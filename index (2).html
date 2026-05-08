@@ -1,0 +1,3143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>超级个体识别系统 · SI System</title>
+<meta name="description" content="连尚 · Super Individual Engine v4.0 · 3+1 项能力标准识别 AI 时代的超级员工">
+<meta property="og:title" content="超级个体识别系统 · SI System">
+<meta property="og:description" content="3 项核心能力 + 1 项超能力，识别 AI 时代的超级员工。">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#FAF3E3">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23C2410C'/%3E%3Ctext x='50' y='66' text-anchor='middle' font-family='Georgia,serif' font-size='52' font-weight='900' fill='%23FAF3E3' font-style='italic'%3ESI%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Claude经典鹅黄色配色 · Warm Cream Palette */
+  --ink:#FAF3E3;          /* 主背景 · 鹅黄底 */
+  --ink-2:#F5ECD7;        /* 卡片背景 · 略深奶油 */
+  --ink-3:#EFE3C5;        /* 输入框/嵌套块 */
+  --ink-4:#E8D9B5;        /* 第三层 */
+  --paper:#2B1D0E;        /* 主文字 · 深棕(几乎黑但暖) */
+  --paper-2:#3D2B17;      /* 次级文字 */
+  --rule:#C9B791;         /* 强分割线 */
+  --rule-soft:#E0CFA6;    /* 弱分割线 */
+  --orange:#C2410C;       /* Claude橘红 · 主色 */
+  --orange-2:#DC5A1B;     /* 橘亮 */
+  --amber:#A6741E;        /* 琥珀棕 */
+  --moss:#5C6B3A;         /* 苔藓绿(深) */
+  --sage:#7A8A4E;         /* 苔藓绿(亮) */
+  --bone:#5A4326;         /* 中等棕 */
+  --muted:#8B6F4A;        /* muted棕 */
+  --muted-2:#A89172;      /* 弱muted */
+  --red:#B53D2A;          /* 警示红 */
+  --serif:'Noto Serif SC','Fraunces',serif;
+  --display:'Fraunces',serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--ink);color:var(--paper);font-family:var(--serif);font-feature-settings:"ss01","ss02";-webkit-font-smoothing:antialiased}
+body{min-height:100vh;overflow-x:hidden}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+
+/* ============ TOP BAR ============ */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 36px;
+  background:rgba(250,243,227,.88);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--rule-soft);
+}
+.brand{display:flex;align-items:center;gap:14px}
+.brand-mark{
+  width:36px;height:36px;border-radius:8px;
+  background:linear-gradient(135deg,var(--orange) 0%,var(--orange-2) 100%);
+  display:grid;place-items:center;
+  font-family:var(--display);font-weight:900;font-size:17px;color:#FAF3E3;
+  letter-spacing:-.02em;
+  box-shadow:0 4px 14px rgba(194,65,12,.28);
+}
+.brand-name{font-family:var(--display);font-weight:600;font-size:18px;letter-spacing:.02em}
+.brand-sub{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;margin-top:2px}
+
+.nav{display:flex;gap:4px;background:var(--ink-2);padding:5px;border-radius:10px;border:1px solid var(--rule-soft)}
+.nav button{
+  padding:7px 13px;border-radius:7px;
+  font-size:13px;font-weight:500;color:var(--muted);
+  transition:all .25s ease;
+  font-family:var(--serif);
+}
+.nav button.active{background:var(--paper);color:#FAF3E3;font-weight:600}
+.nav button:not(.active):hover{color:var(--paper-2)}
+
+.user-chip{display:flex;align-items:center;gap:8px;padding:5px 12px 5px 5px;background:var(--ink-2);border-radius:99px;border:1px solid var(--rule-soft)}
+.avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#DC5A1B,#A6741E);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:11px;color:#FAF3E3}
+.user-info{display:flex;flex-direction:column;line-height:1.15}
+.user-name{font-size:12px;font-weight:600}
+.user-role{font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+
+/* ============ PAGE WRAPPER ============ */
+.page{display:none;animation:fadeIn .4s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.container{max-width:1340px;margin:0 auto;padding:36px 36px 80px}
+
+/* ============ COMMON ============ */
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.h1{font-family:var(--display);font-weight:500;font-size:44px;line-height:1.05;letter-spacing:-.02em}
+.h1 em{font-style:italic;color:var(--orange);font-weight:400}
+.h2{font-family:var(--display);font-weight:500;font-size:24px;letter-spacing:-.01em}
+.h3{font-family:var(--display);font-weight:600;font-size:16px;letter-spacing:-.005em}
+.lead{font-size:14.5px;line-height:1.65;color:var(--bone)}
+.label{font-family:var(--mono);font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.16em}
+
+.card{background:var(--ink-2);border:1px solid var(--rule-soft);border-radius:14px;padding:24px}
+.card-flat{background:transparent;border:1px solid var(--rule-soft);border-radius:14px;padding:24px}
+
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:8px;font-size:13.5px;font-weight:500;transition:all .2s ease;border:1px solid transparent}
+.btn-primary{background:var(--orange);color:#FAF3E3;font-weight:600}
+.btn-primary:hover{background:var(--orange-2);transform:translateY(-1px)}
+.btn-ghost{background:transparent;border-color:var(--rule);color:var(--paper-2)}
+.btn-ghost:hover{background:var(--ink-3);border-color:var(--paper-2)}
+
+/* ============================================================ */
+/* PAGE 1 · DASHBOARD                                            */
+/* ============================================================ */
+.hero-row{
+  display:grid;grid-template-columns:1.3fr 1fr;gap:0;
+  background:linear-gradient(180deg,#F8EFD8 0%,#F2E5C5 100%);
+  border:1px solid var(--rule-soft);border-radius:18px;
+  overflow:hidden;
+  position:relative;
+}
+.hero-row::before{
+  content:"";position:absolute;inset:0;
+  background-image:radial-gradient(circle at 12% 20%,rgba(194,65,12,.10),transparent 40%),
+                   radial-gradient(circle at 90% 80%,rgba(166,116,30,.08),transparent 50%);
+  pointer-events:none;
+}
+.hero-left{padding:38px 40px 40px;position:relative;z-index:1;border-right:1px solid var(--rule-soft)}
+.hero-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.hero-dot{width:6px;height:6px;border-radius:50%;background:var(--orange);box-shadow:0 0 10px rgba(194,65,12,.6);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+.hero-title{
+  font-family:var(--display);font-weight:400;font-size:38px;line-height:1.15;
+  letter-spacing:-.015em;color:var(--paper);margin:6px 0 14px;
+}
+.hero-title em{font-style:italic;color:var(--orange);font-weight:500}
+.hero-sub{font-size:14px;color:var(--muted);line-height:1.65;max-width:480px}
+
+.hero-stats{display:flex;gap:32px;margin-top:28px;padding-top:24px;border-top:1px solid var(--rule-soft)}
+.hero-stat{display:flex;flex-direction:column;gap:4px}
+.hero-stat-num{font-family:var(--display);font-weight:600;font-size:24px;color:var(--paper)}
+.hero-stat-num em{font-style:normal;font-size:13px;color:var(--muted);font-weight:400;margin-left:2px}
+.hero-stat-label{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase}
+
+/* SI Score Big */
+.score-display{padding:38px 40px 40px;display:flex;flex-direction:column;justify-content:space-between;position:relative;z-index:1}
+.score-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}
+.score-tier{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 11px;border-radius:99px;
+  background:rgba(92,107,58,.12);border:1px solid var(--moss);
+  font-family:var(--mono);font-size:10.5px;font-weight:600;color:var(--moss);
+  letter-spacing:.1em;text-transform:uppercase;
+}
+.score-tier.tier-A{background:rgba(194,65,12,.10);border-color:var(--orange);color:var(--orange)}
+
+.score-main{display:flex;align-items:baseline;gap:8px;margin:8px 0}
+.score-num{font-family:var(--display);font-weight:300;font-size:120px;line-height:.9;letter-spacing:-.04em;color:var(--paper)}
+.score-num em{font-style:italic;color:var(--orange);font-weight:400}
+.score-of{font-family:var(--display);font-size:32px;color:var(--muted-2);font-weight:300}
+
+.score-formula{
+  font-family:var(--mono);font-size:11px;color:var(--muted);
+  margin-top:6px;line-height:1.7;
+}
+.score-formula span{color:var(--paper)}
+
+.score-progress{margin-top:22px}
+.score-bar{height:6px;background:var(--ink-4);border-radius:99px;overflow:hidden;position:relative}
+.score-bar-fill{height:100%;background:linear-gradient(90deg,var(--orange) 0%,var(--amber) 100%);border-radius:99px;width:78%;position:relative}
+.score-bar-target{position:absolute;top:-4px;bottom:-4px;width:1px;background:var(--paper);left:50%}
+.score-bar-target::after{content:"达标 50";position:absolute;top:-22px;left:-16px;font-family:var(--mono);font-size:9.5px;color:var(--paper);letter-spacing:.1em;font-weight:600}
+.score-meta{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:10px;letter-spacing:.1em}
+
+/* Capability Cards */
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;margin:48px 0 20px}
+.section-head .h2{display:flex;align-items:baseline;gap:14px}
+.section-head .h2 .num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.16em}
+
+.cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.cap{
+  background:var(--ink-2);border:1px solid var(--rule-soft);border-radius:14px;
+  padding:24px;position:relative;overflow:hidden;
+  transition:transform .3s ease, border-color .3s ease;
+}
+.cap:hover{transform:translateY(-3px);border-color:var(--rule)}
+.cap-tag{display:inline-block;padding:3px 10px;border-radius:99px;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+.tag-orange{background:rgba(194,65,12,.10);color:var(--orange);border:1px solid rgba(194,65,12,.35)}
+.tag-amber{background:rgba(166,116,30,.12);color:var(--amber);border:1px solid rgba(166,116,30,.35)}
+.tag-moss{background:rgba(92,107,58,.12);color:var(--moss);border:1px solid rgba(92,107,58,.35)}
+.tag-bone{background:rgba(90,67,38,.06);color:var(--bone);border:1px solid rgba(90,67,38,.25)}
+
+.cap-name{font-family:var(--display);font-weight:600;font-size:19px;letter-spacing:-.005em;margin-bottom:4px}
+.cap-desc{font-size:12.5px;color:var(--muted);line-height:1.55;margin-bottom:18px;min-height:38px}
+.cap-score{display:flex;align-items:baseline;gap:4px;margin-bottom:14px}
+.cap-score-num{font-family:var(--display);font-weight:500;font-size:46px;color:var(--paper);letter-spacing:-.02em;line-height:1}
+.cap-score-of{font-family:var(--display);font-size:18px;color:var(--muted-2);font-weight:300}
+.cap-bar{height:4px;background:var(--ink-4);border-radius:99px;overflow:hidden}
+.cap-bar > div{height:100%;border-radius:99px}
+.cap-bar.orange > div{background:var(--orange)}
+.cap-bar.amber > div{background:var(--amber)}
+.cap-bar.moss > div{background:var(--moss)}
+
+.cap-detail{margin-top:18px;padding-top:16px;border-top:1px solid var(--rule-soft);display:flex;flex-direction:column;gap:8px}
+.cap-detail-row{display:flex;justify-content:space-between;font-size:12px}
+.cap-detail-row span:first-child{color:var(--bone)}
+.cap-detail-row span:last-child{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.cap-detail-row.hi span:last-child{color:var(--orange)}
+
+/* AI 治理力 special */
+.cap-special{
+  grid-column:span 3;
+  background:linear-gradient(135deg,#F8EFD8 0%,#F3E2C2 100%);
+  border:1.5px solid rgba(194,65,12,.35);
+  position:relative;
+}
+.cap-special::before{
+  content:"超能力 / SUPER";
+  position:absolute;top:18px;right:24px;
+  font-family:var(--mono);font-size:9.5px;color:var(--orange);letter-spacing:.2em;
+}
+.cap-special-inner{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+.cap-special-text .cap-name{font-size:24px;margin-bottom:8px}
+.cap-special-text .cap-desc{font-size:13.5px;color:var(--bone);line-height:1.65;min-height:auto;max-width:600px}
+
+.tier-display{display:flex;flex-direction:column;align-items:flex-end;gap:8px;text-align:right}
+.tier-rating{font-family:var(--display);font-weight:500;font-size:32px;color:var(--orange);letter-spacing:-.01em}
+.tier-rating em{font-style:italic;font-weight:400}
+.tier-method{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;max-width:240px;line-height:1.6}
+
+/* Cases timeline */
+.cases-row{display:grid;grid-template-columns:1.4fr 1fr;gap:20px}
+.timeline{display:flex;flex-direction:column;gap:0}
+.case-item{
+  display:grid;grid-template-columns:80px 1fr auto;gap:24px;align-items:flex-start;
+  padding:22px 0;border-bottom:1px solid var(--rule-soft);
+  transition:background .25s;cursor:pointer;
+  margin:0 -24px;padding-left:24px;padding-right:24px;border-radius:8px;
+}
+.case-item:hover{background:rgba(43,29,14,.04)}
+.case-date{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.1em;padding-top:3px}
+.case-body .case-title{font-family:var(--display);font-weight:600;font-size:15px;margin-bottom:4px;letter-spacing:-.005em}
+.case-body .case-meta{font-size:12.5px;color:var(--muted);line-height:1.55}
+.case-tags{display:flex;gap:6px;margin-top:8px}
+.case-tag{padding:2px 8px;border-radius:4px;background:var(--ink-3);border:1px solid var(--rule-soft);font-family:var(--mono);font-size:9.5px;color:var(--bone);letter-spacing:.08em}
+.case-score{
+  font-family:var(--display);font-weight:600;font-size:24px;color:var(--paper);
+  display:flex;flex-direction:column;align-items:flex-end;line-height:1;
+}
+.case-score em{font-style:normal;font-family:var(--mono);font-size:9.5px;color:var(--muted);letter-spacing:.16em;font-weight:400;margin-top:6px;text-transform:uppercase}
+.case-score.q3{color:var(--orange)}
+.case-score.q2{color:var(--amber)}
+
+/* Side: Quick actions */
+.quick-card{
+  background:linear-gradient(180deg,var(--ink-2) 0%,#EFE3C5 100%);
+  border:1px solid var(--rule-soft);border-radius:14px;
+  padding:24px;margin-bottom:16px;
+}
+.quick-card .h3{margin-bottom:14px}
+.action-list{display:flex;flex-direction:column;gap:10px}
+.action-btn{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 16px;background:var(--ink-3);border:1px solid var(--rule-soft);
+  border-radius:10px;text-align:left;width:100%;
+  transition:all .2s ease;
+}
+.action-btn:hover{background:var(--ink-4);border-color:var(--rule);transform:translateX(2px)}
+.action-btn .left{display:flex;flex-direction:column;gap:2px}
+.action-btn .left strong{font-size:13.5px;font-weight:600;color:var(--paper)}
+.action-btn .left small{font-size:11.5px;color:var(--muted)}
+.action-btn .arrow{color:var(--muted);font-size:18px;font-family:var(--display)}
+
+.tip-box{
+  background:rgba(194,65,12,.06);border:1px solid rgba(194,65,12,.25);
+  border-radius:12px;padding:18px;
+}
+.tip-eyebrow{font-family:var(--mono);font-size:10px;color:var(--orange);letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px}
+.tip-text{font-size:13px;line-height:1.6;color:var(--bone)}
+.tip-text strong{color:var(--paper);font-weight:600}
+
+/* ============================================================ */
+/* PAGE 2 · CASE SUBMISSION                                      */
+/* ============================================================ */
+.submit-grid{display:grid;grid-template-columns:1fr 380px;gap:32px;margin-top:8px}
+
+.form-section{margin-bottom:32px}
+.form-title{font-family:var(--display);font-weight:600;font-size:15px;margin-bottom:4px;display:flex;align-items:center;gap:10px}
+.form-title-num{
+  width:22px;height:22px;border-radius:50%;
+  background:var(--orange);color:var(--ink);
+  font-family:var(--mono);font-size:11px;font-weight:600;
+  display:grid;place-items:center;
+}
+.form-hint{font-size:12.5px;color:var(--muted);margin-bottom:16px;padding-left:32px}
+
+.field{margin-bottom:18px}
+.field-label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.field-label .req{color:var(--orange);margin-left:3px}
+.input,.textarea,.select{
+  width:100%;padding:14px 16px;
+  background:var(--ink-3);border:1px solid var(--rule-soft);border-radius:10px;
+  color:var(--paper);font-family:var(--serif);font-size:14px;
+  transition:border-color .2s;
+}
+.input:focus,.textarea:focus,.select:focus{outline:none;border-color:var(--orange)}
+.textarea{min-height:90px;resize:vertical;line-height:1.55;font-family:var(--serif)}
+.input::placeholder,.textarea::placeholder{color:var(--muted-2)}
+
+/* Depth selector cards */
+.depth-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.depth-card{
+  padding:16px 14px;background:var(--ink-3);border:1px solid var(--rule-soft);
+  border-radius:10px;cursor:pointer;transition:all .25s;text-align:left;
+  display:flex;flex-direction:column;gap:6px;position:relative;
+}
+.depth-card:hover{border-color:var(--rule);background:var(--ink-4)}
+.depth-card.selected{border-color:var(--orange);background:rgba(194,65,12,.08)}
+.depth-card.selected::after{
+  content:"✓";position:absolute;top:10px;right:12px;
+  width:18px;height:18px;border-radius:50%;background:var(--orange);
+  color:#FAF3E3;font-size:11px;font-weight:700;
+  display:grid;place-items:center;
+}
+.depth-id{font-family:var(--mono);font-size:11px;color:var(--orange);letter-spacing:.14em;font-weight:600}
+.depth-title{font-family:var(--display);font-weight:600;font-size:14px}
+.depth-desc{font-size:11.5px;color:var(--muted);line-height:1.5}
+
+/* Quality radio */
+.quality-list{display:flex;flex-direction:column;gap:10px}
+.quality-card{
+  display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;
+  padding:16px 18px;background:var(--ink-3);border:1px solid var(--rule-soft);
+  border-radius:10px;cursor:pointer;transition:all .25s;
+}
+.quality-card:hover{border-color:var(--rule);background:var(--ink-4)}
+.quality-card.selected{border-color:var(--orange);background:rgba(194,65,12,.08)}
+.quality-radio{
+  width:18px;height:18px;border-radius:50%;border:2px solid var(--rule);
+  display:grid;place-items:center;flex-shrink:0;
+}
+.quality-card.selected .quality-radio{border-color:var(--orange)}
+.quality-card.selected .quality-radio::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--orange)}
+.quality-text{display:flex;flex-direction:column;gap:3px}
+.quality-id{font-family:var(--mono);font-size:11px;color:var(--paper);letter-spacing:.12em;font-weight:600}
+.quality-name{font-size:13px;color:var(--bone);line-height:1.45}
+.quality-hint{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.06em}
+
+/* Score preview right rail */
+.preview-card{
+  position:sticky;top:90px;
+  background:linear-gradient(180deg,var(--ink-2),#EBDFC0);
+  border:1px solid var(--rule-soft);border-radius:14px;
+  padding:24px;
+}
+.preview-eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.preview-score{font-family:var(--display);font-weight:300;font-size:84px;line-height:.95;letter-spacing:-.04em;color:var(--orange);margin:6px 0 4px}
+.preview-score em{font-style:italic;font-weight:400}
+.preview-of{font-family:var(--display);font-size:18px;color:var(--muted-2);margin-left:6px;font-weight:300}
+.preview-formula-box{
+  margin-top:18px;padding:14px;background:#FAF3E3;
+  border:1px solid var(--rule-soft);border-radius:10px;
+}
+.preview-formula-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;padding:6px 0}
+.preview-formula-row + .preview-formula-row{border-top:1px solid var(--rule-soft)}
+.preview-formula-row span:first-child{color:var(--muted)}
+.preview-formula-row span:last-child{font-family:var(--mono);color:var(--paper);font-weight:500}
+.preview-divider{height:1px;background:var(--rule-soft);margin:18px 0}
+.preview-tip{font-size:12px;line-height:1.6;color:var(--muted)}
+.preview-tip strong{color:var(--bone)}
+
+.score-matrix{margin-top:14px;border:1px solid var(--rule-soft);border-radius:8px;overflow:hidden}
+.score-matrix table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:11px}
+.score-matrix th,.score-matrix td{padding:6px 4px;text-align:center;border:1px solid var(--rule-soft);color:var(--paper-2)}
+.score-matrix th{background:#FAF3E3;color:var(--muted);font-weight:600;letter-spacing:.05em}
+.score-matrix td.row-head{background:#FAF3E3;color:var(--muted);text-align:left;padding-left:8px;font-weight:600}
+.score-matrix td.hot{background:rgba(194,65,12,.18);color:var(--orange);font-weight:700}
+
+/* upload */
+.upload-zone{
+  border:1.5px dashed var(--rule);background:var(--ink-3);border-radius:10px;
+  padding:32px 20px;text-align:center;color:var(--muted);
+  transition:all .25s;cursor:pointer;
+}
+.upload-zone:hover{border-color:var(--orange);color:var(--bone);background:var(--ink-4)}
+.upload-icon{font-family:var(--display);font-size:34px;color:var(--rule);margin-bottom:8px}
+.upload-text{font-size:13px;line-height:1.5}
+.upload-text strong{color:var(--paper)}
+.upload-text small{display:block;font-size:11px;color:var(--muted);margin-top:4px}
+
+/* === Visibility toggle === */
+.visibility-toggle{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+}
+.vis-card{
+  display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:flex-start;
+  padding:18px 18px;text-align:left;
+  background:var(--ink-3);border:1px solid var(--rule-soft);border-radius:12px;
+  cursor:pointer;transition:all .25s ease;
+  font-family:var(--serif);
+}
+.vis-card:hover{border-color:var(--rule);background:var(--ink-4)}
+.vis-card.selected{border-color:var(--orange);background:rgba(194,65,12,.06)}
+.vis-card.vis-private.selected{border-color:var(--amber);background:rgba(166,116,30,.08)}
+
+.vis-icon{
+  width:38px;height:38px;border-radius:9px;
+  background:#FAF3E3;border:1px solid var(--rule-soft);
+  display:grid;place-items:center;color:var(--paper-2);
+  flex-shrink:0;
+}
+.vis-card.selected .vis-icon{
+  background:var(--orange);border-color:var(--orange);color:#FAF3E3;
+}
+.vis-card.vis-private.selected .vis-icon{
+  background:var(--amber);border-color:var(--amber);color:#FAF3E3;
+}
+
+.vis-text{display:flex;flex-direction:column;gap:6px;min-width:0}
+.vis-title{
+  font-family:var(--display);font-weight:600;font-size:14.5px;color:var(--paper);
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;letter-spacing:-.005em;
+}
+.vis-badge{
+  font-family:var(--mono);font-size:9.5px;font-weight:700;
+  color:var(--amber);background:rgba(166,116,30,.12);
+  border:1px solid rgba(166,116,30,.35);
+  padding:2px 7px;border-radius:99px;letter-spacing:.08em;
+}
+.vis-desc{
+  font-size:11.5px;color:var(--muted);line-height:1.5;
+}
+.vis-radio{
+  width:18px;height:18px;border-radius:50%;border:2px solid var(--rule);
+  display:grid;place-items:center;flex-shrink:0;margin-top:8px;
+  background:#FAF3E3;
+}
+.vis-card.selected .vis-radio{border-color:var(--orange)}
+.vis-card.selected .vis-radio::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--orange)}
+.vis-card.vis-private.selected .vis-radio{border-color:var(--amber)}
+.vis-card.vis-private.selected .vis-radio::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--amber)}
+
+.vis-note{
+  margin-top:14px;padding:13px 16px;display:flex;gap:12px;align-items:flex-start;
+  background:rgba(92,107,58,.08);border:1px solid rgba(92,107,58,.22);border-radius:10px;
+  font-size:12px;line-height:1.6;color:var(--paper-2);
+}
+.vis-note-icon{
+  flex-shrink:0;width:18px;height:18px;border-radius:50%;
+  background:var(--moss);color:#FAF3E3;
+  display:grid;place-items:center;
+  font-family:var(--display);font-size:11px;font-weight:700;font-style:italic;
+  margin-top:1px;
+}
+.vis-note strong{color:var(--paper);font-weight:600}
+
+@media (max-width:1100px){
+  .visibility-toggle{grid-template-columns:1fr}
+}
+
+.submit-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:24px;border-top:1px solid var(--rule-soft);margin-top:8px;
+}
+.submit-meta{font-size:12px;color:var(--muted)}
+.submit-meta strong{color:var(--paper)}
+
+/* ============================================================ */
+/* PAGE 3 · CASE LIBRARY                                         */
+/* ============================================================ */
+.lib-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px}
+.lib-stats{display:flex;gap:32px;margin-top:18px}
+.lib-stat{display:flex;flex-direction:column;gap:2px}
+.lib-stat-num{font-family:var(--display);font-weight:500;font-size:32px;color:var(--paper);letter-spacing:-.02em;line-height:1}
+.lib-stat-num em{font-style:italic;color:var(--orange)}
+.lib-stat-label{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-top:4px}
+
+.filter-bar{
+  display:flex;gap:8px;margin-bottom:24px;
+  padding:14px 16px;background:var(--ink-2);border:1px solid var(--rule-soft);
+  border-radius:12px;align-items:center;
+}
+.filter-search{
+  flex:1;display:flex;align-items:center;gap:10px;
+  background:var(--ink-3);padding:9px 14px;border-radius:8px;
+  border:1px solid var(--rule-soft);
+}
+.filter-search input{
+  flex:1;background:transparent;border:none;outline:none;color:var(--paper);
+  font-family:var(--serif);font-size:13.5px;
+}
+.filter-search input::placeholder{color:var(--muted-2)}
+.filter-icon{color:var(--muted);font-family:var(--mono);font-size:14px}
+.filter-pill{
+  padding:8px 14px;border-radius:8px;background:var(--ink-3);
+  border:1px solid var(--rule-soft);font-size:12.5px;color:var(--bone);
+  font-family:var(--mono);letter-spacing:.05em;font-size:11.5px;
+  cursor:pointer;transition:all .2s;
+}
+.filter-pill:hover{border-color:var(--rule)}
+.filter-pill.active{background:var(--paper);color:var(--ink);border-color:var(--paper);font-weight:600}
+
+.lib-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.lib-card{
+  background:var(--ink-2);border:1px solid var(--rule-soft);border-radius:12px;
+  padding:22px;transition:all .3s ease;cursor:pointer;
+  display:flex;flex-direction:column;gap:12px;position:relative;
+}
+.lib-card:hover{border-color:var(--rule);transform:translateY(-2px)}
+.lib-card-top{display:flex;justify-content:space-between;align-items:flex-start}
+.lib-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:3px 9px;border-radius:5px;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;font-weight:600;
+}
+.badge-d1{background:rgba(90,67,38,.08);color:var(--paper-2);border:1px solid rgba(90,67,38,.25)}
+.badge-d2{background:rgba(166,116,30,.12);color:var(--amber);border:1px solid rgba(166,116,30,.4)}
+.badge-d3{background:rgba(92,107,58,.12);color:var(--moss);border:1px solid rgba(92,107,58,.4)}
+.badge-d4{background:rgba(194,65,12,.12);color:var(--orange);border:1px solid rgba(194,65,12,.4)}
+
+.lib-pts{font-family:var(--display);font-weight:600;font-size:24px;color:var(--paper);line-height:1}
+.lib-pts em{font-style:normal;font-family:var(--mono);font-size:9.5px;color:var(--muted);letter-spacing:.14em;font-weight:400;margin-left:3px;text-transform:uppercase}
+
+.lib-title{font-family:var(--display);font-weight:600;font-size:16px;line-height:1.3;letter-spacing:-.005em}
+.lib-desc{font-size:12.5px;line-height:1.55;color:var(--muted);min-height:54px}
+.lib-foot{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid var(--rule-soft);margin-top:auto}
+.lib-author{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--bone)}
+.lib-author .av{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#A6741E,#5A4326);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:10px;color:#FAF3E3}
+.lib-uses{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.08em}
+.lib-uses em{font-style:normal;color:var(--moss)}
+
+/* ============================================================ */
+/* PAGE 4 · 管理员                                             */
+/* ============================================================ */
+.admin-head{padding:28px 32px;background:linear-gradient(180deg,#F8EFD8,#F2E5C5);border:1px solid var(--rule-soft);border-radius:18px;margin-bottom:28px;position:relative;overflow:hidden}
+.admin-head::after{content:"";position:absolute;top:-50%;right:-10%;width:50%;height:200%;background:radial-gradient(circle,rgba(194,65,12,.08),transparent 70%)}
+.admin-head-grid{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;position:relative;z-index:1}
+.admin-head-text .h1{font-size:36px;margin-bottom:6px}
+.admin-head-text .lead{font-size:14px;max-width:540px}
+
+.kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:24px;background:#FAF3E3;border:1px solid var(--rule-soft);border-radius:12px;overflow:hidden}
+.kpi{padding:20px 22px;border-right:1px solid var(--rule-soft)}
+.kpi:last-child{border-right:none}
+.kpi-label{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px}
+.kpi-num{font-family:var(--display);font-weight:500;font-size:36px;line-height:1;letter-spacing:-.02em;color:var(--paper)}
+.kpi-num em{font-style:italic;color:var(--orange);font-weight:400}
+.kpi-num span.unit{font-family:var(--display);font-size:18px;color:var(--muted-2);font-weight:300;margin-left:2px}
+.kpi-trend{font-family:var(--mono);font-size:11px;margin-top:8px;color:var(--moss)}
+.kpi-trend.down{color:var(--red)}
+
+/* Distribution chart */
+.viz-row{display:grid;grid-template-columns:1.2fr 1fr;gap:20px;margin-bottom:28px}
+.viz-card{background:var(--ink-2);border:1px solid var(--rule-soft);border-radius:14px;padding:24px}
+.viz-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px}
+.viz-title{font-family:var(--display);font-weight:600;font-size:16px}
+.viz-sub{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.06em;margin-top:3px}
+
+/* Histogram */
+.hist{display:flex;align-items:flex-end;gap:5px;height:200px;margin-top:24px;border-bottom:1px solid var(--rule-soft);position:relative}
+.hist-bar{
+  flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;
+  position:relative;
+  transition:all .3s;cursor:pointer;
+}
+.hist-bar:hover .bar-tip{opacity:1}
+.hist-bar > .bar{
+  width:100%;background:#D8C49B;
+  border-radius:4px 4px 0 0;
+  transition:all .25s;
+  position:relative;
+}
+.hist-bar.target > .bar{background:linear-gradient(180deg,var(--orange) 0%,var(--amber) 100%)}
+.hist-bar.peak > .bar{background:linear-gradient(180deg,var(--orange-2) 0%,var(--orange) 100%)}
+.bar-tip{
+  position:absolute;bottom:100%;left:50%;transform:translateX(-50%);
+  background:var(--paper);border:1px solid var(--paper);border-radius:6px;
+  padding:5px 9px;font-family:var(--mono);font-size:10px;color:#FAF3E3;
+  white-space:nowrap;opacity:0;transition:opacity .2s;margin-bottom:6px;letter-spacing:.05em;font-weight:500;
+}
+.hist-x{display:flex;gap:5px;margin-top:6px}
+.hist-x > span{flex:1;text-align:center;font-family:var(--mono);font-size:9.5px;color:var(--muted);letter-spacing:.05em}
+.hist-target-line{position:absolute;top:-20px;bottom:0;left:50%;border-left:1px dashed var(--orange);pointer-events:none}
+.hist-target-line::before{content:"达标线 50";position:absolute;top:-2px;left:6px;font-family:var(--mono);font-size:9.5px;color:var(--orange);letter-spacing:.1em;white-space:nowrap}
+
+.hist-summary{display:flex;gap:20px;margin-top:18px;padding-top:18px;border-top:1px solid var(--rule-soft)}
+.hist-sum{display:flex;flex-direction:column;gap:2px;font-size:13px}
+.hist-sum strong{font-family:var(--display);font-weight:600;font-size:18px;color:var(--paper)}
+.hist-sum strong em{font-style:italic;color:var(--orange)}
+.hist-sum span{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+
+/* Department ranking */
+.dept-list{display:flex;flex-direction:column;gap:14px;margin-top:16px}
+.dept-row{display:grid;grid-template-columns:24px 100px 1fr 60px;gap:12px;align-items:center}
+.dept-rank{font-family:var(--mono);font-size:11px;color:var(--muted);text-align:center;letter-spacing:.05em}
+.dept-name{font-size:13px;font-weight:500;color:var(--bone)}
+.dept-bar{height:8px;background:#E8D9B5;border-radius:99px;overflow:hidden;position:relative}
+.dept-bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--orange),var(--amber))}
+.dept-bar-fill.cool{background:linear-gradient(90deg,var(--moss),var(--amber))}
+.dept-pct{font-family:var(--mono);font-size:12px;color:var(--paper);text-align:right;font-weight:500}
+
+/* Talent table */
+.table-card{background:var(--ink-2);border:1px solid var(--rule-soft);border-radius:14px;overflow:hidden}
+.table-head-row{padding:18px 24px;border-bottom:1px solid var(--rule-soft);display:flex;justify-content:space-between;align-items:center}
+.tabs{display:flex;gap:4px;padding:4px;background:var(--ink-3);border-radius:8px}
+.tab{padding:7px 14px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted);border-radius:6px;cursor:pointer;text-transform:uppercase}
+.tab.active{background:var(--paper);color:#FAF3E3;font-weight:600}
+
+.t-table{width:100%;border-collapse:collapse}
+.t-table th{
+  text-align:left;padding:14px 24px;
+  font-family:var(--mono);font-size:10.5px;font-weight:600;color:var(--muted);
+  letter-spacing:.16em;text-transform:uppercase;
+  border-bottom:1px solid var(--rule-soft);background:#FAF3E3;
+}
+.t-table td{padding:18px 24px;border-bottom:1px solid var(--rule-soft);font-size:13.5px}
+.t-table tr:last-child td{border-bottom:none}
+.t-table tr:hover{background:rgba(43,29,14,.03)}
+.t-name{display:flex;align-items:center;gap:12px}
+.t-name .av{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:12px;color:#FAF3E3}
+.av-1{background:linear-gradient(135deg,#DC5A1B,#A6741E)}
+.av-2{background:linear-gradient(135deg,#7A8A4E,#4D5A2C)}
+.av-3{background:linear-gradient(135deg,#C2410C,#7A2A08)}
+.av-4{background:linear-gradient(135deg,#A6741E,#6B4818)}
+.av-5{background:linear-gradient(135deg,#5C6B3A,#3A4524)}
+.av-6{background:linear-gradient(135deg,#A85729,#6E3618)}
+
+.t-name-text{display:flex;flex-direction:column;line-height:1.25;gap:2px}
+.t-name-text strong{font-size:13.5px;font-weight:600;color:var(--paper)}
+.t-name-text small{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.06em}
+
+.t-score{font-family:var(--display);font-weight:600;font-size:18px;color:var(--paper);letter-spacing:-.01em}
+.t-score em{font-style:normal;font-family:var(--mono);font-size:10px;color:var(--muted);font-weight:400;letter-spacing:.1em;margin-left:2px}
+
+.t-mini-bar{display:flex;gap:2px;height:18px;align-items:flex-end}
+.t-mini-bar > div{flex:1;border-radius:2px;min-height:2px}
+.b-orange{background:var(--orange)}
+.b-amber{background:var(--amber)}
+.b-moss{background:var(--moss)}
+
+.tier-pill{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:99px;font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.1em}
+.t-S{background:rgba(194,65,12,.12);color:var(--orange);border:1px solid var(--orange)}
+.t-A{background:rgba(166,116,30,.12);color:var(--amber);border:1px solid var(--amber)}
+.t-B{background:rgba(92,107,58,.12);color:var(--moss);border:1px solid var(--moss)}
+.t-C{background:rgba(90,67,38,.06);color:var(--bone);border:1px solid var(--rule)}
+
+.t-gov{display:flex;gap:4px}
+.gov-cell{width:8px;height:18px;border-radius:2px;background:#E0CFA6}
+.gov-cell.on{background:var(--orange)}
+
+.t-action{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.1em}
+.t-action a{color:var(--orange);transition:color .2s}
+.t-action a:hover{color:var(--orange-2)}
+
+/* Footer */
+.footer{
+  margin-top:80px;padding:32px 36px;border-top:1px solid var(--rule-soft);
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.1em;
+}
+.footer-marks{display:flex;gap:18px}
+.footer-marks span{display:flex;align-items:center;gap:6px}
+.footer-marks .pip{width:5px;height:5px;border-radius:50%;background:var(--moss);box-shadow:0 0 6px rgba(92,107,58,.5)}
+
+/* Responsive shrink */
+@media (max-width:1100px){
+  .container{padding:24px 18px 60px}
+  .hero-row{grid-template-columns:1fr}
+  .hero-left{border-right:none;border-bottom:1px solid var(--rule-soft)}
+  .cap-grid{grid-template-columns:1fr}
+  .cap-special{grid-column:auto}
+  .cap-special-inner{grid-template-columns:1fr;gap:18px}
+  .submit-grid{grid-template-columns:1fr}
+  .lib-grid{grid-template-columns:1fr}
+  .viz-row{grid-template-columns:1fr}
+  .kpi-strip{grid-template-columns:repeat(2,1fr)}
+  .kpi{border-right:none;border-bottom:1px solid var(--rule-soft)}
+  .depth-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ============ VIEW SWITCHER ============ */
+.view-switcher{
+  display:flex;flex-direction:column;align-items:flex-end;gap:5px;
+  padding-right:12px;border-right:1px solid var(--rule-soft);margin-right:2px;
+}
+.vs-label{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase}
+.vs-toggle{
+  display:flex;background:var(--ink-2);border:1px solid var(--rule-soft);
+  border-radius:99px;padding:3px;position:relative;
+}
+.vs-btn{
+  position:relative;z-index:2;padding:5px 12px;
+  font-family:var(--mono);font-size:10.5px;font-weight:600;
+  letter-spacing:.08em;color:var(--muted);
+  border-radius:99px;transition:color .25s ease;
+}
+.vs-btn.active{color:#FAF3E3}
+.vs-pill{
+  position:absolute;top:3px;left:3px;
+  height:calc(100% - 6px);width:calc(50% - 3px);
+  background:var(--paper);border-radius:99px;
+  transition:transform .35s cubic-bezier(.7,0,.3,1);
+  z-index:1;
+}
+.vs-toggle[data-active="hr"] .vs-pill{transform:translateX(100%)}
+
+/* ============ PRIVACY LAYER VISIBILITY ============ */
+/* employee view: hide hr-only elements */
+body[data-view="employee"] .hr-only{display:none !important}
+/* hr view: hide employee-specific elements (the abstract / reflection ones) */
+body[data-view="hr"] .employee-only{display:none !important}
+
+/* HR view banner */
+.hr-banner{
+  display:none;
+  align-items:center;gap:12px;
+  padding:11px 24px;background:linear-gradient(90deg,rgba(194,65,12,.10),rgba(194,65,12,.04));
+  border:1px solid rgba(194,65,12,.3);border-radius:10px;
+  margin-bottom:24px;
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--orange);
+}
+body[data-view="hr"] .hr-banner{display:flex}
+.hr-banner .lock{font-family:var(--display);font-size:14px}
+.hr-banner strong{font-weight:700}
+
+/* Employee view notice */
+.emp-notice{
+  display:none;
+  padding:10px 16px;
+  background:rgba(92,107,58,.08);border:1px solid rgba(92,107,58,.25);
+  border-radius:10px;font-size:12px;color:var(--moss);
+  font-family:var(--mono);letter-spacing:.06em;
+}
+body[data-view="employee"] .emp-notice{display:inline-flex;align-items:center;gap:8px}
+
+/* ============ EMPLOYEE-VIEW SPECIFIC STYLES ============ */
+/* Score band display (employee sees range, not exact) */
+.score-band{
+  display:flex;flex-direction:column;gap:6px;margin:8px 0;
+}
+
+/* === Employee 达标徽章 === */
+.result-badge{
+  display:flex;align-items:center;gap:18px;
+  margin:14px 0 28px;
+}
+.result-check{
+  width:64px;height:64px;border-radius:50%;
+  background:linear-gradient(135deg,var(--moss),#3F4B23);
+  display:grid;place-items:center;
+  font-family:var(--display);font-size:36px;font-weight:700;color:#FAF3E3;
+  box-shadow:0 4px 18px rgba(92,107,58,.35);
+  flex-shrink:0;
+}
+.result-text{display:flex;flex-direction:column;gap:4px}
+.result-title{
+  font-family:var(--display);font-weight:600;font-size:36px;letter-spacing:-.015em;
+  color:var(--paper);line-height:1;
+}
+.result-sub{
+  font-family:var(--mono);font-size:11px;color:var(--muted);
+  letter-spacing:.16em;text-transform:uppercase;
+}
+
+/* === 部门排名条 === */
+.result-rank{margin-top:20px;padding-top:22px;border-top:1px solid var(--rule-soft)}
+.result-rank-row{
+  display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:12px;
+  font-size:14px;color:var(--paper-2);
+}
+.result-rank-label{font-size:14px;color:var(--paper-2)}
+.result-rank-label strong{color:var(--paper);font-weight:600}
+.result-rank-pct{
+  font-family:var(--display);font-weight:600;font-size:30px;color:var(--orange);
+  letter-spacing:-.02em;line-height:1;
+}
+.result-rank-pct em{font-style:italic;font-size:18px;font-weight:500;color:var(--orange);margin-left:1px}
+.result-rank-bar{
+  height:6px;background:var(--ink-4);border-radius:99px;
+  position:relative;overflow:hidden;
+}
+.result-rank-fill{
+  height:100%;background:linear-gradient(90deg,var(--moss),var(--amber),var(--orange));
+  border-radius:99px;
+}
+.result-rank-marker{
+  position:absolute;top:-3px;width:2px;height:12px;
+  background:var(--paper);border-radius:1px;transform:translateX(-50%);
+}
+
+.score-band-pill{
+  display:inline-flex;align-items:baseline;gap:8px;
+  padding:0;
+}
+.score-band-num{
+  font-family:var(--display);font-weight:300;font-size:96px;line-height:.9;
+  letter-spacing:-.04em;color:var(--paper);
+}
+.score-band-num em{font-style:italic;color:var(--orange);font-weight:400}
+.score-band-of{font-family:var(--display);font-size:24px;color:var(--muted);font-weight:300}
+.score-band-tier{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+  color:var(--moss);font-weight:600;text-transform:uppercase;margin-top:6px;
+}
+.score-band-tier::before{
+  content:"";width:6px;height:6px;border-radius:50%;background:var(--moss);
+}
+
+/* Capability — employee version: tier label, no number */
+.cap-tier{
+  display:flex;align-items:baseline;gap:10px;margin:8px 0 14px;
+}
+
+/* Capability — employee version: simple status */
+.cap-status{
+  display:flex;align-items:center;gap:10px;margin:14px 0 18px;
+  padding-bottom:14px;border-bottom:1px dashed var(--rule-soft);
+}
+.cap-status-icon{
+  color:var(--orange);font-size:14px;line-height:1;
+}
+.cap-status-text{
+  font-family:var(--display);font-weight:500;font-size:18px;
+  letter-spacing:-.005em;color:var(--paper);
+}
+.cap-tier-label{
+  font-family:var(--display);font-weight:500;font-size:32px;letter-spacing:-.01em;
+  color:var(--paper);
+}
+.cap-tier-label em{font-style:italic;color:var(--orange);font-weight:600}
+.cap-tier-of{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+
+.cap-tier-bar{display:flex;gap:3px;height:6px;margin-bottom:14px}
+.cap-tier-bar > div{flex:1;background:var(--ink-4);border-radius:99px}
+.cap-tier-bar > div.on{background:var(--orange)}
+.cap-tier-bar > div.on.amber{background:var(--amber)}
+.cap-tier-bar > div.on.moss{background:var(--moss)}
+
+/* Qualitative feedback box */
+.cap-feedback{
+  margin-top:14px;padding:14px;background:#FAF3E3;border:1px solid var(--rule-soft);
+  border-radius:10px;font-size:13px;line-height:1.6;color:var(--paper-2);
+}
+.cap-feedback-eyebrow{
+  font-family:var(--mono);font-size:9.5px;color:var(--muted);
+  letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px;
+}
+.cap-feedback-body strong{color:var(--paper);font-weight:600}
+
+/* Privacy info line */
+.privacy-note{
+  display:flex;align-items:center;gap:8px;margin-top:18px;padding-top:16px;
+  border-top:1px solid var(--rule-soft);
+  font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.06em;
+}
+.privacy-note .icon{color:var(--moss)}
+
+/* ===== RULES PAGE ===== */
+.rules-hero{
+  display:grid;grid-template-columns:1.4fr 1fr;gap:32px;align-items:center;
+  padding:40px 44px;background:linear-gradient(135deg,#F8EFD8,#F2E5C5);
+  border:1px solid var(--rule-soft);border-radius:18px;margin-bottom:32px;
+  position:relative;overflow:hidden;
+}
+.rules-hero::after{
+  content:"§";position:absolute;right:-30px;bottom:-80px;
+  font-family:var(--display);font-size:380px;line-height:1;color:rgba(194,65,12,.07);font-style:italic;
+  pointer-events:none;
+}
+
+/* ============ RULES HERO V2 · BOLD ============ */
+.rules-hero-v2{
+  position:relative;overflow:hidden;
+  margin-bottom:40px;border-radius:20px;
+  background:
+    linear-gradient(135deg,#F4E8C8 0%,#EDE0BA 35%,#E8D6A0 100%);
+  border:1px solid var(--rule-soft);
+  padding:60px 60px 56px;
+  min-height:380px;
+  isolation:isolate;
+}
+
+/* Giant background numbers */
+.rh-bg-numbers{
+  position:absolute;
+  top:50%;right:-2%;transform:translateY(-50%);
+  display:flex;align-items:baseline;gap:0;
+  font-family:var(--display);font-style:italic;font-weight:300;
+  line-height:.85;letter-spacing:-.04em;
+  pointer-events:none;z-index:1;
+  user-select:none;
+}
+.rh-bg-3,.rh-bg-1{
+  font-size:520px;
+  background:linear-gradient(180deg,rgba(194,65,12,.13) 0%,rgba(194,65,12,.04) 80%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  -webkit-text-stroke:1.5px rgba(194,65,12,.18);
+}
+.rh-bg-plus{
+  font-size:280px;font-style:normal;font-weight:200;
+  color:rgba(194,65,12,.12);
+  margin:0 -10px 100px;
+}
+
+/* Diagonal grid lines */
+.rh-grid{
+  position:absolute;inset:0;pointer-events:none;z-index:1;
+  opacity:.4;
+}
+.rh-grid-line{
+  position:absolute;
+  width:200%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(43,29,14,.12) 30%,rgba(43,29,14,.12) 70%,transparent);
+  transform-origin:left center;
+}
+.rh-grid-line:nth-child(1){top:18%;left:-50%;transform:rotate(-8deg)}
+.rh-grid-line:nth-child(2){top:42%;left:-50%;transform:rotate(-8deg)}
+.rh-grid-line:nth-child(3){top:66%;left:-50%;transform:rotate(-8deg)}
+.rh-grid-line:nth-child(4){top:90%;left:-50%;transform:rotate(-8deg)}
+
+/* Content layer */
+.rh-content{position:relative;z-index:2;max-width:780px}
+
+.rh-eyebrow{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:36px;
+}
+.rh-pip{
+  width:8px;height:8px;border-radius:50%;background:var(--orange);
+  box-shadow:0 0 14px rgba(194,65,12,.55);
+  animation:rh-pulse 2.6s ease-in-out infinite;
+}
+@keyframes rh-pulse{
+  0%,100%{transform:scale(1);opacity:1}
+  50%{transform:scale(1.4);opacity:.55}
+}
+.rh-eyebrow-text{
+  font-family:var(--mono);font-size:11px;color:var(--orange);
+  letter-spacing:.24em;font-weight:700;
+}
+.rh-line{
+  flex:0 0 60px;height:1px;background:var(--rule);opacity:.5;
+}
+.rh-eyebrow-meta{
+  font-family:var(--mono);font-size:10px;color:var(--muted);
+  letter-spacing:.2em;font-weight:500;
+}
+
+.rh-title{
+  font-family:var(--display);font-weight:300;
+  font-size:88px;line-height:.96;letter-spacing:-.035em;
+  color:var(--paper);margin-bottom:48px;
+}
+.rh-line-1,.rh-line-2{display:block}
+.rh-line-1{margin-bottom:6px}
+.rh-line-2{padding-left:80px}
+.rh-em-orange{
+  font-style:normal;font-weight:600;color:var(--orange);
+  position:relative;
+}
+.rh-em-orange::after{
+  content:"";position:absolute;left:0;right:0;bottom:6px;height:14px;
+  background:rgba(194,65,12,.15);border-radius:2px;z-index:-1;
+}
+.rh-em-italic{
+  font-style:italic;font-weight:500;color:var(--paper);
+  background:linear-gradient(180deg,transparent 60%,rgba(166,116,30,.25) 60%);
+  padding:0 4px;
+}
+
+/* Pillars (3 + 1) */
+.rh-pillars{
+  display:flex;align-items:center;gap:28px;
+  margin-bottom:34px;
+}
+.rh-pillar{display:flex;align-items:center;gap:18px}
+.rh-pillar-num{
+  font-family:var(--display);font-weight:600;font-style:italic;
+  font-size:78px;line-height:.85;color:var(--paper);
+  letter-spacing:-.04em;
+}
+.rh-pillar-num-orange{color:var(--orange)}
+.rh-pillar-label{display:flex;flex-direction:column;gap:3px;line-height:1.2}
+.rh-pillar-label strong{
+  font-family:var(--display);font-weight:600;font-size:18px;color:var(--paper);
+}
+.rh-pillar-label span{
+  font-family:var(--mono);font-size:11px;color:var(--muted);
+  letter-spacing:.14em;text-transform:uppercase;font-weight:500;
+}
+.rh-pillar-divider{
+  font-family:var(--display);font-weight:200;font-size:54px;line-height:1;
+  color:var(--rule);font-style:normal;
+}
+
+/* Marquee tags */
+.rh-marquee{
+  position:absolute;left:0;right:0;bottom:0;
+  padding:18px 0;
+  background:linear-gradient(90deg,var(--paper) 0%,#1A1107 100%);
+  overflow:hidden;
+  z-index:3;
+}
+.rh-marquee::before,.rh-marquee::after{
+  content:"";position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none;
+}
+.rh-marquee::before{
+  left:0;background:linear-gradient(90deg,var(--paper),transparent);
+}
+.rh-marquee::after{
+  right:0;background:linear-gradient(-90deg,#1A1107,transparent);
+}
+.rh-marquee-track{
+  display:flex;align-items:center;gap:28px;
+  white-space:nowrap;
+  animation:rh-marquee 32s linear infinite;
+  width:max-content;
+}
+@keyframes rh-marquee{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+.rh-tag{
+  font-family:var(--display);font-style:italic;font-weight:400;
+  font-size:18px;color:#F4EFE6;letter-spacing:-.005em;
+  flex-shrink:0;
+}
+.rh-tag-dot{
+  color:var(--orange);font-size:10px;flex-shrink:0;
+}
+
+@media (max-width:1100px){
+  .rules-hero-v2{padding:40px 28px 56px;min-height:auto}
+  .rh-title{font-size:54px}
+  .rh-line-2{padding-left:30px}
+  .rh-bg-3,.rh-bg-1{font-size:280px}
+  .rh-bg-plus{font-size:160px;margin:0 -6px 50px}
+  .rh-pillar-num{font-size:54px}
+  .rh-pillars{gap:18px;flex-wrap:wrap}
+}
+.rules-card{background:var(--ink-2);border:1px solid var(--rule-soft);border-radius:14px;padding:28px;margin-bottom:20px}
+.rules-card .h2{margin-bottom:6px}
+.rules-card .lead{margin-bottom:20px}
+
+.rule-table{width:100%;border-collapse:collapse;margin-top:12px}
+.rule-table th{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-align:left;padding:12px 14px;border-bottom:1px solid var(--rule-soft);background:#FAF3E3}
+.rule-table td{padding:14px;border-bottom:1px solid var(--rule-soft);font-size:13.5px;color:var(--paper-2);vertical-align:top}
+.rule-table tr:last-child td{border-bottom:none}
+.rule-id{font-family:var(--mono);font-size:11px;color:var(--orange);font-weight:700;letter-spacing:.1em}
+.rule-name{font-family:var(--display);font-weight:600;color:var(--paper);font-size:14px;display:block;margin-bottom:3px}
+.rule-table .pt-cell{font-family:var(--display);font-weight:600;font-size:18px;color:var(--paper);text-align:center}
+.rule-table .pt-cell.hot{color:var(--orange)}
+
+.matrix-large{margin-top:18px;border:1px solid var(--rule-soft);border-radius:12px;overflow:hidden}
+.matrix-large table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:13px}
+.matrix-large th,.matrix-large td{padding:14px;text-align:center;border:1px solid var(--rule-soft);color:var(--paper)}
+.matrix-large th{background:#FAF3E3;color:var(--muted);font-weight:700;letter-spacing:.1em;font-size:11px;text-transform:uppercase}
+.matrix-large td.row-head{background:#FAF3E3;color:var(--paper);text-align:left;padding-left:18px;font-weight:700;font-size:12px}
+.matrix-large td.row-head small{display:block;font-family:var(--mono);font-size:10px;color:var(--muted);font-weight:500;letter-spacing:.06em;margin-top:2px}
+.matrix-large td.score{font-family:var(--display);font-weight:600;font-size:20px;color:var(--paper)}
+.matrix-large td.score.peak{color:var(--orange);background:rgba(194,65,12,.08)}
+
+/* ============================================================ */
+/* PAGE · RATING (管理员员工评分)                                 */
+/* ============================================================ */
+.rating-shell{
+  display:grid;grid-template-columns:340px 1fr;gap:24px;
+  margin-top:24px;
+  align-items:start;
+}
+
+/* 左侧：员工列表 */
+.rating-side{
+  background:var(--ink-2);border:1px solid var(--rule-soft);border-radius:14px;
+  padding:18px;position:sticky;top:90px;
+  max-height:calc(100vh - 110px);overflow-y:auto;
+}
+.rating-side-head{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:0 6px 14px;border-bottom:1px solid var(--rule-soft);margin-bottom:12px;
+}
+.rating-side-title{
+  font-family:var(--display);font-weight:600;font-size:14px;color:var(--paper);
+}
+.rating-side-count{
+  font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.1em;
+}
+.rating-side-search{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 12px;background:var(--ink-3);border:1px solid var(--rule-soft);
+  border-radius:8px;margin-bottom:14px;
+}
+.rating-side-search input{
+  flex:1;background:transparent;border:none;outline:none;
+  color:var(--paper);font-family:var(--serif);font-size:12.5px;
+}
+.rating-side-search input::placeholder{color:var(--muted-2)}
+
+.rating-emp-list{display:flex;flex-direction:column;gap:4px}
+.rating-emp{
+  display:grid;grid-template-columns:30px 1fr auto;gap:10px;align-items:center;
+  padding:10px 10px;border-radius:8px;cursor:pointer;
+  transition:all .2s ease;border:1px solid transparent;
+}
+.rating-emp:hover{background:rgba(43,29,14,.04);border-color:var(--rule-soft)}
+.rating-emp.active{background:rgba(194,65,12,.08);border-color:var(--orange)}
+.rating-emp .av{
+  width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+  font-family:var(--display);font-weight:700;font-size:11px;color:#FAF3E3;
+}
+.rating-emp-text{display:flex;flex-direction:column;line-height:1.2;min-width:0}
+.rating-emp-name{
+  font-size:13px;font-weight:600;color:var(--paper);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.rating-emp-meta{
+  font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.06em;
+  margin-top:1px;
+}
+.rating-emp-status{
+  font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.1em;
+  padding:3px 7px;border-radius:99px;
+}
+.status-done{background:rgba(92,107,58,.12);color:var(--moss);border:1px solid rgba(92,107,58,.35)}
+.status-pending{background:rgba(166,116,30,.12);color:var(--amber);border:1px solid rgba(166,116,30,.35)}
+.status-overdue{background:rgba(181,61,42,.12);color:var(--red);border:1px solid rgba(181,61,42,.35)}
+
+/* 右侧：评分主面板 */
+.rating-main{
+  background:var(--ink-2);border:1px solid var(--rule-soft);border-radius:14px;
+  padding:0;overflow:hidden;
+}
+.rating-main-head{
+  padding:24px 28px;
+  background:linear-gradient(180deg,#F8EFD8 0%,#F4E8C8 100%);
+  border-bottom:1px solid var(--rule-soft);
+  display:flex;justify-content:space-between;align-items:flex-start;gap:24px;
+}
+.rating-main-emp{display:flex;align-items:center;gap:16px}
+.rating-main-emp .av{
+  width:56px;height:56px;border-radius:50%;display:grid;place-items:center;
+  font-family:var(--display);font-weight:700;font-size:20px;color:#FAF3E3;flex-shrink:0;
+}
+.rating-main-emp-text{display:flex;flex-direction:column;gap:4px}
+.rating-main-emp-name{
+  font-family:var(--display);font-weight:600;font-size:22px;color:var(--paper);
+  letter-spacing:-.005em;line-height:1;
+}
+.rating-main-emp-meta{
+  font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.1em;
+}
+.rating-main-actions{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.rating-summary-link{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:8px 14px;background:#FAF3E3;border:1px solid var(--rule);
+  border-radius:8px;font-size:12.5px;font-weight:500;color:var(--paper-2);
+  transition:all .2s;cursor:pointer;
+}
+.rating-summary-link:hover{background:var(--paper);color:#FAF3E3;border-color:var(--paper)}
+.rating-summary-link .ext{font-family:var(--mono);font-size:11px;opacity:.7}
+.rating-period{
+  font-family:var(--mono);font-size:10px;color:var(--muted);
+  letter-spacing:.16em;text-transform:uppercase;
+}
+
+.rating-main-body{padding:28px}
+
+/* 评分能力区 */
+.rate-cap{margin-bottom:32px}
+.rate-cap-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:6px;padding-bottom:10px;border-bottom:1px solid var(--rule-soft)}
+.rate-cap-title{display:flex;align-items:baseline;gap:10px}
+.rate-cap-tag{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.16em;font-weight:600}
+.rate-cap-name{font-family:var(--display);font-weight:600;font-size:18px;color:var(--paper);letter-spacing:-.005em}
+.rate-cap-weight{font-family:var(--display);font-weight:600;font-style:italic;font-size:16px;color:var(--amber)}
+.rate-cap-weight.moss{color:var(--moss)}
+.rate-cap-total{font-family:var(--display);font-weight:600;font-size:16px;color:var(--paper)}
+.rate-cap-total em{font-style:normal;color:var(--muted-2);font-weight:400;font-size:13px;margin-left:2px}
+
+.rate-row{
+  display:grid;grid-template-columns:200px 1fr 280px;gap:24px;align-items:center;
+  padding:16px 0;border-bottom:1px dashed var(--rule-soft);
+}
+.rate-row:last-child{border-bottom:none}
+.rate-dim{display:flex;flex-direction:column;gap:3px}
+.rate-dim-id{font-family:var(--mono);font-size:10px;color:var(--orange);letter-spacing:.1em;font-weight:700}
+.rate-dim-id.amber{color:var(--amber)}
+.rate-dim-id.moss{color:var(--moss)}
+.rate-dim-name{font-family:var(--display);font-weight:600;font-size:14px;color:var(--paper);letter-spacing:-.005em}
+.rate-dim-desc{font-size:11.5px;color:var(--muted);line-height:1.5}
+
+.rate-scale{display:flex;gap:6px}
+.rate-btn{
+  flex:1;padding:10px 4px;background:#FAF3E3;border:1px solid var(--rule-soft);
+  border-radius:8px;cursor:pointer;transition:all .2s ease;
+  display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--display);
+}
+.rate-btn:hover{border-color:var(--rule);background:var(--paper)}
+.rate-btn:hover .rate-btn-num,.rate-btn:hover .rate-btn-label{color:#FAF3E3}
+.rate-btn-num{font-weight:600;font-size:18px;color:var(--paper);line-height:1}
+.rate-btn-label{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.06em;font-weight:500}
+.rate-btn.selected{background:var(--orange);border-color:var(--orange)}
+.rate-btn.selected .rate-btn-num,.rate-btn.selected .rate-btn-label{color:#FAF3E3}
+.rate-btn.amber.selected{background:var(--amber);border-color:var(--amber)}
+.rate-btn.moss.selected{background:var(--moss);border-color:var(--moss)}
+
+.rate-feedback-section{margin-top:18px;padding:18px;background:#FAF3E3;border:1px solid var(--rule-soft);border-radius:12px}
+.rate-feedback-title{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;font-weight:600;margin-bottom:10px}
+.rate-feedback-textarea{
+  width:100%;padding:12px 14px;background:#fff;border:1px solid var(--rule-soft);
+  border-radius:8px;color:var(--paper);font-family:var(--serif);font-size:13px;
+  min-height:80px;resize:vertical;line-height:1.6;
+}
+.rate-feedback-textarea:focus{outline:none;border-color:var(--orange)}
+
+.rate-submit-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:24px 28px;background:#FAF3E3;border-top:1px solid var(--rule-soft);
+}
+.rate-submit-summary{display:flex;align-items:baseline;gap:24px}
+.rate-summary-block{display:flex;flex-direction:column;gap:2px}
+.rate-summary-block .lab{font-family:var(--mono);font-size:9.5px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.rate-summary-block .val{font-family:var(--display);font-weight:600;font-size:20px;color:var(--paper)}
+.rate-summary-block .val em{font-style:normal;color:var(--muted-2);font-size:13px;font-weight:400;margin-left:2px}
+.rate-summary-block .val.orange{color:var(--orange)}
+
+/* 历史记录 */
+.rate-history-section{padding:24px 28px;background:#FAF3E3;border-top:1px solid var(--rule-soft)}
+.rate-history-title{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;font-weight:600;margin-bottom:14px}
+.rate-history-list{display:flex;flex-direction:column;gap:8px}
+.rate-history-row{
+  display:grid;grid-template-columns:90px 1fr auto auto;gap:18px;align-items:center;
+  padding:10px 14px;background:#fff;border:1px solid var(--rule-soft);border-radius:8px;
+  font-size:12.5px;
+}
+.rate-history-period{font-family:var(--mono);font-size:11px;color:var(--paper-2);letter-spacing:.06em;font-weight:600}
+.rate-history-bars{display:flex;gap:8px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.rate-history-bars b{font-weight:700;color:var(--paper);font-size:12px}
+.rate-history-pts{font-family:var(--display);font-weight:600;font-size:15px;color:var(--paper)}
+.rate-history-pts em{font-style:normal;font-family:var(--mono);font-size:9.5px;color:var(--muted);font-weight:400;margin-left:2px}
+.rate-history-status{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.1em}
+.rate-history-status.locked{color:var(--moss)}
+
+/* Hero (rating page) */
+.rating-hero{
+  display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;
+  padding:24px 28px;
+  background:linear-gradient(180deg,#F8EFD8 0%,#F4E8C8 100%);
+  border:1px solid var(--rule-soft);border-radius:14px;margin-bottom:8px;
+}
+.rating-hero-text .h1{font-size:32px;margin-bottom:4px}
+.rating-hero-text .lead{font-size:13px}
+.rating-hero-stats{display:flex;gap:28px}
+.rh-stat{display:flex;flex-direction:column;gap:2px;text-align:right}
+.rh-stat-num{font-family:var(--display);font-weight:600;font-size:28px;color:var(--paper);letter-spacing:-.02em;line-height:1}
+.rh-stat-num em{font-style:italic;color:var(--orange)}
+.rh-stat-num.moss em{color:var(--moss)}
+.rh-stat-num.amber em{color:var(--amber)}
+.rh-stat-label{font-family:var(--mono);font-size:9.5px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-top:4px}
+
+@media (max-width:1100px){
+  .rating-shell{grid-template-columns:1fr}
+  .rating-side{position:static;max-height:none}
+  .rate-row{grid-template-columns:1fr}
+}
+
+/* Anti-leakage watermark for HR view */
+.watermark{
+  position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:1;
+  display:none;
+  background-image:repeating-linear-gradient(45deg,transparent 0 240px,rgba(194,65,12,.025) 240px 480px);
+}
+body[data-view="hr"] .watermark{display:block}
+.watermark-tag{
+  position:fixed;bottom:18px;right:18px;
+  padding:6px 14px;border-radius:99px;
+  background:rgba(194,65,12,.12);border:1px solid var(--orange);
+  font-family:var(--mono);font-size:10px;color:var(--orange);
+  letter-spacing:.16em;font-weight:700;
+  display:none;z-index:100;
+  text-transform:uppercase;
+}
+body[data-view="hr"] .watermark-tag{display:block}
+</style>
+</head>
+<body data-view="employee">
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">SI</div>
+    <div>
+      <div class="brand-name">超级个体识别系统</div>
+      <div class="brand-sub">LianShang · Super Individual Engine v4.0</div>
+    </div>
+  </div>
+  <nav class="nav">
+    <button data-page="rules" class="active">首页</button>
+    <button data-page="dashboard">我的SI</button>
+    <button data-page="submit">提报案例</button>
+    <button data-page="library">案例库</button>
+    <button data-page="rating" class="hr-only">员工评分</button>
+    <button data-page="admin" class="hr-only">人才看板 / 管理员</button>
+  </nav>
+  <div style="display:flex;align-items:center;gap:14px">
+    <div class="view-switcher">
+      <span class="vs-label">演示视角</span>
+      <div class="vs-toggle" id="vsToggle">
+        <button class="vs-btn active" data-view="employee">员工端</button>
+        <button class="vs-btn" data-view="hr">管理员端</button>
+        <span class="vs-pill"></span>
+      </div>
+    </div>
+    <div class="user-chip">
+      <div class="avatar" id="userAvatar">AK</div>
+      <div class="user-info">
+        <div class="user-name" id="userName">Amanda Kang</div>
+        <div class="user-role" id="userRole">HR · People Strategy</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- =================== PAGE 1 · DASHBOARD =================== -->
+<div class="page" id="page-dashboard">
+<div class="container">
+
+  <div class="hr-banner">
+    <span class="lock">⊕</span>
+    <strong>管理员视角 · 内部使用</strong>
+    <span style="margin-left:auto;color:var(--paper-2);font-size:11px;letter-spacing:.04em">完整分数、Tier 评级、6 维度拆解、人评原始数据</span>
+  </div>
+
+  <div class="emp-notice" style="margin-bottom:24px">
+    <span style="color:var(--moss)">●</span>
+    <span>员工视角 · 你看到的是 <strong style="color:var(--paper);font-family:var(--serif);font-weight:600">达标结果</strong> 与 <strong style="color:var(--paper);font-family:var(--serif);font-weight:600">上级反馈</strong>，具体分数仅管理员内部使用</span>
+  </div>
+
+  <!-- Hero with SI Score -->
+  <div class="hero-row">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <div class="hero-dot"></div>
+        <span class="eyebrow">2026 · Q2 · 当前评估周期</span>
+      </div>
+      <h1 class="hero-title">从「用 AI」<br>到 <em>「管 AI」</em>。</h1>
+      <p class="hero-sub">每一位超级个体身后，都管理着一套由智能体组成的"数字部门"。你不再只是执行任务的人，而是定义逻辑、管理流程、治理偏差的指挥官。</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">12</div>
+          <div class="hero-stat-label">已提报案例</div>
+        </div>
+        <div class="hero-stat hr-only">
+          <div class="hero-stat-num">3<em>/12</em></div>
+          <div class="hero-stat-label">Q3级认证</div>
+        </div>
+        <div class="hero-stat hr-only">
+          <div class="hero-stat-num">A</div>
+          <div class="hero-stat-label">Tier · 待治理力面试</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="score-display">
+      <div class="score-top">
+        <div>
+          <div class="eyebrow" style="color:var(--muted);margin-bottom:6px">SI 盘点结果</div>
+          <div class="label">Super Individual · Result</div>
+        </div>
+        <!-- HR view: exact tier shown -->
+        <div class="score-tier tier-A hr-only">● Tier A · 卓越</div>
+      </div>
+
+      <!-- HR view: exact score -->
+      <div class="hr-only">
+        <div class="score-main">
+          <div class="score-num">7<em>8</em></div>
+          <div class="score-of">/ 100</div>
+        </div>
+        <div class="score-formula">
+          = <span>32</span> AI指挥力 &nbsp;+&nbsp; <span>24</span> 学习进化力 &nbsp;+&nbsp; <span>22</span> 价值创造力
+        </div>
+      </div>
+
+      <!-- Employee view: ONLY达标 status + 部门排名,无任何分数 -->
+      <div class="employee-only">
+        <div class="result-badge">
+          <div class="result-check">✓</div>
+          <div class="result-text">
+            <div class="result-title">已达标</div>
+            <div class="result-sub">本期 SI 盘点结果</div>
+          </div>
+        </div>
+        <div class="result-rank">
+          <div class="result-rank-row">
+            <span class="result-rank-label">在 <strong>HR 中心</strong> 中超越</span>
+            <span class="result-rank-pct">85<em>%</em></span>
+            <span class="result-rank-label">的同事</span>
+          </div>
+          <div class="result-rank-bar">
+            <div class="result-rank-fill" style="width:85%"></div>
+            <div class="result-rank-marker" style="left:85%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HR-only progress bar (员工不看到达标线和具体分数轴) -->
+      <div class="score-progress hr-only">
+        <div class="score-bar">
+          <div class="score-bar-fill"></div>
+          <div class="score-bar-target"></div>
+        </div>
+        <div class="score-meta">
+          <span>0</span><span>50 · 达标</span><span>100</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Three core capabilities -->
+  <div class="section-head">
+    <h2 class="h2"><span class="num">— 03</span>三项核心能力</h2>
+    <span class="label">Last sync · 2026.05.07 · 14:32</span>
+  </div>
+
+  <div class="cap-grid">
+
+    <!-- AI 指挥力 — HR版：精确分 -->
+    <div class="cap hr-only">
+      <span class="cap-tag tag-orange">核心能力 01 · 40%</span>
+      <h3 class="cap-name">AI 指挥力</h3>
+      <p class="cap-desc">驱动人机协同，并将个人经验与业务逻辑 Agent 化的能力</p>
+      <div class="cap-score">
+        <span class="cap-score-num">32</span>
+        <span class="cap-score-of">/ 40</span>
+      </div>
+      <div class="cap-bar orange"><div style="width:80%"></div></div>
+      <div class="cap-detail">
+        <div class="cap-detail-row hi"><span>最高分代表作</span><span>D3 × Q3 → 35pt</span></div>
+        <div class="cap-detail-row"><span>评分方式</span><span>系统查表 · 深度 × 质量</span></div>
+        <div class="cap-detail-row"><span>数据源</span><span>AI 案例库 · 12 cases</span></div>
+      </div>
+    </div>
+
+    <!-- AI 指挥力 — 员工版：只显示提报状态和代表作信息,无分数 -->
+    <div class="cap employee-only">
+      <span class="cap-tag tag-orange">核心能力 01</span>
+      <h3 class="cap-name">AI 指挥力</h3>
+      <p class="cap-desc">驱动人机协同，并将个人经验与业务逻辑 Agent 化的能力</p>
+      <div class="cap-status">
+        <div class="cap-status-icon">●</div>
+        <div class="cap-status-text">已评估</div>
+      </div>
+      <div class="cap-detail">
+        <div class="cap-detail-row hi"><span>你的代表作</span><span>招聘JD智能生成</span></div>
+        <div class="cap-detail-row"><span>已提报案例</span><span>12 个 · 3 个 Q3</span></div>
+      </div>
+      <div class="cap-feedback" style="margin-top:14px">
+        <div class="cap-feedback-eyebrow">— 努力方向</div>
+        <div class="cap-feedback-body">尝试把 <strong>OKR 校准助手</strong> 从 Q2 推进到 Q3，让代表作再上一档。</div>
+      </div>
+    </div>
+
+    <!-- 学习进化力 — HR 看精确分 + 5维拆解 -->
+    <div class="cap hr-only">
+      <span class="cap-tag tag-amber">核心能力 02 · 30%</span>
+      <h3 class="cap-name">学习进化力</h3>
+      <p class="cap-desc">高效完成知识获取-内化-实践闭环，并沉淀为可复用方法论</p>
+      <div class="cap-score">
+        <span class="cap-score-num">24</span>
+        <span class="cap-score-of">/ 30</span>
+      </div>
+      <div class="cap-bar amber"><div style="width:80%"></div></div>
+      <div class="cap-detail">
+        <div class="cap-detail-row"><span>5 维度结构化人评</span><span>L1·5 L2·5 L3·4 L4·5 L5·5</span></div>
+        <div class="cap-detail-row"><span>评分主体</span><span>上级 80% + 合作方 20%</span></div>
+        <div class="cap-detail-row"><span>团队对标</span><span>P88 · 卓越层</span></div>
+      </div>
+    </div>
+
+    <!-- 学习进化力 — 员工版：只显示已评估 + 方向性反馈 -->
+    <div class="cap employee-only">
+      <span class="cap-tag tag-amber">核心能力 02</span>
+      <h3 class="cap-name">学习进化力</h3>
+      <p class="cap-desc">借助 AI 高效完成知识获取-内化-实践闭环，沉淀为方法论</p>
+      <div class="cap-status">
+        <div class="cap-status-icon" style="color:var(--amber)">●</div>
+        <div class="cap-status-text">已评估</div>
+      </div>
+      <div class="cap-feedback">
+        <div class="cap-feedback-eyebrow">— 上级反馈</div>
+        <div class="cap-feedback-body">在 <strong>跨领域学习</strong> 与 <strong>知识沉淀赋能</strong> 上展现出团队优秀水平，建议下半年聚焦在 <strong>本职领域学习速度</strong> 上加强系统性方法论积累。</div>
+      </div>
+    </div>
+
+    <!-- 价值创造力 — HR 看精确分 -->
+    <div class="cap hr-only">
+      <span class="cap-tag tag-moss">核心能力 03 · 30%</span>
+      <h3 class="cap-name">价值创造力</h3>
+      <p class="cap-desc">主人翁意识、不设限担当与可量化业务增值贡献</p>
+      <div class="cap-score">
+        <span class="cap-score-num">22</span>
+        <span class="cap-score-of">/ 30</span>
+      </div>
+      <div class="cap-bar moss"><div style="width:73.3%"></div></div>
+      <div class="cap-detail">
+        <div class="cap-detail-row"><span>5 维度结构化人评</span><span>V1·5 V2·5 V3·4 V4·4 V5·4</span></div>
+        <div class="cap-detail-row"><span>季度交付任务</span><span>战略级 占比 38%</span></div>
+        <div class="cap-detail-row"><span>团队对标</span><span>P74 · 优秀层</span></div>
+      </div>
+    </div>
+
+    <!-- 价值创造力 — 员工版 -->
+    <div class="cap employee-only">
+      <span class="cap-tag tag-moss">核心能力 03</span>
+      <h3 class="cap-name">价值创造力</h3>
+      <p class="cap-desc">主人翁意识、不设限担当与可量化业务增值贡献</p>
+      <div class="cap-status">
+        <div class="cap-status-icon" style="color:var(--moss)">●</div>
+        <div class="cap-status-text">已评估</div>
+      </div>
+      <div class="cap-feedback">
+        <div class="cap-feedback-eyebrow">— 上级反馈</div>
+        <div class="cap-feedback-body">本职职责交付 <strong>稳健扎实</strong>，主动识别问题表现突出。可以更多挑战 <strong>跨部门协同</strong> 与 <strong>不设限担当</strong>，把战略级任务的占比再拉一档。</div>
+      </div>
+    </div>
+
+    <!-- AI 治理力 special -->
+    <div class="cap cap-special">
+      <div class="cap-special-inner">
+        <div class="cap-special-text">
+          <span class="cap-tag tag-bone" style="margin-bottom:10px">超能力 · 独立认证</span>
+          <h3 class="cap-name">AI 治理力<span style="font-style:italic;color:var(--muted);font-weight:300;font-size:18px;margin-left:10px">— 半年度线下访谈</span></h3>
+          <p class="cap-desc">将 AI 的失控与试错，转化为系统进化养料的驯化力。<br>当工作流出现偏差时主动介入纠偏；深挖根因重构 Agent 边界；最终让 AI 从"需要人盯着"进化到"在设定的演化轨道上自行进化"。</p>
+        </div>
+        <!-- HR sees rating -->
+        <div class="tier-display hr-only">
+          <div class="tier-rating">中<em>·偏强</em></div>
+          <div class="tier-method">半年度线下访谈认证<br>评审委员会 · 待面试</div>
+        </div>
+        <!-- Employee sees only invitation status -->
+        <div class="tier-display employee-only">
+          <div class="tier-rating" style="font-size:18px;color:var(--moss)">● 已邀请访谈</div>
+          <div class="tier-method">半年度线下访谈 · 5/14<br>地点：滨江园区 B3 会议室</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cases & quick actions -->
+  <div class="section-head">
+    <h2 class="h2"><span class="num">— 04</span>我的 AI 案例库</h2>
+    <span class="label">12 cases · 3 已 Q3 认证</span>
+  </div>
+
+  <div class="cases-row">
+    <div class="card-flat">
+      <div class="timeline">
+        <div class="case-item">
+          <div class="case-date">2026.04.21</div>
+          <div class="case-body">
+            <div class="case-title">招聘JD智能生成与候选人匹配 Agent</div>
+            <div class="case-meta">输入岗位关键词 + JD 模板 → 多 Agent 协同生成完整 JD、人才画像、Boolean 搜索串、面试题库</div>
+            <div class="case-tags">
+              <span class="case-tag">D4 · 复杂Agent</span>
+              <span class="case-tag">Q3 · 高度认可</span>
+              <span class="case-tag">已纳入流程</span>
+            </div>
+          </div>
+          <div class="case-score q3">35<em>分</em></div>
+        </div>
+
+        <div class="case-item">
+          <div class="case-date">2026.03.15</div>
+          <div class="case-body">
+            <div class="case-title">员工敬业度调研半自动化分析工作流</div>
+            <div class="case-meta">问卷数据 → 分群聚类 → 主题抽取 → 自动生成可视化报告，HR 仅做最终判断</div>
+            <div class="case-tags">
+              <span class="case-tag">D3 · Agent工作流</span>
+              <span class="case-tag">Q3 · 高度认可</span>
+            </div>
+          </div>
+          <div class="case-score q3">35<em>分</em></div>
+        </div>
+
+        <div class="case-item">
+          <div class="case-date">2026.02.28</div>
+          <div class="case-body">
+            <div class="case-title">绩效面谈话术生成器 Prompt 链</div>
+            <div class="case-meta">基于绩效结果与员工画像，输出差异化的面谈开场白、关键问题与改进建议</div>
+            <div class="case-tags">
+              <span class="case-tag">D2 · 人机协同</span>
+              <span class="case-tag">Q2 · 业务方认可</span>
+            </div>
+          </div>
+          <div class="case-score q2">22<em>分</em></div>
+        </div>
+
+        <div class="case-item">
+          <div class="case-date">2026.02.10</div>
+          <div class="case-body">
+            <div class="case-title">OKR 校准 AI 助手</div>
+            <div class="case-meta">基于公司战略与团队目标，自动检测 OKR 颗粒度、可衡量性与对齐度，给出修订建议</div>
+            <div class="case-tags">
+              <span class="case-tag">D2 · 人机协同</span>
+              <span class="case-tag">Q2 · 业务方认可</span>
+            </div>
+          </div>
+          <div class="case-score q2">22<em>分</em></div>
+        </div>
+
+        <div class="case-item">
+          <div class="case-date">2026.01.18</div>
+          <div class="case-body">
+            <div class="case-title">offer letter 起草 Prompt 模板</div>
+            <div class="case-meta">基于岗位、级别、薪酬包、特殊条款，结构化生成中英双语 offer letter</div>
+            <div class="case-tags">
+              <span class="case-tag">D1 · Prompt</span>
+              <span class="case-tag">Q2 · 业务方认可</span>
+            </div>
+          </div>
+          <div class="case-score">12<em>分</em></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="quick-card">
+        <h3 class="h3">快速操作</h3>
+        <div class="action-list">
+          <button class="action-btn" onclick="goPage('submit')">
+            <div class="left"><strong>提报新案例</strong><small>登记你的 AI 实践，更新代表作</small></div>
+            <span class="arrow">→</span>
+          </button>
+          <button class="action-btn" onclick="goPage('library')">
+            <div class="left"><strong>浏览案例库</strong><small>1,847 个公司级 AI 资产可复用</small></div>
+            <span class="arrow">→</span>
+          </button>
+          <button class="action-btn">
+            <div class="left"><strong>申请 Q2 → Q3 复评</strong><small>OKR 校准助手已运行 8 周</small></div>
+            <span class="arrow">→</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <div class="tip-eyebrow">— 代表作思维</div>
+        <div class="tip-text">
+          AI 指挥力得分 = <strong>最高分案例</strong>，封顶 40 分。<br><br>
+          其他案例可入库沉淀，但<strong>不累加</strong>分数。<br>
+          做精，不做多。一个真正的超级个体，会让自己的 AI 资产持续创造价值。
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+<!-- =================== PAGE · RULES (评分规则) =================== -->
+<div class="page active" id="page-rules">
+<div class="container">
+
+  <!-- HERO -->
+  <div class="rules-hero-v2">
+    <div class="rh-bg-numbers">
+      <span class="rh-bg-3">3</span>
+      <span class="rh-bg-plus">+</span>
+      <span class="rh-bg-1">1</span>
+    </div>
+
+    <div class="rh-grid">
+      <div class="rh-grid-line"></div>
+      <div class="rh-grid-line"></div>
+      <div class="rh-grid-line"></div>
+      <div class="rh-grid-line"></div>
+    </div>
+
+    <div class="rh-content">
+      <div class="rh-eyebrow">
+        <span class="rh-pip"></span>
+        <span class="rh-eyebrow-text">SCORING&nbsp; RULES &nbsp;·&nbsp; v4.0</span>
+        <span class="rh-line"></span>
+      </div>
+
+      <h1 class="rh-title">
+        <span class="rh-line-1">一个 <em class="rh-em-orange">超级个体</em>，</span>
+        <span class="rh-line-2">如何 <em class="rh-em-italic">被识别</em>？</span>
+      </h1>
+
+      <div class="rh-pillars">
+        <div class="rh-pillar">
+          <div class="rh-pillar-num">3</div>
+          <div class="rh-pillar-label">
+            <strong>核心能力</strong>
+            <span>构成 SI Score 主线</span>
+          </div>
+        </div>
+        <div class="rh-pillar-divider">+</div>
+        <div class="rh-pillar">
+          <div class="rh-pillar-num rh-pillar-num-orange">1</div>
+          <div class="rh-pillar-label">
+            <strong>超能力</strong>
+            <span>区分顶尖人才</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 标准总览 -->
+  <div class="rules-card">
+    <span class="label">— 01</span>
+    <h2 class="h2" style="margin-top:6px">标准总览</h2>
+    <p class="lead">连尚超级个体的能力画像由 <strong style="color:var(--paper)">3 项核心能力 + 1 项超能力</strong> 共同构成。</p>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px">
+      <div style="padding:22px;background:#FAF3E3;border:1px solid var(--rule-soft);border-radius:12px;border-top:3px solid var(--orange);position:relative">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--orange);letter-spacing:.16em;font-weight:700;margin-bottom:10px">— 核心能力 01</div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <div style="font-family:var(--display);font-weight:600;font-size:19px;color:var(--paper)">AI 指挥力</div>
+          <div style="font-family:var(--display);font-weight:600;font-style:italic;font-size:24px;color:var(--orange);line-height:1">·40%</div>
+        </div>
+        <div style="font-size:12.5px;line-height:1.55;color:var(--paper-2)">驱动人机协同，并将个人经验与业务逻辑 Agent 化的能力</div>
+      </div>
+      <div style="padding:22px;background:#FAF3E3;border:1px solid var(--rule-soft);border-radius:12px;border-top:3px solid var(--amber);position:relative">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--amber);letter-spacing:.16em;font-weight:700;margin-bottom:10px">— 核心能力 02</div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <div style="font-family:var(--display);font-weight:600;font-size:19px;color:var(--paper)">学习进化力</div>
+          <div style="font-family:var(--display);font-weight:600;font-style:italic;font-size:24px;color:var(--amber);line-height:1">·30%</div>
+        </div>
+        <div style="font-size:12.5px;line-height:1.55;color:var(--paper-2)">借助 AI 高效完成知识获取-内化-实践闭环，沉淀为方法论</div>
+      </div>
+      <div style="padding:22px;background:#FAF3E3;border:1px solid var(--rule-soft);border-radius:12px;border-top:3px solid var(--moss);position:relative">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--moss);letter-spacing:.16em;font-weight:700;margin-bottom:10px">— 核心能力 03</div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:8px">
+          <div style="font-family:var(--display);font-weight:600;font-size:19px;color:var(--paper)">价值创造力</div>
+          <div style="font-family:var(--display);font-weight:600;font-style:italic;font-size:24px;color:var(--moss);line-height:1">·30%</div>
+        </div>
+        <div style="font-size:12.5px;line-height:1.55;color:var(--paper-2)">主人翁意识、不设限担当与可量化的业务增值贡献</div>
+      </div>
+      <div style="padding:22px;background:linear-gradient(135deg,#F8EFD8,#F2E5C5);border:1.5px solid rgba(194,65,12,.4);border-radius:12px;position:relative">
+        <div style="position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:9px;color:var(--orange);letter-spacing:.18em;font-weight:700">SUPER</div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--bone);letter-spacing:.16em;font-weight:700;margin-bottom:10px">— 超能力</div>
+        <div style="font-family:var(--display);font-weight:600;font-size:19px;color:var(--paper);margin-bottom:8px">AI 治理力</div>
+        <div style="font-size:12.5px;line-height:1.55;color:var(--paper-2)">将 AI 的失控与试错转化为系统进化养料的驯化力</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI 指挥力 -->
+  <div class="rules-card">
+    <span class="label">— 02</span>
+    <h2 class="h2" style="margin-top:6px">AI 指挥力</h2>
+    <p class="lead">驱动人机协同，并将个人经验与业务逻辑 Agent 化的能力。<strong style="color:var(--paper)">基于你提报到 AI 案例库的实践案例评估</strong>。</p>
+
+    <div style="margin-top:24px">
+      <div style="font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px;font-weight:600">— 考察维度</div>
+      <table class="rule-table">
+        <tbody>
+          <tr><td style="width:200px;padding-left:0"><span class="rule-name">提示词工程</span></td><td>能写出结构清晰、有效的 Prompt；能主动调用多元 AI 工具完成常规任务（翻译、总结、起草、数据查询）</td></tr>
+          <tr><td style="padding-left:0"><span class="rule-name">工具选型与流程编排</span></td><td>在真实业务场景中能找到 AI 的切入点，设计合理的人机协同分工模式</td></tr>
+          <tr><td style="padding-left:0"><span class="rule-name">任务 Agent 化</span></td><td>交付能跑通的工作流 / 智能体以处理较复杂的工作任务，实现端到端自动化</td></tr>
+          <tr><td style="padding-left:0"><span class="rule-name">结果闭环</span></td><td>通过工作流 / 智能体带来可量化的业务指标提升或工时降低 / 合作方与用户的实际反馈</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:28px">
+      <div style="font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px;font-weight:600">— 怎么打分</div>
+      <p class="lead" style="margin-bottom:16px">案例的<strong style="color:var(--paper)">深度</strong>（做到了什么程度）× <strong style="color:var(--paper)">质量</strong>（有多少人在用，是否真实有效）双维度查表评估。<strong style="color:var(--paper)">取你最高分案例为最终得分。</strong></p>
+
+      <div class="matrix-large">
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align:left;padding-left:18px">深度 \ 质量</th>
+              <th>Q1 · 个人能跑</th>
+              <th>Q2 · 业务方认可</th>
+              <th>Q3 · 高度认可</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="row-head">D1 · Prompt 模板<small>可复用的高质量提示词</small></td>
+              <td class="score">10</td><td class="score">12</td><td class="score">15</td>
+            </tr>
+            <tr>
+              <td class="row-head">D2 · 人机协同分工<small>重构 AI 与人的分工模式</small></td>
+              <td class="score">18</td><td class="score">22</td><td class="score">25</td>
+            </tr>
+            <tr>
+              <td class="row-head">D3 · Agent 工作流<small>端到端自动化，无需持续介入</small></td>
+              <td class="score">25</td><td class="score">32</td><td class="score">35</td>
+            </tr>
+            <tr>
+              <td class="row-head">D4 · 复杂 Agent<small>多 Agent 协同 / 动态决策</small></td>
+              <td class="score">30</td><td class="score">35</td><td class="score peak">40</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-top:18px;padding:16px 18px;background:rgba(194,65,12,.06);border:1px solid rgba(194,65,12,.22);border-radius:10px;font-size:13px;line-height:1.65;color:var(--paper-2)">
+        <strong style="color:var(--paper)">代表作思维 · </strong>取最高分案例为最终得分，其他案例可入库沉淀但不累加。鼓励做精不做多 — 一个真正的超级个体，会让自己的 AI 资产持续创造价值。
+      </div>
+    </div>
+  </div>
+
+  <!-- 学习进化力 -->
+  <div class="rules-card">
+    <span class="label">— 03</span>
+    <h2 class="h2" style="margin-top:6px">学习进化力</h2>
+    <p class="lead">借助 AI 高效完成从知识获取、内化到工作实践的闭环，并将经验沉淀为可复用方法论的能力。</p>
+
+    <div style="margin-top:24px">
+      <div style="font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px;font-weight:600">— 考察维度</div>
+      <table class="rule-table">
+        <tbody>
+          <tr><td style="width:200px;padding-left:0"><span class="rule-name">本职领域学习速度</span></td><td>本岗位职责范围内学习新工具、新方法、新流程的速度 vs 团队平均</td></tr>
+          <tr><td style="padding-left:0"><span class="rule-name">行业灵敏度</span></td><td>持续关注全球前沿与行业动态，识别并适应外部趋势变化</td></tr>
+          <tr><td style="padding-left:0"><span class="rule-name">跨领域新技能获取速度</span></td><td>完成跨领域新工具 / 新领域 / 新挑战的平均耗时 vs 团队平均（超出本职范围）</td></tr>
+          <tr><td style="padding-left:0"><span class="rule-name">高价值任务胜任度 / 跨界项目参与度</span></td><td>过去一个季度内承担任务的平均难度变化或战略级任务占比；跨领域 / 模块项目参与表现</td></tr>
+          <tr><td style="padding-left:0"><span class="rule-name">知识沉淀与赋能</span></td><td>内部分享、培训、最佳实践输出的数量与质量；个人项目的系统性复盘与方法论沉淀同等计入</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:24px;padding:14px 18px;background:#FAF3E3;border:1px solid var(--rule-soft);border-radius:10px;font-size:12.5px;color:var(--paper-2)">
+      <strong style="color:var(--paper);font-weight:600">评估方式 · </strong>由直属上级基于日常观察与工作总结进行综合评估。
+    </div>
+  </div>
+
+  <!-- 价值创造力 -->
+  <div class="rules-card">
+    <span class="label">— 04</span>
+    <h2 class="h2" style="margin-top:6px">价值创造力</h2>
+    <p class="lead">具备强烈的主人翁意识，不对岗位边界设限，能积极交付确定性结果、驱动业务增值的能力。</p>
+
+    <div style="margin-top:24px">
+      <div style="font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px;font-weight:600">— 考察维度</div>
+      <table class="rule-table">
+        <tbody>
+          <tr><td style="width:200px;padding-left:0"><span class="rule-name">本职职责的扎实交付</span></td><td>在本岗位范围内，稳定、高质量地交付工作</td></tr>
+          <tr><td style="padding-left:0"><span class="rule-name">主动识别问题</span></td><td>在工作中主动识别业务痛点并推动改善的实际案例</td></tr>
+          <tr><td style="padding-left:0"><span class="rule-name">不设限的担当</span></td><td>面对超出当前职责或经验的挑战性任务，不设限，能主动顶上、拿到结果，并对最终结果负全责</td></tr>
+          <tr><td style="padding-left:0"><span class="rule-name">交付韧性</span></td><td>在面临不确定因素时，能够调动资源、跨部门协同以确保结果达成的程度</td></tr>
+          <tr><td style="padding-left:0"><span class="rule-name">业务增值贡献</span></td><td>推动可量化的业务增长 / 降本 / 突破；岗位特性导致较少接触业务增量的，可量化的效率提升、质量提升、风险降低同等计入</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:24px;padding:14px 18px;background:#FAF3E3;border:1px solid var(--rule-soft);border-radius:10px;font-size:12.5px;color:var(--paper-2)">
+      <strong style="color:var(--paper);font-weight:600">评估方式 · </strong>由直属上级基于日常观察与工作总结进行综合评估，跨部门合作方提供补充视角。
+    </div>
+  </div>
+
+  <!-- AI 治理力 -->
+  <div class="rules-card">
+    <span class="label">— 05</span>
+    <h2 class="h2" style="margin-top:6px">AI 治理力 <span style="color:var(--orange);font-style:italic;font-weight:400">· 超能力</span></h2>
+    <p class="lead">将 AI 的失控与试错，转化为系统进化养料的驯化力。这是区分顶尖人才的能力，<strong style="color:var(--paper)">独立赋分，不计入 SI 主分</strong>。</p>
+
+    <div style="margin-top:24px">
+      <div style="font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px;font-weight:600">— 考察维度</div>
+      <table class="rule-table">
+        <tbody>
+          <tr><td style="padding-left:0"><span class="rule-name">主动纠偏</span><br><span style="color:var(--muted);font-size:13px">当 AI 工作流因出错、需求变更或数据问题出现波动时，能主动介入，通过纠偏和优化使其恢复</span></td></tr>
+          <tr><td style="padding-left:0"><span class="rule-name">根因重构</span><br><span style="color:var(--muted);font-size:13px">深入挖掘波动背后的根因，并据此重构 Agent 的权限边界、决策树和动态 Prompt 策略</span></td></tr>
+          <tr><td style="padding-left:0"><span class="rule-name">系统进化</span><br><span style="color:var(--muted);font-size:13px">沉淀方法论让 AI 从"需要人盯着"进化到"在设定的演化轨道上自行进化"</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:24px;padding:14px 18px;background:rgba(194,65,12,.06);border:1px solid rgba(194,65,12,.25);border-radius:10px;font-size:12.5px;color:var(--paper-2)">
+      <strong style="color:var(--paper);font-weight:600">评估方式 · </strong>由 AI 案例评审委员会通过<strong style="color:var(--paper);font-weight:600">半年度线下访谈</strong>认证。
+    </div>
+  </div>
+
+  <!-- SI 公式（最下面亮出来） -->
+  <div style="margin-top:48px;padding:54px 40px;background:linear-gradient(135deg,#F8EFD8,#F2E5C5);border:1.5px solid var(--rule-soft);border-radius:18px;position:relative;overflow:hidden">
+    <div style="position:absolute;right:-40px;top:-60px;font-family:var(--display);font-size:280px;color:rgba(194,65,12,.06);font-style:italic;font-weight:300;line-height:1;pointer-events:none">SI</div>
+
+    <div style="text-align:center;position:relative;z-index:2">
+      <div style="font-family:var(--mono);font-size:11px;color:var(--orange);letter-spacing:.22em;text-transform:uppercase;font-weight:700;margin-bottom:14px">— 你的盘点公式</div>
+      <h2 class="h2" style="font-size:32px;margin-bottom:8px">每个人都有一个 <em style="color:var(--orange);font-style:italic;font-weight:600">SI Score</em></h2>
+      <p class="lead" style="max-width:520px;margin:0 auto 36px">三项核心能力共同构成你的超级个体得分。</p>
+
+      <div style="display:flex;flex-direction:column;gap:18px;align-items:center">
+        <div style="font-family:var(--display);font-size:30px;font-weight:500;color:var(--paper);letter-spacing:.005em;line-height:1.5;text-align:center">
+          <span style="color:var(--orange);font-style:italic;font-weight:700">SI</span>
+          &nbsp;=&nbsp;
+          <span style="color:var(--orange)">AI 指挥力</span>
+          <span style="color:var(--orange);font-family:var(--display);font-weight:600;font-style:italic;margin:0 2px">·40%</span>
+          &nbsp;+&nbsp;
+          <span style="color:var(--amber)">学习进化力</span>
+          <span style="color:var(--amber);font-family:var(--display);font-weight:600;font-style:italic;margin:0 2px">·30%</span>
+          &nbsp;+&nbsp;
+          <span style="color:var(--moss)">价值创造力</span>
+          <span style="color:var(--moss);font-family:var(--display);font-weight:600;font-style:italic;margin:0 2px">·30%</span>
+        </div>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;font-weight:500">
+          满分 100 分 &nbsp;·&nbsp; AI 治理力 独立认证 不计入 SI
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- =================== PAGE 2 · SUBMIT =================== -->
+<div class="page" id="page-submit">
+<div class="container">
+
+  <div style="margin-bottom:12px"><span class="label">— 案例提报 / Case submission</span></div>
+  <h1 class="h1" style="margin-bottom:8px">登记一个 <em>AI 实践</em>。</h1>
+  <p class="lead" style="max-width:680px;margin-bottom:36px">所有员工提报的 AI 实践，经评审入库后，既是你 <strong style="color:var(--paper)">AI 指挥力</strong> 评分的证据，也是公司可复用的工具集。</p>
+
+  <div class="submit-grid">
+
+    <!-- LEFT: form -->
+    <div>
+      <div class="card">
+
+        <!-- Section 1 -->
+        <div class="form-section">
+          <div class="form-title"><span class="form-title-num">1</span>基础信息</div>
+          <div class="form-hint">用一句话能让别人秒懂你这个 AI 实践在解决什么。</div>
+
+          <div class="field">
+            <label class="field-label">案例标题<span class="req">*</span></label>
+            <input class="input" placeholder="例：招聘 JD 智能生成与候选人匹配 Agent" value="招聘JD智能生成与候选人匹配 Agent">
+          </div>
+
+          <div class="field">
+            <label class="field-label">业务场景描述<span class="req">*</span></label>
+            <textarea class="textarea" placeholder="说清楚原本的工作流是什么、痛点在哪里、AI 介入了哪些环节">招聘官每周需起草 15-20 个 JD，原流程依赖人工 + 模板，质量参差不齐且与候选人匹配度低。本案例通过多 Agent 协同：JD-Writer + Persona-Generator + Boolean-Builder + Question-Bank，端到端生成完整招聘包。</textarea>
+          </div>
+
+          <div class="field">
+            <label class="field-label">使用工具 / 技术栈</label>
+            <input class="input" value="Claude Sonnet 4.5 · n8n · 飞书多维表格 · 内部 ATS API">
+          </div>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="form-section">
+          <div class="form-title"><span class="form-title-num">2</span>深度评级 (D 维度)</div>
+          <div class="form-hint">你这个案例做到了什么程度？参考下面四档定义。</div>
+
+          <div class="depth-grid">
+            <div class="depth-card" data-depth="D1">
+              <span class="depth-id">D1</span>
+              <div class="depth-title">Prompt 模板</div>
+              <div class="depth-desc">可复用的高质量提示词</div>
+            </div>
+            <div class="depth-card" data-depth="D2">
+              <span class="depth-id">D2</span>
+              <div class="depth-title">人机协同分工</div>
+              <div class="depth-desc">重构 AI 与人的分工模式</div>
+            </div>
+            <div class="depth-card" data-depth="D3">
+              <span class="depth-id">D3</span>
+              <div class="depth-title">Agent 工作流</div>
+              <div class="depth-desc">端到端自动化，无需持续介入</div>
+            </div>
+            <div class="depth-card selected" data-depth="D4">
+              <span class="depth-id">D4</span>
+              <div class="depth-title">复杂 Agent</div>
+              <div class="depth-desc">多 Agent 协同 / 动态决策</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3 -->
+        <div class="form-section">
+          <div class="form-title"><span class="form-title-num">3</span>质量评级 (Q 维度)</div>
+          <div class="form-hint">实际有多少人在用、被认可到什么程度。</div>
+
+          <div class="quality-list">
+            <div class="quality-card" data-quality="Q1">
+              <div class="quality-radio"></div>
+              <div class="quality-text">
+                <span class="quality-id">Q1 · 个人能跑</span>
+                <span class="quality-name">自己使用，提交运行截图即时生效</span>
+              </div>
+              <span class="quality-hint">自助申报</span>
+            </div>
+            <div class="quality-card" data-quality="Q2">
+              <div class="quality-radio"></div>
+              <div class="quality-text">
+                <span class="quality-id">Q2 · 业务方认可</span>
+                <span class="quality-name">上级 / 用户 / 合作方点击"使用过且有价值"</span>
+              </div>
+              <span class="quality-hint">业务方确认</span>
+            </div>
+            <div class="quality-card selected" data-quality="Q3">
+              <div class="quality-radio"></div>
+              <div class="quality-text">
+                <span class="quality-id">Q3 · 已纳入日常工作</span>
+                <span class="quality-name">完全成型，业务方填写说明，评审委员会复核</span>
+              </div>
+              <span class="quality-hint">委员会复核</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4 -->
+        <div class="form-section">
+          <div class="form-title"><span class="form-title-num">4</span>结果与证据</div>
+          <div class="form-hint">交付物截图、运行视频、业务方反馈、效率提升量化数据。</div>
+
+          <div class="field">
+            <label class="field-label">效能提升 (可量化)</label>
+            <input class="input" value="单次 JD 起草耗时 45min → 8min · 候选人匹配 hit rate +28%">
+          </div>
+
+          <div class="upload-zone">
+            <div class="upload-icon">⌘</div>
+            <div class="upload-text">
+              <strong>拖拽文件到此处，或点击上传</strong>
+              <small>已上传 3 个文件 · workflow_demo.mp4 · feedback_screenshot.png · run_logs.csv</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 5 · 可见性设置 -->
+        <div class="form-section">
+          <div class="form-title"><span class="form-title-num">5</span>可见性设置</div>
+          <div class="form-hint">本案例提交后是否对全员公开？涉及业务敏感信息的请选择"仅管理员可见"。</div>
+
+          <div class="visibility-toggle">
+            <button class="vis-card vis-public selected" data-vis="public">
+              <div class="vis-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg>
+              </div>
+              <div class="vis-text">
+                <div class="vis-title">公开 · 全员可见</div>
+                <div class="vis-desc">案例进入公司级 AI 资产库，所有员工可搜索、复用、点赞</div>
+              </div>
+              <div class="vis-radio"></div>
+            </button>
+
+            <button class="vis-card vis-private" data-vis="private">
+              <div class="vis-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>
+              </div>
+              <div class="vis-text">
+                <div class="vis-title">涉密 · 仅管理员 & 上级可见<span class="vis-badge">敏感数据</span></div>
+                <div class="vis-desc">案例不进入公开案例库，仅系统管理员、你的直属上级和评审委员会可查看</div>
+              </div>
+              <div class="vis-radio"></div>
+            </button>
+          </div>
+
+          <div class="vis-note">
+            <span class="vis-note-icon">i</span>
+            <span><strong>无论选择哪种可见性，都不影响你的 SI 评分。</strong>系统会统一基于案例的深度 × 质量评估。涉密案例同样进入评审流程，只是不会在公司级案例库展示。</span>
+          </div>
+        </div>
+
+        <div class="submit-row">
+          <div class="submit-meta">提报后将进入 <strong>评审委员会</strong> 队列 · 平均 3 个工作日反馈</div>
+          <div style="display:flex;gap:10px">
+            <button class="btn btn-ghost">保存草稿</button>
+            <button class="btn btn-primary">提交评审 →</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: Live preview -->
+    <div>
+      <div class="preview-card">
+        <div class="preview-eyebrow">实时预测分数</div>
+        <div style="display:flex;align-items:baseline">
+          <div class="preview-score">4<em>0</em></div>
+          <div class="preview-of">/ 40</div>
+        </div>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--moss);letter-spacing:.08em">D4 × Q3 = 满分代表作</div>
+
+        <div class="preview-formula-box">
+          <div class="preview-formula-row"><span>深度评级</span><span>D4 · 复杂 Agent</span></div>
+          <div class="preview-formula-row"><span>质量评级</span><span>Q3 · 高度认可</span></div>
+          <div class="preview-formula-row"><span>计分逻辑</span><span>查表 → 40 pt</span></div>
+        </div>
+
+        <div class="score-matrix">
+          <table>
+            <thead>
+              <tr><th></th><th>Q1</th><th>Q2</th><th>Q3</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="row-head">D1</td><td>10</td><td>12</td><td>15</td></tr>
+              <tr><td class="row-head">D2</td><td>18</td><td>22</td><td>25</td></tr>
+              <tr><td class="row-head">D3</td><td>25</td><td>32</td><td>35</td></tr>
+              <tr><td class="row-head">D4</td><td>30</td><td>35</td><td class="hot">40</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="preview-divider"></div>
+
+        <div class="preview-tip">
+          <strong>提示 · </strong>AI 指挥力得分 = 你提报的所有案例中分数最高的那一个，不累加。<br>本案例若获评 Q3，将成为你的代表作并替换当前最高分案例（35 → 40）。
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- =================== PAGE 3 · LIBRARY =================== -->
+<div class="page" id="page-library">
+<div class="container">
+
+  <div class="lib-head">
+    <div>
+      <span class="label">— 公司级 AI 资产 / Case Hub</span>
+      <h1 class="h1" style="margin-top:8px">案例库 <em>·</em> 1,847 个可复用资产</h1>
+      <div class="lib-stats">
+        <div class="lib-stat">
+          <div class="lib-stat-num">1,8<em>47</em></div>
+          <div class="lib-stat-label">入库案例</div>
+        </div>
+        <div class="lib-stat">
+          <div class="lib-stat-num">2<em>34</em></div>
+          <div class="lib-stat-label">Q3 高度认可</div>
+        </div>
+        <div class="lib-stat">
+          <div class="lib-stat-num">9<em>1</em></div>
+          <div class="lib-stat-label">D4 复杂 Agent</div>
+        </div>
+        <div class="lib-stat">
+          <div class="lib-stat-num">6<em>8</em>%</div>
+          <div class="lib-stat-label">员工参与率</div>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="goPage('submit')">+ 提报新案例</button>
+  </div>
+
+  <div class="filter-bar">
+    <div class="filter-search">
+      <span class="filter-icon">⌕</span>
+      <input placeholder="搜索案例名称、提报人、技术栈、业务场景…">
+    </div>
+    <button class="filter-pill active">全部</button>
+    <button class="filter-pill">D4 复杂 Agent</button>
+    <button class="filter-pill">D3 工作流</button>
+    <button class="filter-pill">D2 人机协同</button>
+    <button class="filter-pill">D1 Prompt</button>
+    <button class="filter-pill">Q3 认证</button>
+  </div>
+
+  <div class="lib-grid">
+
+    <div class="lib-card">
+      <div class="lib-card-top">
+        <span class="lib-badge badge-d4">D4 · Q3</span>
+        <div class="lib-pts">40<em>pt</em></div>
+      </div>
+      <h3 class="lib-title">销售线索清洗与分级智能体集群</h3>
+      <p class="lib-desc">5 个 Agent 协同完成线索去重、企业画像补全、意向度评分、自动分配，月处理 1.2 万条</p>
+      <div class="lib-foot">
+        <div class="lib-author"><div class="av">王</div>王俊豪 · Sales Ops</div>
+        <div class="lib-uses"><em>已被 47 团队使用</em></div>
+      </div>
+    </div>
+
+    <div class="lib-card">
+      <div class="lib-card-top">
+        <span class="lib-badge badge-d4">D4 · Q3</span>
+        <div class="lib-pts">40<em>pt</em></div>
+      </div>
+      <h3 class="lib-title">财务月结全流程自动化 Agent</h3>
+      <p class="lib-desc">凭证采集 → 异常检测 → 自动入账 → 报表生成，月结周期从 5 天缩短至 1.5 天</p>
+      <div class="lib-foot">
+        <div class="lib-author"><div class="av">李</div>李佳茵 · Finance</div>
+        <div class="lib-uses"><em>已被 12 团队使用</em></div>
+      </div>
+    </div>
+
+    <div class="lib-card">
+      <div class="lib-card-top">
+        <span class="lib-badge badge-d3">D3 · Q3</span>
+        <div class="lib-pts">35<em>pt</em></div>
+      </div>
+      <h3 class="lib-title">招聘JD智能生成与候选人匹配</h3>
+      <p class="lib-desc">输入岗位关键词 + JD 模板 → 自动生成完整 JD、人才画像、Boolean 串、面试题库</p>
+      <div class="lib-foot">
+        <div class="lib-author"><div class="av">AK</div>Amanda Kang · HR</div>
+        <div class="lib-uses"><em>已被 23 团队使用</em></div>
+      </div>
+    </div>
+
+    <div class="lib-card">
+      <div class="lib-card-top">
+        <span class="lib-badge badge-d3">D3 · Q3</span>
+        <div class="lib-pts">35<em>pt</em></div>
+      </div>
+      <h3 class="lib-title">用户反馈情感分析与归因工作流</h3>
+      <p class="lib-desc">从应用商店、客服工单、社媒抓取反馈，自动分类归因到产品功能模块</p>
+      <div class="lib-foot">
+        <div class="lib-author"><div class="av">陈</div>陈默 · Product</div>
+        <div class="lib-uses"><em>已被 31 团队使用</em></div>
+      </div>
+    </div>
+
+    <div class="lib-card">
+      <div class="lib-card-top">
+        <span class="lib-badge badge-d3">D3 · Q2</span>
+        <div class="lib-pts">32<em>pt</em></div>
+      </div>
+      <h3 class="lib-title">合同关键条款抽取与风险审查</h3>
+      <p class="lib-desc">PDF 合同 → 抽取付款条款、违约责任、知识产权 → 标注风险点并对比公司模板</p>
+      <div class="lib-foot">
+        <div class="lib-author"><div class="av">林</div>林书雅 · Legal</div>
+        <div class="lib-uses"><em>已被 9 团队使用</em></div>
+      </div>
+    </div>
+
+    <div class="lib-card">
+      <div class="lib-card-top">
+        <span class="lib-badge badge-d2">D2 · Q3</span>
+        <div class="lib-pts">25<em>pt</em></div>
+      </div>
+      <h3 class="lib-title">竞品周报半自动化生成</h3>
+      <p class="lib-desc">每周一固定抓取 12 个竞品的官方更新与公开数据，AI 起草初稿，分析师 30min 完稿</p>
+      <div class="lib-foot">
+        <div class="lib-author"><div class="av">周</div>周岚 · Strategy</div>
+        <div class="lib-uses"><em>已被 6 团队使用</em></div>
+      </div>
+    </div>
+
+    <div class="lib-card">
+      <div class="lib-card-top">
+        <span class="lib-badge badge-d2">D2 · Q2</span>
+        <div class="lib-pts">22<em>pt</em></div>
+      </div>
+      <h3 class="lib-title">绩效面谈话术生成器</h3>
+      <p class="lib-desc">基于绩效结果与员工画像，输出差异化的面谈开场白与改进建议</p>
+      <div class="lib-foot">
+        <div class="lib-author"><div class="av">AK</div>Amanda Kang · HR</div>
+        <div class="lib-uses"><em>已被 14 团队使用</em></div>
+      </div>
+    </div>
+
+    <div class="lib-card">
+      <div class="lib-card-top">
+        <span class="lib-badge badge-d1">D1 · Q3</span>
+        <div class="lib-pts">15<em>pt</em></div>
+      </div>
+      <h3 class="lib-title">客诉响应话术 Prompt 模板包</h3>
+      <p class="lib-desc">12 个高频客诉场景的标准化回应 Prompt，覆盖 90% 一线客服日常工单</p>
+      <div class="lib-foot">
+        <div class="lib-author"><div class="av">高</div>高雅婷 · Customer</div>
+        <div class="lib-uses"><em>已被 84 团队使用</em></div>
+      </div>
+    </div>
+
+    <div class="lib-card">
+      <div class="lib-card-top">
+        <span class="lib-badge badge-d1">D1 · Q2</span>
+        <div class="lib-pts">12<em>pt</em></div>
+      </div>
+      <h3 class="lib-title">产品 PRD 评审 Checklist Prompt</h3>
+      <p class="lib-desc">输入 PRD 文档 → 输出完整性、可行性、依赖项 30 项检查清单</p>
+      <div class="lib-foot">
+        <div class="lib-author"><div class="av">吴</div>吴志明 · Product</div>
+        <div class="lib-uses"><em>已被 18 团队使用</em></div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</div>
+
+<!-- =================== PAGE · RATING (管理员评分) =================== -->
+<div class="page" id="page-rating">
+<div class="container">
+
+  <!-- Hero -->
+  <div class="rating-hero">
+    <div class="rating-hero-text">
+      <span class="label">— 员工评分 / Manager Rating</span>
+      <h1 class="h1" style="margin-top:6px">为你的团队 <em>打分</em>。</h1>
+      <p class="lead">基于日常观察与员工的季度工作总结，对学习进化力 (30%) 与价值创造力 (30%) 进行评估。</p>
+    </div>
+    <div class="rating-hero-stats">
+      <div class="rh-stat">
+        <div class="rh-stat-num"><em>14</em></div>
+        <div class="rh-stat-label">直属下属</div>
+      </div>
+      <div class="rh-stat">
+        <div class="rh-stat-num moss"><em>9</em></div>
+        <div class="rh-stat-label">已完成评分</div>
+      </div>
+      <div class="rh-stat">
+        <div class="rh-stat-num amber"><em>5</em></div>
+        <div class="rh-stat-label">待评分</div>
+      </div>
+      <div class="rh-stat">
+        <div class="rh-stat-num"><em>06.30</em></div>
+        <div class="rh-stat-label">截止日期</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rating-shell">
+
+    <!-- LEFT: 员工列表 -->
+    <aside class="rating-side">
+      <div class="rating-side-head">
+        <div class="rating-side-title">直属下属 · 2026 Q2</div>
+        <div class="rating-side-count">14 人</div>
+      </div>
+      <div class="rating-side-search">
+        <span style="color:var(--muted);font-family:var(--mono);font-size:13px">⌕</span>
+        <input placeholder="搜索员工姓名 / 工号">
+      </div>
+
+      <div class="rating-emp-list" id="ratingEmpList">
+
+        <div class="rating-emp active" data-emp="lihaoze">
+          <div class="av av-1">李</div>
+          <div class="rating-emp-text">
+            <div class="rating-emp-name">李浩泽</div>
+            <div class="rating-emp-meta">HR Specialist · L4</div>
+          </div>
+          <span class="rating-emp-status status-pending">待评</span>
+        </div>
+
+        <div class="rating-emp" data-emp="zhangyixian">
+          <div class="av av-3">张</div>
+          <div class="rating-emp-text">
+            <div class="rating-emp-name">张轶贤</div>
+            <div class="rating-emp-meta">HRBP · L5</div>
+          </div>
+          <span class="rating-emp-status status-pending">待评</span>
+        </div>
+
+        <div class="rating-emp" data-emp="wangsiyi">
+          <div class="av av-4">王</div>
+          <div class="rating-emp-text">
+            <div class="rating-emp-name">王思怡</div>
+            <div class="rating-emp-meta">招聘专员 · L3</div>
+          </div>
+          <span class="rating-emp-status status-pending">待评</span>
+        </div>
+
+        <div class="rating-emp" data-emp="chenyumeng">
+          <div class="av av-5">陈</div>
+          <div class="rating-emp-text">
+            <div class="rating-emp-name">陈雨萌</div>
+            <div class="rating-emp-meta">薪酬绩效 · L4</div>
+          </div>
+          <span class="rating-emp-status status-overdue">超期</span>
+        </div>
+
+        <div class="rating-emp" data-emp="zhoumingxuan">
+          <div class="av av-2">周</div>
+          <div class="rating-emp-text">
+            <div class="rating-emp-name">周明轩</div>
+            <div class="rating-emp-meta">组织发展 · L5</div>
+          </div>
+          <span class="rating-emp-status status-pending">待评</span>
+        </div>
+
+        <div style="font-family:var(--mono);font-size:9.5px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;padding:14px 6px 6px;font-weight:600">— 已完成 · 9</div>
+
+        <div class="rating-emp" data-emp="liujiaqi">
+          <div class="av av-6">刘</div>
+          <div class="rating-emp-text">
+            <div class="rating-emp-name">刘嘉琪</div>
+            <div class="rating-emp-meta">招聘经理 · L6</div>
+          </div>
+          <span class="rating-emp-status status-done">已评</span>
+        </div>
+
+        <div class="rating-emp" data-emp="hexinyu">
+          <div class="av av-1">何</div>
+          <div class="rating-emp-text">
+            <div class="rating-emp-name">何欣雨</div>
+            <div class="rating-emp-meta">HRBP · L5</div>
+          </div>
+          <span class="rating-emp-status status-done">已评</span>
+        </div>
+
+        <div class="rating-emp" data-emp="huangzihan">
+          <div class="av av-3">黄</div>
+          <div class="rating-emp-text">
+            <div class="rating-emp-name">黄子涵</div>
+            <div class="rating-emp-meta">学习发展 · L4</div>
+          </div>
+          <span class="rating-emp-status status-done">已评</span>
+        </div>
+
+        <div class="rating-emp" data-emp="xufangzhou">
+          <div class="av av-4">徐</div>
+          <div class="rating-emp-text">
+            <div class="rating-emp-name">徐方舟</div>
+            <div class="rating-emp-meta">薪酬专员 · L3</div>
+          </div>
+          <span class="rating-emp-status status-done">已评</span>
+        </div>
+
+        <div class="rating-emp" data-emp="sunluyao">
+          <div class="av av-5">孙</div>
+          <div class="rating-emp-text">
+            <div class="rating-emp-name">孙璐瑶</div>
+            <div class="rating-emp-meta">企业文化 · L4</div>
+          </div>
+          <span class="rating-emp-status status-done">已评</span>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- RIGHT: 评分主面板 -->
+    <main class="rating-main">
+
+      <!-- Head -->
+      <div class="rating-main-head">
+        <div class="rating-main-emp">
+          <div class="av av-1">李</div>
+          <div class="rating-main-emp-text">
+            <div class="rating-main-emp-name">李浩泽</div>
+            <div class="rating-main-emp-meta">HR Specialist · L4 · LIANSHANG-2241</div>
+          </div>
+        </div>
+        <div class="rating-main-actions">
+          <a class="rating-summary-link" href="#" onclick="event.preventDefault();alert('跳转至李浩泽 2026 Q2 工作总结\n\n[模拟] 此处会跳转至OA系统的员工工作总结页面')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+            查看 Q2 工作总结
+            <span class="ext">↗</span>
+          </a>
+          <span class="rating-period">2026 Q2 · 评估周期</span>
+        </div>
+      </div>
+
+      <!-- Body · 评分主体 -->
+      <div class="rating-main-body">
+
+        <!-- 学习进化力 -->
+        <div class="rate-cap">
+          <div class="rate-cap-head">
+            <div class="rate-cap-title">
+              <span class="rate-cap-tag">— 02</span>
+              <span class="rate-cap-name">学习进化力</span>
+              <span class="rate-cap-weight">·30%</span>
+            </div>
+            <div class="rate-cap-total" id="learnTotal">0 <em>/ 30</em></div>
+          </div>
+
+          <div class="rate-row">
+            <div class="rate-dim">
+              <span class="rate-dim-id amber">L1</span>
+              <span class="rate-dim-name">本职领域学习速度</span>
+              <span class="rate-dim-desc">本岗位职责范围内学习新工具、新方法、新流程的速度 vs 团队平均</span>
+            </div>
+            <div></div>
+            <div class="rate-scale" data-cap="learn" data-dim="L1">
+              <button class="rate-btn amber" data-v="1"><span class="rate-btn-num">1</span><span class="rate-btn-label">偏弱</span></button>
+              <button class="rate-btn amber" data-v="2"><span class="rate-btn-num">2</span><span class="rate-btn-label">偏弱</span></button>
+              <button class="rate-btn amber" data-v="3"><span class="rate-btn-num">3</span><span class="rate-btn-label">良好</span></button>
+              <button class="rate-btn amber selected" data-v="4"><span class="rate-btn-num">4</span><span class="rate-btn-label">良好</span></button>
+              <button class="rate-btn amber" data-v="5"><span class="rate-btn-num">5</span><span class="rate-btn-label">优秀</span></button>
+              <button class="rate-btn amber" data-v="6"><span class="rate-btn-num">6</span><span class="rate-btn-label">卓越</span></button>
+            </div>
+          </div>
+
+          <div class="rate-row">
+            <div class="rate-dim">
+              <span class="rate-dim-id amber">L2</span>
+              <span class="rate-dim-name">行业灵敏度</span>
+              <span class="rate-dim-desc">持续关注全球前沿与行业动态，识别并适应外部趋势变化</span>
+            </div>
+            <div></div>
+            <div class="rate-scale" data-cap="learn" data-dim="L2">
+              <button class="rate-btn amber" data-v="1"><span class="rate-btn-num">1</span><span class="rate-btn-label">偏弱</span></button>
+              <button class="rate-btn amber" data-v="2"><span class="rate-btn-num">2</span><span class="rate-btn-label">偏弱</span></button>
+              <button class="rate-btn amber" data-v="3"><span class="rate-btn-num">3</span><span class="rate-btn-label">良好</span></button>
+              <button class="rate-btn amber" data-v="4"><span class="rate-btn-num">4</span><span class="rate-btn-label">良好</span></button>
+              <button class="rate-btn amber selected" data-v="5"><span class="rate-btn-num">5</span><span class="rate-btn-label">优秀</span></button>
+              <button class="rate-btn amber" data-v="6"><span class="rate-btn-num">6</span><span class="rate-btn-label">卓越</span></button>
+            </div>
+          </div>
+
+          <div class="rate-row">
+            <div class="rate-dim">
+              <span class="rate-dim-id amber">L3</span>
+              <span class="rate-dim-name">跨领域新技能获取速度</span>
+              <span class="rate-dim-desc">完成跨领域新工具/新领域/新挑战的平均耗时 vs 团队平均（超出本职范围）</span>
+            </div>
+            <div></div>
+            <div class="rate-scale" data-cap="learn" data-dim="L3">
+              <button class="rate-btn amber" data-v="1"><span class="rate-btn-num">1</span><span class="rate-btn-label">偏弱</span></button>
+              <button class="rate-btn amber" data-v="2"><span class="rate-btn-num">2</span><span class="rate-btn-label">偏弱</span></button>
+              <button class="rate-btn amber selected" data-v="3"><span class="rate-btn-num">3</span><span class="rate-btn-label">良好</span></button>
+              <button class="rate-btn amber" data-v="4"><span class="rate-btn-num">4</span><span class="rate-btn-label">良好</span></button>
+              <button class="rate-btn amber" data-v="5"><span class="rate-btn-num">5</span><span class="rate-btn-label">优秀</span></button>
+              <button class="rate-btn amber" data-v="6"><span class="rate-btn-num">6</span><span class="rate-btn-label">卓越</span></button>
+            </div>
+          </div>
+
+          <div class="rate-row">
+            <div class="rate-dim">
+              <span class="rate-dim-id amber">L4</span>
+              <span class="rate-dim-name">高价值任务胜任度 / 跨界项目参与度</span>
+              <span class="rate-dim-desc">承担任务的平均难度变化或战略级任务占比；跨领域/模块项目参与表现</span>
+            </div>
+            <div></div>
+            <div class="rate-scale" data-cap="learn" data-dim="L4">
+              <button class="rate-btn amber" data-v="1"><span class="rate-btn-num">1</span><span class="rate-btn-label">偏弱</span></button>
+              <button class="rate-btn amber" data-v="2"><span class="rate-btn-num">2</span><span class="rate-btn-label">偏弱</span></button>
+              <button class="rate-btn amber" data-v="3"><span class="rate-btn-num">3</span><span class="rate-btn-label">良好</span></button>
+              <button class="rate-btn amber selected" data-v="4"><span class="rate-btn-num">4</span><span class="rate-btn-label">良好</span></button>
+              <button class="rate-btn amber" data-v="5"><span class="rate-btn-num">5</span><span class="rate-btn-label">优秀</span></button>
+              <button class="rate-btn amber" data-v="6"><span class="rate-btn-num">6</span><span class="rate-btn-label">卓越</span></button>
+            </div>
+          </div>
+
+          <div class="rate-row">
+            <div class="rate-dim">
+              <span class="rate-dim-id amber">L5</span>
+              <span class="rate-dim-name">知识沉淀与赋能</span>
+              <span class="rate-dim-desc">内部分享、培训、最佳实践输出的数量与质量；个人项目的系统性复盘与方法论沉淀同等计入</span>
+            </div>
+            <div></div>
+            <div class="rate-scale" data-cap="learn" data-dim="L5">
+              <button class="rate-btn amber" data-v="1"><span class="rate-btn-num">1</span><span class="rate-btn-label">偏弱</span></button>
+              <button class="rate-btn amber" data-v="2"><span class="rate-btn-num">2</span><span class="rate-btn-label">偏弱</span></button>
+              <button class="rate-btn amber" data-v="3"><span class="rate-btn-num">3</span><span class="rate-btn-label">良好</span></button>
+              <button class="rate-btn amber" data-v="4"><span class="rate-btn-num">4</span><span class="rate-btn-label">良好</span></button>
+              <button class="rate-btn amber selected" data-v="5"><span class="rate-btn-num">5</span><span class="rate-btn-label">优秀</span></button>
+              <button class="rate-btn amber" data-v="6"><span class="rate-btn-num">6</span><span class="rate-btn-label">卓越</span></button>
+            </div>
+          </div>
+
+          <div class="rate-feedback-section">
+            <div class="rate-feedback-title">— 学习进化力 · 给员工的反馈（员工可见）</div>
+            <textarea class="rate-feedback-textarea" placeholder="用一段话给出方向性反馈，建议聚焦：哪些维度做得好？哪些可以加强？下一阶段应该怎么发力？">浩泽在跨领域学习上展现出团队优秀水平，能快速上手新工具并应用到本职工作。建议下半年聚焦本职领域学习速度，加强系统性方法论的积累，多输出可复用的最佳实践。</textarea>
+          </div>
+        </div>
+
+        <!-- 价值创造力 -->
+        <div class="rate-cap">
+          <div class="rate-cap-head">
+            <div class="rate-cap-title">
+              <span class="rate-cap-tag">— 03</span>
+              <span class="rate-cap-name">价值创造力</span>
+              <span class="rate-cap-weight moss">·30%</span>
+            </div>
+            <div class="rate-cap-total" id="valueTotal">0 <em>/ 30</em></div>
+          </div>
+
+          <div class="rate-row">
+            <div class="rate-dim">
+              <span class="rate-dim-id moss">V1</span>
+              <span class="rate-dim-name">本职职责的扎实交付</span>
+              <span class="rate-dim-desc">在本岗位范围内，稳定、高质量地交付工作</span>
+            </div>
+            <div></div>
+            <div class="rate-scale" data-cap="value" data-dim="V1">
+              <button class="rate-btn moss" data-v="1"><span class="rate-btn-num">1</span><span class="rate-btn-label">偏弱</span></button>
+              <button class="rate-btn moss" data-v="2"><span class="rate-btn-num">2</span><span class="rate-btn-label">偏弱</span></button>
+              <button class="rate-btn moss" data-v="3"><span class="rate-btn-num">3</span><span class="rate-btn-label">良好</span></button>
+              <button class="rate-btn moss" data-v="4"><span class="rate-btn-num">4</span><span class="rate-btn-label">良好</span></button>
+              <button class="rate-btn moss selected" data-v="5"><span class="rate-btn-num">5</span><span class="rate-btn-label">优秀</span></button>
+              <button class="rate-btn moss" data-v="6"><span class="rate-btn-num">6</span><span class="rate-btn-label">卓越</span></button>
+            </div>
+          </div>
+
+          <div class="rate-row">
+            <div class="rate-dim">
+              <span class="rate-dim-id moss">V2</span>
+              <span class="rate-dim-name">主动识别问题</span>
+              <span class="rate-dim-desc">在工作中主动识别业务痛点并推动改善的实际案例</span>
+            </div>
+            <div></div>
+            <div class="rate-scale" data-cap="value" data-dim="V2">
+              <button class="rate-btn moss" data-v="1"><span class="rate-btn-num">1</span><span class="rate-btn-label">偏弱</span></button>
+              <button class="rate-btn moss" data-v="2"><span class="rate-btn-num">2</span><span class="rate-btn-label">偏弱</span></button>
+              <button class="rate-btn moss" data-v="3"><span class="rate-btn-num">3</span><span class="rate-btn-label">良好</span></button>
+              <button class="rate-btn moss" data-v="4"><span class="rate-btn-num">4</span><span class="rate-btn-label">良好</span></button>
+              <button class="rate-btn moss selected" data-v="5"><span class="rate-btn-num">5</span><span class="rate-btn-label">优秀</span></button>
+              <button class="rate-btn moss" data-v="6"><span class="rate-btn-num">6</span><span class="rate-btn-label">卓越</span></button>
+            </div>
+          </div>
+
+          <div class="rate-row">
+            <div class="rate-dim">
+              <span class="rate-dim-id moss">V3</span>
+              <span class="rate-dim-name">不设限的担当</span>
+              <span class="rate-dim-desc">面对超出当前职责或经验的挑战性任务，不设限，能主动顶上、对最终结果负全责</span>
+            </div>
+            <div></div>
+            <div class="rate-scale" data-cap="value" data-dim="V3">
+              <button class="rate-btn moss" data-v="1"><span class="rate-btn-num">1</span><span class="rate-btn-label">偏弱</span></button>
+              <button class="rate-btn moss" data-v="2"><span class="rate-btn-num">2</span><span class="rate-btn-label">偏弱</span></button>
+              <button class="rate-btn moss" data-v="3"><span class="rate-btn-num">3</span><span class="rate-btn-label">良好</span></button>
+              <button class="rate-btn moss selected" data-v="4"><span class="rate-btn-num">4</span><span class="rate-btn-label">良好</span></button>
+              <button class="rate-btn moss" data-v="5"><span class="rate-btn-num">5</span><span class="rate-btn-label">优秀</span></button>
+              <button class="rate-btn moss" data-v="6"><span class="rate-btn-num">6</span><span class="rate-btn-label">卓越</span></button>
+            </div>
+          </div>
+
+          <div class="rate-row">
+            <div class="rate-dim">
+              <span class="rate-dim-id moss">V4</span>
+              <span class="rate-dim-name">交付韧性</span>
+              <span class="rate-dim-desc">在面临不确定因素时，能够调动资源、跨部门协同以确保结果达成的程度</span>
+            </div>
+            <div></div>
+            <div class="rate-scale" data-cap="value" data-dim="V4">
+              <button class="rate-btn moss" data-v="1"><span class="rate-btn-num">1</span><span class="rate-btn-label">偏弱</span></button>
+              <button class="rate-btn moss" data-v="2"><span class="rate-btn-num">2</span><span class="rate-btn-label">偏弱</span></button>
+              <button class="rate-btn moss" data-v="3"><span class="rate-btn-num">3</span><span class="rate-btn-label">良好</span></button>
+              <button class="rate-btn moss selected" data-v="4"><span class="rate-btn-num">4</span><span class="rate-btn-label">良好</span></button>
+              <button class="rate-btn moss" data-v="5"><span class="rate-btn-num">5</span><span class="rate-btn-label">优秀</span></button>
+              <button class="rate-btn moss" data-v="6"><span class="rate-btn-num">6</span><span class="rate-btn-label">卓越</span></button>
+            </div>
+          </div>
+
+          <div class="rate-row">
+            <div class="rate-dim">
+              <span class="rate-dim-id moss">V5</span>
+              <span class="rate-dim-name">业务增值贡献</span>
+              <span class="rate-dim-desc">推动可量化的业务增长/降本/突破；岗位特性较少接触业务增量的，可量化的效率/质量/风险降低同等计入</span>
+            </div>
+            <div></div>
+            <div class="rate-scale" data-cap="value" data-dim="V5">
+              <button class="rate-btn moss" data-v="1"><span class="rate-btn-num">1</span><span class="rate-btn-label">偏弱</span></button>
+              <button class="rate-btn moss" data-v="2"><span class="rate-btn-num">2</span><span class="rate-btn-label">偏弱</span></button>
+              <button class="rate-btn moss" data-v="3"><span class="rate-btn-num">3</span><span class="rate-btn-label">良好</span></button>
+              <button class="rate-btn moss selected" data-v="4"><span class="rate-btn-num">4</span><span class="rate-btn-label">良好</span></button>
+              <button class="rate-btn moss" data-v="5"><span class="rate-btn-num">5</span><span class="rate-btn-label">优秀</span></button>
+              <button class="rate-btn moss" data-v="6"><span class="rate-btn-num">6</span><span class="rate-btn-label">卓越</span></button>
+            </div>
+          </div>
+
+          <div class="rate-feedback-section">
+            <div class="rate-feedback-title">— 价值创造力 · 给员工的反馈（员工可见）</div>
+            <textarea class="rate-feedback-textarea" placeholder="给员工的方向性反馈">本职职责交付稳健扎实，主动识别问题表现突出。可以更多挑战跨部门协同与不设限担当，把战略级任务的占比再拉一档。</textarea>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 提交栏 -->
+      <div class="rate-submit-row">
+        <div class="rate-submit-summary">
+          <div class="rate-summary-block">
+            <span class="lab">学习进化力</span>
+            <span class="val" id="learnTotalSummary">22 <em>/ 30</em></span>
+          </div>
+          <div class="rate-summary-block">
+            <span class="lab">价值创造力</span>
+            <span class="val" id="valueTotalSummary">22 <em>/ 30</em></span>
+          </div>
+          <div class="rate-summary-block">
+            <span class="lab">合计</span>
+            <span class="val orange" id="totalSummary">44 <em>/ 60</em></span>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px">
+          <button class="btn btn-ghost">保存草稿</button>
+          <button class="btn btn-primary">提交评分 →</button>
+        </div>
+      </div>
+
+      <!-- 历史评分记录 -->
+      <div class="rate-history-section">
+        <div class="rate-history-title">— 李浩泽 · 历史评分记录</div>
+        <div class="rate-history-list">
+          <div class="rate-history-row">
+            <span class="rate-history-period">2026 Q1</span>
+            <div class="rate-history-bars">
+              <span>学习 <b>20</b>/30</span>
+              <span>·</span>
+              <span>价值 <b>20</b>/30</span>
+            </div>
+            <span class="rate-history-pts">40<em>/ 60</em></span>
+            <span class="rate-history-status locked">已锁定</span>
+          </div>
+          <div class="rate-history-row">
+            <span class="rate-history-period">2025 Q4</span>
+            <div class="rate-history-bars">
+              <span>学习 <b>18</b>/30</span>
+              <span>·</span>
+              <span>价值 <b>19</b>/30</span>
+            </div>
+            <span class="rate-history-pts">37<em>/ 60</em></span>
+            <span class="rate-history-status locked">已锁定</span>
+          </div>
+          <div class="rate-history-row">
+            <span class="rate-history-period">2025 Q3</span>
+            <div class="rate-history-bars">
+              <span>学习 <b>17</b>/30</span>
+              <span>·</span>
+              <span>价值 <b>18</b>/30</span>
+            </div>
+            <span class="rate-history-pts">35<em>/ 60</em></span>
+            <span class="rate-history-status locked">已锁定</span>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+</div>
+</div>
+
+<!-- =================== PAGE 4 · ADMIN =================== -->
+<div class="page" id="page-admin">
+
+<!-- 员工视角下访问HR后台的提示 -->
+<div class="employee-only" style="padding:80px 36px;max-width:680px;margin:0 auto;text-align:center">
+  <div style="font-family:var(--display);font-size:120px;color:var(--orange);font-weight:300;line-height:1;font-style:italic">⊘</div>
+  <h2 class="h2" style="margin-top:24px;font-size:32px">仅限管理员访问</h2>
+  <p class="lead" style="max-width:520px;margin:14px auto 0">人才看板包含全员的精确 SI 分数、Tier 评级、人评 6 维度拆解和待认证候选人信息。<br>员工视角下不显示。</p>
+  <div style="margin-top:32px;padding:18px 24px;background:rgba(194,65,12,.06);border:1px solid rgba(194,65,12,.2);border-radius:12px;text-align:left;font-size:12.5px;line-height:1.7;color:var(--paper-2)">
+    <div style="font-family:var(--mono);font-size:10px;color:var(--orange);letter-spacing:.16em;font-weight:700;margin-bottom:8px">— 切换至管理员端可查看：</div>
+    全员精确 SI 分数 · 部门达标率排行 · SI 分布直方图 · Tier S/A/B/C 候选人列表 · 人评 6 维度原始数据 · AI 治理力面试排期
+  </div>
+  <button class="btn btn-primary" style="margin-top:24px" onclick="document.querySelector('.vs-btn[data-view=hr]').click()">→ 切换到管理员端</button>
+</div>
+
+<!-- HR后台正式内容 -->
+<div class="hr-only">
+<div class="container">
+
+  <div class="admin-head">
+    <div class="admin-head-grid">
+      <div class="admin-head-text">
+        <span class="label">— 管理员后台 / Talent Identification</span>
+        <h1 class="h1" style="margin-top:8px;font-size:36px">从"人力密集型"<em> · </em>到<em>「超级组织」</em></h1>
+        <p class="lead">8.30 前实现 60% 及以上员工达到 SI Score ≥ 50。当前进度可视化与全量人才识别看板。</p>
+      </div>
+      <div style="text-align:right">
+        <div style="font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px">距离目标节点</div>
+        <div style="font-family:var(--display);font-weight:300;font-size:54px;line-height:1;letter-spacing:-.03em;color:var(--orange)">115<span style="font-size:18px;color:var(--muted-2);margin-left:4px">天</span></div>
+      </div>
+    </div>
+
+    <div class="kpi-strip">
+      <div class="kpi">
+        <div class="kpi-label">达标率 · SI ≥ 50</div>
+        <div class="kpi-num">5<em>2</em><span class="unit">%</span></div>
+        <div class="kpi-trend">▲ +14% MoM · 距 60% 目标 8pp</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">SI 平均分 · 全员</div>
+        <div class="kpi-num">4<em>9</em>.4</div>
+        <div class="kpi-trend">▲ +6.2 MoM</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">超级个体</div>
+        <div class="kpi-num">2<em>3</em><span class="unit">人</span></div>
+        <div class="kpi-trend">▲ +5 MoM · SI ≥ 90</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">案例库总量</div>
+        <div class="kpi-num">1,8<em>47</em></div>
+        <div class="kpi-trend">▲ +312 MoM</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Visualizations -->
+  <div class="viz-row">
+    <div class="viz-card">
+      <div class="viz-head">
+        <div>
+          <div class="viz-title">SI Score 分布直方图</div>
+          <div class="viz-sub">全公司 · 1,402 人 · 2026 Q2</div>
+        </div>
+        <div style="display:flex;gap:14px;font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.1em">
+          <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:var(--orange);border-radius:2px"></span>已达标</span>
+          <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:var(--ink-4);border-radius:2px"></span>待达标</span>
+        </div>
+      </div>
+
+      <div class="hist">
+        <div class="hist-target-line"></div>
+        <div class="hist-bar"><span class="bar-tip">0-10 · 4 人</span><div class="bar" style="height:5%"></div></div>
+        <div class="hist-bar"><span class="bar-tip">10-20 · 32 人</span><div class="bar" style="height:13%"></div></div>
+        <div class="hist-bar"><span class="bar-tip">20-30 · 124 人</span><div class="bar" style="height:32%"></div></div>
+        <div class="hist-bar"><span class="bar-tip">30-40 · 218 人</span><div class="bar" style="height:55%"></div></div>
+        <div class="hist-bar"><span class="bar-tip">40-50 · 295 人</span><div class="bar" style="height:75%"></div></div>
+        <div class="hist-bar target"><span class="bar-tip">50-60 · 342 人 · 已达标</span><div class="bar" style="height:88%"></div></div>
+        <div class="hist-bar peak target"><span class="bar-tip">60-70 · 261 人 · 已达标</span><div class="bar" style="height:68%"></div></div>
+        <div class="hist-bar target"><span class="bar-tip">70-80 · 84 人 · 优秀</span><div class="bar" style="height:23%"></div></div>
+        <div class="hist-bar target"><span class="bar-tip">80-90 · 19 人 · Tier A</span><div class="bar" style="height:8%"></div></div>
+        <div class="hist-bar target"><span class="bar-tip">90-100 · 23 人 · Tier S</span><div class="bar" style="height:9%"></div></div>
+      </div>
+      <div class="hist-x">
+        <span>0</span><span>10</span><span>20</span><span>30</span><span>40</span><span>50</span><span>60</span><span>70</span><span>80</span><span>90</span>
+      </div>
+
+      <div class="hist-summary">
+        <div class="hist-sum"><strong>72<em>9</em></strong><span>已达标</span></div>
+        <div class="hist-sum"><strong>67<em>3</em></strong><span>待达标</span></div>
+        <div class="hist-sum"><strong>49.<em>4</em></strong><span>平均分</span></div>
+        <div class="hist-sum"><strong>5<em>4</em></strong><span>中位数</span></div>
+      </div>
+    </div>
+
+    <div class="viz-card">
+      <div class="viz-head">
+        <div>
+          <div class="viz-title">部门达标率排行</div>
+          <div class="viz-sub">按 SI ≥ 50 占比降序</div>
+        </div>
+      </div>
+
+      <div class="dept-list">
+        <div class="dept-row"><span class="dept-rank">01</span><span class="dept-name">技术中台</span><div class="dept-bar"><div class="dept-bar-fill" style="width:78%"></div></div><span class="dept-pct">78%</span></div>
+        <div class="dept-row"><span class="dept-rank">02</span><span class="dept-name">产品研发</span><div class="dept-bar"><div class="dept-bar-fill" style="width:71%"></div></div><span class="dept-pct">71%</span></div>
+        <div class="dept-row"><span class="dept-rank">03</span><span class="dept-name">数据智能</span><div class="dept-bar"><div class="dept-bar-fill" style="width:68%"></div></div><span class="dept-pct">68%</span></div>
+        <div class="dept-row"><span class="dept-rank">04</span><span class="dept-name">商业化</span><div class="dept-bar"><div class="dept-bar-fill cool" style="width:58%"></div></div><span class="dept-pct">58%</span></div>
+        <div class="dept-row"><span class="dept-rank">05</span><span class="dept-name">用户增长</span><div class="dept-bar"><div class="dept-bar-fill cool" style="width:54%"></div></div><span class="dept-pct">54%</span></div>
+        <div class="dept-row"><span class="dept-rank">06</span><span class="dept-name">人力资源</span><div class="dept-bar"><div class="dept-bar-fill cool" style="width:48%"></div></div><span class="dept-pct">48%</span></div>
+        <div class="dept-row"><span class="dept-rank">07</span><span class="dept-name">财务</span><div class="dept-bar"><div class="dept-bar-fill cool" style="width:41%"></div></div><span class="dept-pct">41%</span></div>
+        <div class="dept-row"><span class="dept-rank">08</span><span class="dept-name">行政与法务</span><div class="dept-bar"><div class="dept-bar-fill cool" style="width:32%"></div></div><span class="dept-pct">32%</span></div>
+      </div>
+
+      <div style="margin-top:24px;padding:16px;background:rgba(194,65,12,.06);border:1px solid rgba(194,65,12,.22);border-radius:10px;font-size:12.5px;line-height:1.6;color:var(--paper-2)">
+        <strong style="color:var(--paper)">岗位差异调节 · </strong>对行政、财务执行、前台等 AI 化空间受限岗位，由 HRBP / 上级 / 评审委员会三方联合审议，可上调一档或达标保护。
+      </div>
+    </div>
+  </div>
+
+  <!-- Talent table -->
+  <div class="table-card">
+    <div class="table-head-row">
+      <div>
+        <div class="viz-title">超级个体 · 待认证候选人</div>
+        <div class="viz-sub" style="margin-top:3px">SI ≥ A 级 · 进入 AI 治理力线下访谈环节</div>
+      </div>
+      <div class="tabs">
+        <div class="tab active">Tier S · 顶尖</div>
+        <div class="tab">Tier A · 卓越</div>
+        <div class="tab">Tier B · 优秀</div>
+        <div class="tab">全部</div>
+      </div>
+    </div>
+
+    <table class="t-table">
+      <thead>
+        <tr>
+          <th>员工</th>
+          <th>SI</th>
+          <th>分项 (40 / 30 / 30)</th>
+          <th>Tier</th>
+          <th>AI 治理力</th>
+          <th>案例数</th>
+          <th>下一步</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="t-name">
+              <div class="av av-1">王</div>
+              <div class="t-name-text"><strong>王俊豪</strong><small>Sales Ops · L7</small></div>
+            </div>
+          </td>
+          <td><span class="t-score">96<em>/ 100</em></span></td>
+          <td><div class="t-mini-bar"><div class="b-orange" style="height:100%"></div><div class="b-amber" style="height:97%"></div><div class="b-moss" style="height:90%"></div></div></td>
+          <td><span class="tier-pill t-S">● Tier S</span></td>
+          <td><div class="t-gov"><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell on"></div></div></td>
+          <td><span style="font-family:var(--mono);font-size:12px;color:var(--bone)">23 / 8 Q3</span></td>
+          <td class="t-action"><a>已认证 · 治理力 强</a></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="t-name">
+              <div class="av av-2">陈</div>
+              <div class="t-name-text"><strong>陈默</strong><small>Product · L6</small></div>
+            </div>
+          </td>
+          <td><span class="t-score">93<em>/ 100</em></span></td>
+          <td><div class="t-mini-bar"><div class="b-orange" style="height:100%"></div><div class="b-amber" style="height:90%"></div><div class="b-moss" style="height:90%"></div></div></td>
+          <td><span class="tier-pill t-S">● Tier S</span></td>
+          <td><div class="t-gov"><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell"></div></div></td>
+          <td><span style="font-family:var(--mono);font-size:12px;color:var(--bone)">17 / 6 Q3</span></td>
+          <td class="t-action"><a>已认证 · 治理力 强</a></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="t-name">
+              <div class="av av-3">李</div>
+              <div class="t-name-text"><strong>李佳茵</strong><small>Finance · L6</small></div>
+            </div>
+          </td>
+          <td><span class="t-score">88<em>/ 100</em></span></td>
+          <td><div class="t-mini-bar"><div class="b-orange" style="height:95%"></div><div class="b-amber" style="height:87%"></div><div class="b-moss" style="height:87%"></div></div></td>
+          <td><span class="tier-pill t-A">● Tier A</span></td>
+          <td><div class="t-gov"><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell"></div><div class="gov-cell"></div></div></td>
+          <td><span style="font-family:var(--mono);font-size:12px;color:var(--bone)">14 / 5 Q3</span></td>
+          <td class="t-action"><a>→ 已排访谈 5/12</a></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="t-name">
+              <div class="av av-4">林</div>
+              <div class="t-name-text"><strong>林书雅</strong><small>Legal · L5</small></div>
+            </div>
+          </td>
+          <td><span class="t-score">85<em>/ 100</em></span></td>
+          <td><div class="t-mini-bar"><div class="b-orange" style="height:80%"></div><div class="b-amber" style="height:90%"></div><div class="b-moss" style="height:90%"></div></div></td>
+          <td><span class="tier-pill t-A">● Tier A</span></td>
+          <td><div class="t-gov"><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell"></div><div class="gov-cell"></div></div></td>
+          <td><span style="font-family:var(--mono);font-size:12px;color:var(--bone)">11 / 3 Q3</span></td>
+          <td class="t-action"><a>→ 已排访谈 5/14</a></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="t-name">
+              <div class="av av-5">周</div>
+              <div class="t-name-text"><strong>周岚</strong><small>Strategy · L7</small></div>
+            </div>
+          </td>
+          <td><span class="t-score">82<em>/ 100</em></span></td>
+          <td><div class="t-mini-bar"><div class="b-orange" style="height:75%"></div><div class="b-amber" style="height:90%"></div><div class="b-moss" style="height:90%"></div></div></td>
+          <td><span class="tier-pill t-A">● Tier A</span></td>
+          <td><div class="t-gov"><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell"></div><div class="gov-cell"></div><div class="gov-cell"></div></div></td>
+          <td><span style="font-family:var(--mono);font-size:12px;color:var(--bone)">9 / 2 Q3</span></td>
+          <td class="t-action"><a>→ 待排访谈</a></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="t-name">
+              <div class="av av-6">AK</div>
+              <div class="t-name-text"><strong>Amanda Kang</strong><small>HR · L5</small></div>
+            </div>
+          </td>
+          <td><span class="t-score">78<em>/ 100</em></span></td>
+          <td><div class="t-mini-bar"><div class="b-orange" style="height:80%"></div><div class="b-amber" style="height:80%"></div><div class="b-moss" style="height:73%"></div></div></td>
+          <td><span class="tier-pill t-A">● Tier A</span></td>
+          <td><div class="t-gov"><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell"></div><div class="gov-cell"></div></div></td>
+          <td><span style="font-family:var(--mono);font-size:12px;color:var(--bone)">12 / 3 Q3</span></td>
+          <td class="t-action"><a>→ 待排访谈</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</div>
+</div>
+
+<!-- HR mode watermark -->
+<div class="watermark"></div>
+<div class="watermark-tag">⊕  Admin Internal · Confidential</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div>SI System · v4.0 · 2026.05 · 内部演示版</div>
+  <div class="footer-marks">
+    <span><span class="pip"></span>System operational</span>
+    <span>1,402 / 1,402 employees synced</span>
+    <span>Last build · 2026.05.07</span>
+  </div>
+</footer>
+
+<script>
+// view switcher
+const vsToggle = document.getElementById('vsToggle');
+document.querySelectorAll('.vs-btn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    const v = b.dataset.view;
+    document.body.dataset.view = v;
+    document.querySelectorAll('.vs-btn').forEach(x=>x.classList.toggle('active', x.dataset.view===v));
+    vsToggle.dataset.active = v;
+    // change user role label depending on view
+    const roleEl = document.getElementById('userRole');
+    if (v === 'hr') {
+      roleEl.textContent = '管理员 · 全权限';
+    } else {
+      roleEl.textContent = 'HR · People Strategy';
+      // 如果切换到员工端时正好在admin页,跳转到dashboard
+      const currentPage = document.querySelector('.page.active')?.id;
+      if (currentPage === 'page-admin') {
+        goPage('dashboard');
+      }
+    }
+  });
+});
+
+// page nav
+document.querySelectorAll('.nav button').forEach(b=>{
+  b.addEventListener('click',()=>goPage(b.dataset.page));
+});
+function goPage(p){
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===p));
+  document.querySelectorAll('.page').forEach(pg=>pg.classList.toggle('active',pg.id==='page-'+p));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// depth selector
+document.querySelectorAll('.depth-card').forEach(c=>{
+  c.addEventListener('click',()=>{
+    document.querySelectorAll('.depth-card').forEach(x=>x.classList.remove('selected'));
+    c.classList.add('selected');
+    updatePreview();
+  });
+});
+// quality radio
+document.querySelectorAll('.quality-card').forEach(c=>{
+  c.addEventListener('click',()=>{
+    document.querySelectorAll('.quality-card').forEach(x=>x.classList.remove('selected'));
+    c.classList.add('selected');
+    updatePreview();
+  });
+});
+
+// visibility toggle
+document.querySelectorAll('.vis-card').forEach(c=>{
+  c.addEventListener('click',()=>{
+    document.querySelectorAll('.vis-card').forEach(x=>x.classList.remove('selected'));
+    c.classList.add('selected');
+  });
+});
+
+// === Rating page · 评分按钮交互 ===
+document.querySelectorAll('.rate-scale').forEach(scale=>{
+  scale.querySelectorAll('.rate-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      scale.querySelectorAll('.rate-btn').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      updateRatingTotals();
+    });
+  });
+});
+
+function updateRatingTotals(){
+  let learnSum = 0, valueSum = 0;
+  document.querySelectorAll('.rate-scale').forEach(scale=>{
+    const cap = scale.dataset.cap;
+    const sel = scale.querySelector('.rate-btn.selected');
+    const v = sel ? parseInt(sel.dataset.v) : 0;
+    if(cap==='learn') learnSum += v;
+    else if(cap==='value') valueSum += v;
+  });
+  // 5维度*6分=30满分,直接取分数和(已经是1-30区间)
+  const learnEl = document.getElementById('learnTotal');
+  const valueEl = document.getElementById('valueTotal');
+  const learnSumEl = document.getElementById('learnTotalSummary');
+  const valueSumEl = document.getElementById('valueTotalSummary');
+  const totalEl = document.getElementById('totalSummary');
+  if(learnEl) learnEl.innerHTML = learnSum + ' <em>/ 30</em>';
+  if(valueEl) valueEl.innerHTML = valueSum + ' <em>/ 30</em>';
+  if(learnSumEl) learnSumEl.innerHTML = learnSum + ' <em>/ 30</em>';
+  if(valueSumEl) valueSumEl.innerHTML = valueSum + ' <em>/ 30</em>';
+  if(totalEl) totalEl.innerHTML = (learnSum+valueSum) + ' <em>/ 60</em>';
+}
+// 初始化总分
+updateRatingTotals();
+
+// 员工列表切换(简化为UI演示,只切换active状态)
+document.querySelectorAll('.rating-emp').forEach(emp=>{
+  emp.addEventListener('click',()=>{
+    document.querySelectorAll('.rating-emp').forEach(x=>x.classList.remove('active'));
+    emp.classList.add('active');
+    // 更新右侧主面板的姓名
+    const name = emp.querySelector('.rating-emp-name')?.textContent;
+    const meta = emp.querySelector('.rating-emp-meta')?.textContent;
+    const av = emp.querySelector('.av');
+    const mainName = document.querySelector('.rating-main-emp-name');
+    const mainMeta = document.querySelector('.rating-main-emp-meta');
+    const mainAv = document.querySelector('.rating-main-emp .av');
+    if(mainName && name) mainName.textContent = name;
+    if(mainMeta && meta) mainMeta.textContent = meta + ' · LIANSHANG-' + Math.floor(2000+Math.random()*999);
+    if(mainAv && av){
+      mainAv.textContent = av.textContent;
+      // 复制颜色class
+      const avClass = Array.from(av.classList).find(c=>c.startsWith('av-'));
+      mainAv.className = 'av ' + (avClass||'av-1');
+    }
+    // 更新历史评分标题里的姓名
+    const histTitle = document.querySelector('.rate-history-title');
+    if(histTitle && name) histTitle.textContent = `— ${name} · 历史评分记录`;
+  });
+});
+function updatePreview(){
+  const d=document.querySelector('.depth-card.selected')?.dataset.depth;
+  const q=document.querySelector('.quality-card.selected')?.dataset.quality;
+  const tbl={
+    D1:{Q1:10,Q2:12,Q3:15},
+    D2:{Q1:18,Q2:22,Q3:25},
+    D3:{Q1:25,Q2:32,Q3:35},
+    D4:{Q1:30,Q2:35,Q3:40}
+  };
+  if(d&&q){
+    const score=tbl[d][q];
+    const el=document.querySelector('.preview-score');
+    const tens=Math.floor(score/10), ones=score%10;
+    if(score===100||score>=10){
+      el.innerHTML = (Math.floor(score/10)) + '<em>'+(score%10)+'</em>';
+    }else{
+      el.innerHTML='<em>'+score+'</em>';
+    }
+    // also highlight matrix cell
+    document.querySelectorAll('.score-matrix td').forEach(c=>c.classList.remove('hot'));
+    const map={D1:0,D2:1,D3:2,D4:3};
+    const qmap={Q1:1,Q2:2,Q3:3};
+    const rows=document.querySelectorAll('.score-matrix tbody tr');
+    if(rows[map[d]]){
+      const cells=rows[map[d]].querySelectorAll('td');
+      if(cells[qmap[q]]) cells[qmap[q]].classList.add('hot');
+    }
+    // update sub
+    const sub=document.querySelector('.preview-eyebrow').nextElementSibling.nextElementSibling;
+    if(sub) sub.textContent = d+' × '+q+' = '+(score===40?'满分代表作':score>=30?'高分代表作':score>=20?'优质案例':'入门案例');
+    document.querySelectorAll('.preview-formula-row span:last-child').forEach((s,i)=>{
+      if(i===0) s.textContent = d+' · '+({D1:'Prompt 模板',D2:'人机协同',D3:'Agent 工作流',D4:'复杂 Agent'})[d];
+      if(i===1) s.textContent = q+' · '+({Q1:'个人能跑',Q2:'业务方认可',Q3:'高度认可'})[q];
+      if(i===2) s.textContent = '查表 → '+score+' pt';
+    });
+  }
+}
+
+// filter pills active toggle
+document.querySelectorAll('.filter-pill').forEach(p=>{
+  p.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-pill').forEach(x=>x.classList.remove('active'));
+    p.classList.add('active');
+  });
+});
+// admin tabs
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
