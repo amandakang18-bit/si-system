@@ -1228,12 +1228,265 @@ body[data-view="employee"] .emp-notice{display:inline-flex;align-items:center;ga
   font-size:12.5px;
 }
 .rate-history-period{font-family:var(--mono);font-size:11px;color:var(--paper-2);letter-spacing:.06em;font-weight:600}
-.rate-history-bars{display:flex;gap:8px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--muted)}
-.rate-history-bars b{font-weight:700;color:var(--paper);font-size:12px}
+.rate-history-bars{display:flex;gap:7px;align-items:center;font-family:var(--mono);font-size:10.5px;color:var(--muted);flex-wrap:wrap}
+.rate-history-bars b{font-weight:700;color:var(--paper);font-size:11.5px}
 .rate-history-pts{font-family:var(--display);font-weight:600;font-size:15px;color:var(--paper)}
 .rate-history-pts em{font-style:normal;font-family:var(--mono);font-size:9.5px;color:var(--muted);font-weight:400;margin-left:2px}
 .rate-history-status{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.1em}
 .rate-history-status.locked{color:var(--moss)}
+
+/* AI 指挥力 · 只读展示区 (rate-cap-readonly) */
+.rate-cap-readonly{
+  padding:0;
+  margin-bottom:32px;
+}
+.rate-readonly-badge{
+  margin-left:8px;
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 10px;border-radius:99px;
+  background:rgba(194,65,12,.08);border:1px solid rgba(194,65,12,.3);
+  font-family:var(--mono);font-size:9.5px;color:var(--orange);
+  letter-spacing:.1em;font-weight:700;
+}
+
+/* 案例 showcase */
+.ai-showcase{
+  margin-top:14px;
+  background:linear-gradient(135deg,#F8EFD8 0%,#F2E5C5 100%);
+  border:1px solid var(--rule-soft);border-radius:12px;
+  overflow:hidden;
+}
+.ai-showcase-head{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 22px;border-bottom:1px solid var(--rule-soft);
+}
+.ai-showcase-eyebrow{
+  font-family:var(--mono);font-size:10px;color:var(--orange);
+  letter-spacing:.18em;text-transform:uppercase;font-weight:700;
+}
+.ai-showcase-link{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 12px;background:#FAF3E3;border:1px solid var(--rule);
+  border-radius:7px;font-size:11.5px;font-weight:500;color:var(--paper-2);
+  transition:all .2s;cursor:pointer;
+  font-family:var(--serif);
+}
+.ai-showcase-link:hover{
+  background:var(--paper);color:#FAF3E3;border-color:var(--paper);
+}
+
+.ai-showcase-body{padding:22px}
+.ai-showcase-title{
+  font-family:var(--display);font-weight:600;font-size:18px;color:var(--paper);
+  letter-spacing:-.005em;margin-bottom:6px;
+}
+.ai-showcase-desc{
+  font-size:13px;line-height:1.6;color:var(--paper-2);margin-bottom:16px;
+}
+.ai-showcase-meta{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  padding-top:16px;border-top:1px dashed var(--rule-soft);
+}
+.ai-meta-item{display:flex;flex-direction:column;gap:4px}
+.ai-meta-label{
+  font-family:var(--mono);font-size:9.5px;color:var(--muted);
+  letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+}
+.ai-meta-val{
+  font-size:13px;color:var(--paper);font-weight:500;
+}
+.ai-meta-d{
+  display:inline-flex;width:fit-content;
+  padding:3px 10px;border-radius:5px;
+  background:rgba(92,107,58,.12);color:var(--moss);
+  border:1px solid rgba(92,107,58,.4);
+  font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.06em;
+}
+.ai-meta-q{
+  display:inline-flex;width:fit-content;
+  padding:3px 10px;border-radius:5px;
+  background:rgba(194,65,12,.12);color:var(--orange);
+  border:1px solid rgba(194,65,12,.4);
+  font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.06em;
+}
+
+.ai-showcase-foot{
+  padding:14px 22px;
+  background:#FAF3E3;
+  border-top:1px solid var(--rule-soft);
+  display:flex;justify-content:space-between;align-items:center;gap:18px;
+}
+.ai-showcase-stats{display:flex;align-items:center;gap:12px}
+.ai-stat-block{display:flex;align-items:baseline;gap:5px}
+.ai-stat-num{
+  font-family:var(--display);font-weight:600;font-size:16px;color:var(--paper);
+  letter-spacing:-.01em;
+}
+.ai-stat-label{
+  font-family:var(--mono);font-size:10px;color:var(--muted);
+  letter-spacing:.1em;text-transform:uppercase;font-weight:500;
+}
+.ai-stat-divider{color:var(--rule);font-family:var(--display)}
+.ai-showcase-note{
+  font-size:11.5px;color:var(--muted);line-height:1.5;
+  text-align:right;max-width:300px;
+}
+
+@media (max-width:1100px){
+  .ai-showcase-meta{grid-template-columns:repeat(2,1fr)}
+  .ai-showcase-foot{flex-direction:column;align-items:flex-start;gap:10px}
+  .ai-showcase-note{text-align:left;max-width:none}
+}
+
+/* === Q 等级核定区 === */
+.q-review{
+  margin-top:18px;
+  background:var(--ink-2);border:1px solid var(--rule-soft);
+  border-radius:12px;overflow:hidden;
+}
+.q-review-head{
+  padding:18px 22px;
+  display:flex;justify-content:space-between;align-items:flex-start;gap:18px;
+  border-bottom:1px solid var(--rule-soft);
+  background:#FAF3E3;
+}
+.q-review-title{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.q-review-sub{
+  font-size:12px;line-height:1.55;color:var(--paper-2);max-width:560px;
+}
+
+.q-list{padding:14px 22px;display:flex;flex-direction:column;gap:14px}
+
+.q-item{
+  display:grid;grid-template-columns:1fr auto;gap:24px;align-items:flex-start;
+  padding:18px;background:#FAF3E3;border:1px solid var(--rule-soft);
+  border-radius:10px;
+  transition:opacity .3s;
+}
+.q-item.q-pending{
+  border-left:3px solid var(--orange);
+}
+
+.q-item-left{display:flex;flex-direction:column;gap:8px;min-width:0}
+.q-item-tag{display:flex;align-items:center;gap:8px}
+.q-arrow{
+  font-family:var(--mono);font-size:10.5px;font-weight:700;
+  letter-spacing:.1em;color:var(--orange);
+  padding:3px 9px;border-radius:5px;
+  background:rgba(194,65,12,.12);border:1px solid rgba(194,65,12,.35);
+}
+.q-tag-label{
+  font-family:var(--mono);font-size:10px;color:var(--orange);
+  letter-spacing:.12em;font-weight:600;
+  padding:3px 9px;border-radius:5px;
+  background:rgba(194,65,12,.08);border:1px solid rgba(194,65,12,.3);
+}
+.q-item-name{
+  font-family:var(--display);font-weight:600;font-size:15px;color:var(--paper);
+  letter-spacing:-.005em;
+}
+.q-item-meta{
+  display:flex;align-items:center;gap:7px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:11px;color:var(--muted);
+  letter-spacing:.04em;
+}
+.q-item-meta strong{color:var(--orange);font-weight:700}
+.q-meta-dot{color:var(--rule)}
+.q-item-evidence{
+  margin-top:4px;padding:10px 12px;
+  background:#fff;border:1px solid var(--rule-soft);
+  border-radius:8px;
+  font-size:12px;line-height:1.55;color:var(--paper-2);font-style:italic;
+}
+.q-evidence-eyebrow{
+  font-family:var(--mono);font-size:9.5px;color:var(--muted);
+  letter-spacing:.14em;text-transform:uppercase;font-weight:700;font-style:normal;
+  margin-right:6px;
+}
+
+.q-item-right{
+  display:flex;flex-direction:column;align-items:flex-end;gap:10px;
+  flex-shrink:0;min-width:200px;
+}
+.q-link{
+  font-family:var(--mono);font-size:11px;color:var(--muted);
+  letter-spacing:.06em;cursor:pointer;
+  transition:color .2s;
+}
+.q-link:hover{color:var(--orange)}
+.q-actions{display:flex;flex-direction:column;gap:6px;width:100%}
+.q-btn{
+  padding:8px 14px;border-radius:7px;
+  font-family:var(--serif);font-size:12.5px;font-weight:500;
+  cursor:pointer;transition:all .2s;
+  border:1px solid;text-align:center;white-space:nowrap;
+}
+.q-btn-approve{
+  background:var(--orange);color:#FAF3E3;border-color:var(--orange);font-weight:600;
+}
+.q-btn-approve:hover{background:var(--orange-2);transform:translateY(-1px)}
+.q-btn-approve:disabled{
+  background:var(--moss);border-color:var(--moss);cursor:default;transform:none;
+}
+.q-btn-reject{
+  background:transparent;color:var(--paper-2);border-color:var(--rule);
+}
+.q-btn-reject:hover{background:var(--ink-3);border-color:var(--paper-2)}
+
+/* 已核定记录 */
+.q-history{
+  border-top:1px solid var(--rule-soft);
+}
+.q-history-summary{
+  list-style:none;cursor:pointer;
+  padding:14px 22px;
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:11px;color:var(--muted);
+  letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+  transition:background .2s;
+}
+.q-history-summary::-webkit-details-marker{display:none}
+.q-history-summary:hover{background:rgba(43,29,14,.03)}
+.q-history-icon{
+  font-family:var(--display);font-size:14px;color:var(--orange);
+  transition:transform .2s;display:inline-block;
+}
+.q-history[open] .q-history-icon{transform:rotate(90deg)}
+.q-history-text{color:var(--paper);font-weight:700}
+.q-history-meta{margin-left:auto;color:var(--muted-2);font-weight:500}
+
+.q-history-list{
+  padding:0 22px 18px;
+  display:flex;flex-direction:column;gap:6px;
+}
+.q-history-row{
+  display:flex;justify-content:space-between;align-items:center;gap:14px;
+  padding:10px 14px;background:#FAF3E3;border:1px solid var(--rule-soft);
+  border-radius:7px;font-size:12.5px;
+}
+.q-history-left{display:flex;align-items:center;gap:14px;min-width:0;flex:1}
+.q-history-action{
+  font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.08em;
+  padding:3px 8px;border-radius:4px;flex-shrink:0;
+}
+.q-history-action.approved{
+  color:var(--moss);background:rgba(92,107,58,.1);border:1px solid rgba(92,107,58,.3);
+}
+.q-history-action.rejected{
+  color:var(--muted);background:rgba(90,67,38,.06);border:1px solid rgba(90,67,38,.25);
+}
+.q-history-case{
+  color:var(--paper-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.q-history-date{
+  font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.06em;
+  flex-shrink:0;
+}
+
+@media (max-width:1100px){
+  .q-item{grid-template-columns:1fr}
+  .q-item-right{align-items:stretch;min-width:auto}
+}
 
 /* Hero (rating page) */
 .rating-hero{
@@ -2442,6 +2695,219 @@ body[data-view="hr"] .watermark-tag{display:block}
       <!-- Body · 评分主体 -->
       <div class="rating-main-body">
 
+        <!-- AI 指挥力 · 只读展示 (系统自动算分) -->
+        <div class="rate-cap rate-cap-readonly">
+          <div class="rate-cap-head">
+            <div class="rate-cap-title">
+              <span class="rate-cap-tag">— 01</span>
+              <span class="rate-cap-name">AI 指挥力</span>
+              <span class="rate-cap-weight" style="color:var(--orange)">·40%</span>
+              <span class="rate-readonly-badge">系统自动评分 · 无需打分</span>
+            </div>
+            <div class="rate-cap-total" id="aiTotal" style="color:var(--orange)">35 <em>/ 40</em></div>
+          </div>
+
+          <div class="ai-showcase">
+            <div class="ai-showcase-head">
+              <div class="ai-showcase-eyebrow">— 员工最高分代表作</div>
+              <a class="ai-showcase-link" href="#" onclick="event.preventDefault();alert('跳转至李浩泽的「招聘面试官 AI 助手」案例详情\n\n[模拟] 此处会展示完整的案例描述、运行截图、业务方反馈、效能提升数据等')">
+                查看案例详情
+                <span style="font-family:var(--mono);font-size:11px;opacity:.7">↗</span>
+              </a>
+            </div>
+
+            <div class="ai-showcase-body">
+              <div class="ai-showcase-title">招聘面试官 AI 助手 · 多 Agent 协同版</div>
+              <div class="ai-showcase-desc">基于 JD + 候选人简历自动生成定制化面试题库 (技术 / 行为 / 文化匹配三个维度)，并实时辅助面试官追问与评估。</div>
+
+              <div class="ai-showcase-meta">
+                <div class="ai-meta-item">
+                  <span class="ai-meta-label">深度</span>
+                  <span class="ai-meta-val ai-meta-d">D3 · Agent 工作流</span>
+                </div>
+                <div class="ai-meta-item">
+                  <span class="ai-meta-label">质量</span>
+                  <span class="ai-meta-val ai-meta-q">Q3 · 高度认可</span>
+                </div>
+                <div class="ai-meta-item">
+                  <span class="ai-meta-label">提报时间</span>
+                  <span class="ai-meta-val">2026.04.18</span>
+                </div>
+                <div class="ai-meta-item">
+                  <span class="ai-meta-label">已被使用</span>
+                  <span class="ai-meta-val">17 个团队</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="ai-showcase-foot">
+              <div class="ai-showcase-stats">
+                <span class="ai-stat-block">
+                  <span class="ai-stat-num">8</span>
+                  <span class="ai-stat-label">总提报案例</span>
+                </span>
+                <span class="ai-stat-divider">·</span>
+                <span class="ai-stat-block">
+                  <span class="ai-stat-num">2</span>
+                  <span class="ai-stat-label">Q3 高度认可</span>
+                </span>
+                <span class="ai-stat-divider">·</span>
+                <span class="ai-stat-block">
+                  <span class="ai-stat-num">3</span>
+                  <span class="ai-stat-label">Q2 业务方认可</span>
+                </span>
+              </div>
+              <div class="ai-showcase-note">
+                <span style="color:var(--orange);font-weight:600">代表作思维 · </span>
+                AI 指挥力得分 = 最高分案例分数，其他案例可入库沉淀但不累加。
+              </div>
+            </div>
+          </div>
+
+          <!-- 上级 Q 等级核定区 -->
+          <div class="q-review">
+            <div class="q-review-head">
+              <div>
+                <div class="q-review-title">
+                  <span class="rate-readonly-badge" style="margin-left:0;background:rgba(166,116,30,.12);color:var(--amber);border-color:rgba(166,116,30,.4)">⚐ 待你处理 · 2 项</span>
+                </div>
+                <div class="q-review-sub">作为上级，你需要核定下属案例的 Q 等级。Q3 升级需要你与评审委员会共同确认。</div>
+              </div>
+              <a class="ai-showcase-link" href="#" onclick="event.preventDefault();alert('查看完整Q核定流程说明\n\n[模拟] Q1自助申报即时生效 · Q2业务方点赞认可 · Q3需上级+评审委员会复核')">
+                了解 Q 核定规则
+                <span style="font-family:var(--mono);font-size:11px;opacity:.7">↗</span>
+              </a>
+            </div>
+
+            <div class="q-list">
+
+              <!-- 待 Q3 复核 -->
+              <div class="q-item q-pending">
+                <div class="q-item-left">
+                  <div class="q-item-tag">
+                    <span class="q-arrow">Q2 → Q3</span>
+                    <span class="q-tag-label">待 Q3 复核</span>
+                  </div>
+                  <div class="q-item-name">面试评估报告自动生成 Agent</div>
+                  <div class="q-item-meta">
+                    <span>D3 · Agent 工作流</span>
+                    <span class="q-meta-dot">·</span>
+                    <span>当前 Q2 → 32 分</span>
+                    <span class="q-meta-dot">·</span>
+                    <span>升级后 → <strong style="color:var(--orange)">35 分</strong></span>
+                  </div>
+                  <div class="q-item-evidence">
+                    <span class="q-evidence-eyebrow">业务方反馈 ·</span>
+                    "已纳入招聘部门日常工作流程，每月稳定处理 80+ 场面试评估，节省一线招聘官约 12 小时/周。" — 刘嘉琪 (招聘经理)
+                  </div>
+                </div>
+                <div class="q-item-right">
+                  <a class="q-link" href="#" onclick="event.preventDefault();alert('跳转至「面试评估报告自动生成 Agent」案例详情页\n\n[模拟] 完整查看运行截图、用户反馈、效能数据')">
+                    查看详情 ↗
+                  </a>
+                  <div class="q-actions">
+                    <button class="q-btn q-btn-approve" onclick="this.closest('.q-item').style.opacity='.5';this.textContent='✓ 已批准';this.disabled=true">✓ 批准升级 Q3</button>
+                    <button class="q-btn q-btn-reject">维持 Q2</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 待 Q2 确认 (上级可代业务方点赞) -->
+              <div class="q-item q-pending">
+                <div class="q-item-left">
+                  <div class="q-item-tag">
+                    <span class="q-arrow">Q1 → Q2</span>
+                    <span class="q-tag-label" style="color:var(--amber);background:rgba(166,116,30,.12);border-color:rgba(166,116,30,.4)">业务方未点赞</span>
+                  </div>
+                  <div class="q-item-name">候选人背景调查信息聚合工具</div>
+                  <div class="q-item-meta">
+                    <span>D2 · 人机协同</span>
+                    <span class="q-meta-dot">·</span>
+                    <span>当前 Q1 → 18 分</span>
+                    <span class="q-meta-dot">·</span>
+                    <span>升级后 → <strong style="color:var(--orange)">22 分</strong></span>
+                  </div>
+                  <div class="q-item-evidence">
+                    <span class="q-evidence-eyebrow">提报人备注 ·</span>
+                    "已被同组同事使用 6 周，但业务方未在系统点赞确认。我希望上级核定其实际价值。"
+                  </div>
+                </div>
+                <div class="q-item-right">
+                  <a class="q-link" href="#" onclick="event.preventDefault();alert('跳转至「候选人背景调查信息聚合工具」案例详情页')">
+                    查看详情 ↗
+                  </a>
+                  <div class="q-actions">
+                    <button class="q-btn q-btn-approve" onclick="this.closest('.q-item').style.opacity='.5';this.textContent='✓ 已确认';this.disabled=true">✓ 确认升级 Q2</button>
+                    <button class="q-btn q-btn-reject">维持 Q1</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- 已核定记录 (折叠) -->
+            <details class="q-history">
+              <summary class="q-history-summary">
+                <span class="q-history-icon">▸</span>
+                <span class="q-history-text">已核定记录 · 6 项</span>
+                <span class="q-history-meta">最近核定 · 2026.04.21</span>
+              </summary>
+              <div class="q-history-list">
+
+                <div class="q-history-row">
+                  <div class="q-history-left">
+                    <span class="q-history-action approved">✓ 批准 Q2 → Q3</span>
+                    <span class="q-history-case">招聘面试官 AI 助手 · 多 Agent 协同版</span>
+                  </div>
+                  <span class="q-history-date">2026.04.21</span>
+                </div>
+
+                <div class="q-history-row">
+                  <div class="q-history-left">
+                    <span class="q-history-action approved">✓ 确认 Q1 → Q2</span>
+                    <span class="q-history-case">JD 智能改写器</span>
+                  </div>
+                  <span class="q-history-date">2026.04.10</span>
+                </div>
+
+                <div class="q-history-row">
+                  <div class="q-history-left">
+                    <span class="q-history-action approved">✓ 批准 Q2 → Q3</span>
+                    <span class="q-history-case">入职 Welcome Pack 自动生成器</span>
+                  </div>
+                  <span class="q-history-date">2026.03.28</span>
+                </div>
+
+                <div class="q-history-row">
+                  <div class="q-history-left">
+                    <span class="q-history-action rejected">✗ 维持 Q1</span>
+                    <span class="q-history-case">员工敬业度问卷分析助手 (v0)</span>
+                  </div>
+                  <span class="q-history-date">2026.03.15</span>
+                </div>
+
+                <div class="q-history-row">
+                  <div class="q-history-left">
+                    <span class="q-history-action approved">✓ 确认 Q1 → Q2</span>
+                    <span class="q-history-case">绩效面谈 Prompt 模板包</span>
+                  </div>
+                  <span class="q-history-date">2026.02.18</span>
+                </div>
+
+                <div class="q-history-row">
+                  <div class="q-history-left">
+                    <span class="q-history-action approved">✓ 确认 Q1 → Q2</span>
+                    <span class="q-history-case">offer letter 自动起草工作流</span>
+                  </div>
+                  <span class="q-history-date">2026.01.30</span>
+                </div>
+
+              </div>
+            </details>
+
+          </div>
+        </div>
+
         <!-- 学习进化力 -->
         <div class="rate-cap">
           <div class="rate-cap-head">
@@ -2652,6 +3118,10 @@ body[data-view="hr"] .watermark-tag{display:block}
       <div class="rate-submit-row">
         <div class="rate-submit-summary">
           <div class="rate-summary-block">
+            <span class="lab">AI指挥力</span>
+            <span class="val" style="color:var(--orange)">35 <em>/ 40</em></span>
+          </div>
+          <div class="rate-summary-block">
             <span class="lab">学习进化力</span>
             <span class="val" id="learnTotalSummary">22 <em>/ 30</em></span>
           </div>
@@ -2660,8 +3130,8 @@ body[data-view="hr"] .watermark-tag{display:block}
             <span class="val" id="valueTotalSummary">22 <em>/ 30</em></span>
           </div>
           <div class="rate-summary-block">
-            <span class="lab">合计</span>
-            <span class="val orange" id="totalSummary">44 <em>/ 60</em></span>
+            <span class="lab">SI 合计</span>
+            <span class="val orange" id="totalSummary">79 <em>/ 100</em></span>
           </div>
         </div>
         <div style="display:flex;gap:10px">
@@ -2677,31 +3147,37 @@ body[data-view="hr"] .watermark-tag{display:block}
           <div class="rate-history-row">
             <span class="rate-history-period">2026 Q1</span>
             <div class="rate-history-bars">
+              <span>AI <b>32</b>/40</span>
+              <span>·</span>
               <span>学习 <b>20</b>/30</span>
               <span>·</span>
               <span>价值 <b>20</b>/30</span>
             </div>
-            <span class="rate-history-pts">40<em>/ 60</em></span>
+            <span class="rate-history-pts">72<em>/ 100</em></span>
             <span class="rate-history-status locked">已锁定</span>
           </div>
           <div class="rate-history-row">
             <span class="rate-history-period">2025 Q4</span>
             <div class="rate-history-bars">
+              <span>AI <b>25</b>/40</span>
+              <span>·</span>
               <span>学习 <b>18</b>/30</span>
               <span>·</span>
               <span>价值 <b>19</b>/30</span>
             </div>
-            <span class="rate-history-pts">37<em>/ 60</em></span>
+            <span class="rate-history-pts">62<em>/ 100</em></span>
             <span class="rate-history-status locked">已锁定</span>
           </div>
           <div class="rate-history-row">
             <span class="rate-history-period">2025 Q3</span>
             <div class="rate-history-bars">
+              <span>AI <b>22</b>/40</span>
+              <span>·</span>
               <span>学习 <b>17</b>/30</span>
               <span>·</span>
               <span>价值 <b>18</b>/30</span>
             </div>
-            <span class="rate-history-pts">35<em>/ 60</em></span>
+            <span class="rate-history-pts">57<em>/ 100</em></span>
             <span class="rate-history-status locked">已锁定</span>
           </div>
         </div>
@@ -3046,6 +3522,8 @@ function updateRatingTotals(){
     if(cap==='learn') learnSum += v;
     else if(cap==='value') valueSum += v;
   });
+  // AI指挥力是固定的35分(基于代表作Q3xD3),与人评相加得SI合计
+  const aiScore = 35;
   // 5维度*6分=30满分,直接取分数和(已经是1-30区间)
   const learnEl = document.getElementById('learnTotal');
   const valueEl = document.getElementById('valueTotal');
@@ -3056,7 +3534,7 @@ function updateRatingTotals(){
   if(valueEl) valueEl.innerHTML = valueSum + ' <em>/ 30</em>';
   if(learnSumEl) learnSumEl.innerHTML = learnSum + ' <em>/ 30</em>';
   if(valueSumEl) valueSumEl.innerHTML = valueSum + ' <em>/ 30</em>';
-  if(totalEl) totalEl.innerHTML = (learnSum+valueSum) + ' <em>/ 60</em>';
+  if(totalEl) totalEl.innerHTML = (aiScore+learnSum+valueSum) + ' <em>/ 100</em>';
 }
 // 初始化总分
 updateRatingTotals();
