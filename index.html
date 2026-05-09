@@ -1338,6 +1338,124 @@ body[data-view="employee"] .emp-notice{display:inline-flex;align-items:center;ga
   .ai-showcase-note{text-align:left;max-width:none}
 }
 
+/* === D 等级真实范例展示 === */
+.d-examples{display:flex;flex-direction:column;gap:14px}
+
+/* === 分层审核机制流程图 === */
+.tier-flow{display:flex;flex-direction:column;gap:10px}
+.tier-flow-item{
+  display:grid;grid-template-columns:80px 40px 1fr auto;gap:18px;align-items:center;
+  padding:18px 20px;background:#FAF3E3;border:1px solid var(--rule-soft);
+  border-radius:12px;
+  transition:transform .25s, border-color .25s;
+}
+.tier-flow-item:hover{transform:translateX(2px)}
+.tier-d1{border-left:3px solid var(--moss)}
+.tier-d23{border-left:3px solid var(--amber)}
+.tier-d4{border-left:3px solid var(--orange);background:linear-gradient(135deg,#F8EFD8 0%,#F2E5C5 100%)}
+
+.tier-flow-tag{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.12em;
+  color:var(--paper);
+}
+.tier-flow-icon{
+  width:38px;height:38px;border-radius:50%;
+  display:grid;place-items:center;
+  background:#fff;border:1px solid var(--rule-soft);
+  color:var(--paper-2);
+}
+.tier-d1 .tier-flow-icon{color:var(--moss);background:rgba(92,107,58,.12);border-color:rgba(92,107,58,.4)}
+.tier-d23 .tier-flow-icon{color:var(--amber);background:rgba(166,116,30,.12);border-color:rgba(166,116,30,.4)}
+.tier-d4 .tier-flow-icon{color:var(--orange);background:rgba(194,65,12,.15);border-color:var(--orange)}
+
+.tier-flow-text{display:flex;flex-direction:column;gap:4px;min-width:0}
+.tier-flow-title{
+  font-family:var(--display);font-weight:600;font-size:14.5px;color:var(--paper);
+  letter-spacing:-.005em;
+}
+.tier-flow-desc{
+  font-size:12px;line-height:1.55;color:var(--paper-2);
+}
+
+.tier-flow-actor{display:flex;flex-shrink:0}
+.actor-pill{
+  font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.1em;
+  padding:5px 12px;border-radius:99px;border:1px solid;
+}
+.actor-self{
+  background:rgba(92,107,58,.12);color:var(--moss);border-color:var(--moss);
+}
+.actor-mgr{
+  background:rgba(166,116,30,.14);color:var(--amber);border-color:var(--amber);
+}
+.actor-cmt{
+  background:rgba(194,65,12,.14);color:var(--orange);border-color:var(--orange);
+}
+
+/* Q 升级流程 */
+.q-flow{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+}
+.q-flow-step{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 16px;background:#fff;border:1px solid var(--rule-soft);border-radius:10px;
+  flex:1;min-width:200px;
+}
+.q-flow-num{
+  font-family:var(--display);font-weight:700;font-style:italic;font-size:18px;
+  color:var(--orange);
+}
+.q-flow-label{
+  font-size:12.5px;color:var(--paper-2);font-weight:500;
+}
+.q-flow-arrow{
+  font-family:var(--display);font-size:20px;color:var(--rule);
+  flex-shrink:0;
+}
+
+@media (max-width:1100px){
+  .tier-flow-item{grid-template-columns:60px 36px 1fr;grid-template-rows:auto auto}
+  .tier-flow-actor{grid-column:1/-1;justify-content:flex-end}
+  .q-flow{flex-direction:column;align-items:stretch}
+  .q-flow-arrow{transform:rotate(90deg);text-align:center}
+}
+
+.d-example{
+  padding:18px 20px;
+  background:#FAF3E3;border:1px solid var(--rule-soft);
+  border-radius:12px;
+  border-left:3px solid var(--rule);
+  transition:transform .25s, border-color .25s;
+}
+.d-example:hover{transform:translateX(2px)}
+.d-example-d1{border-left-color:var(--orange)}
+.d-example-d2{border-left-color:var(--amber)}
+.d-example-d3{border-left-color:var(--moss)}
+.d-example-d4{
+  border-left-color:var(--orange);border-left-width:5px;
+  background:linear-gradient(135deg,#F8EFD8 0%,#F2E5C5 100%);
+}
+.d-example-head{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  margin-bottom:10px;
+}
+.d-example-tag{
+  font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.1em;
+  padding:4px 11px;border-radius:5px;border:1px solid;
+}
+.d-example-pts{
+  font-family:var(--display);font-weight:600;font-style:italic;font-size:15px;
+  letter-spacing:-.005em;
+}
+.d-example-name{
+  font-family:var(--display);font-weight:600;font-size:15px;color:var(--paper);
+  letter-spacing:-.005em;margin-bottom:8px;
+}
+.d-example-body{
+  font-size:12.5px;line-height:1.7;color:var(--paper-2);
+}
+.d-example-body strong{color:var(--paper);font-weight:600}
+
 /* === Q 等级核定区 === */
 .q-review{
   margin-top:18px;
@@ -1809,7 +1927,7 @@ body[data-view="hr"] .watermark-tag{display:block}
             <div class="case-title">招聘JD智能生成与候选人匹配 Agent</div>
             <div class="case-meta">输入岗位关键词 + JD 模板 → 多 Agent 协同生成完整 JD、人才画像、Boolean 搜索串、面试题库</div>
             <div class="case-tags">
-              <span class="case-tag">D4 · 复杂Agent</span>
+              <span class="case-tag">D4 · 范式创造</span>
               <span class="case-tag">Q3 · 高度认可</span>
               <span class="case-tag">已纳入流程</span>
             </div>
@@ -1823,7 +1941,7 @@ body[data-view="hr"] .watermark-tag{display:block}
             <div class="case-title">员工敬业度调研半自动化分析工作流</div>
             <div class="case-meta">问卷数据 → 分群聚类 → 主题抽取 → 自动生成可视化报告，HR 仅做最终判断</div>
             <div class="case-tags">
-              <span class="case-tag">D3 · Agent工作流</span>
+              <span class="case-tag">D3 · Agent接管</span>
               <span class="case-tag">Q3 · 高度认可</span>
             </div>
           </div>
@@ -2004,20 +2122,45 @@ body[data-view="hr"] .watermark-tag{display:block}
     <p class="lead">驱动人机协同，并将个人经验与业务逻辑 Agent 化的能力。<strong style="color:var(--paper)">基于你提报到 AI 案例库的实践案例评估</strong>。</p>
 
     <div style="margin-top:24px">
-      <div style="font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px;font-weight:600">— 考察维度</div>
+      <div style="font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px;font-weight:600">— 考察维度 · 4 层递进</div>
+      <p style="font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:14px">从"用 AI"到"管 AI"的能力梯度。每一档需具备前置档位的全部能力，逐级递进、不可跳过。</p>
       <table class="rule-table">
         <tbody>
-          <tr><td style="width:200px;padding-left:0"><span class="rule-name">提示词工程</span></td><td>能写出结构清晰、有效的 Prompt；能主动调用多元 AI 工具完成常规任务（翻译、总结、起草、数据查询）</td></tr>
-          <tr><td style="padding-left:0"><span class="rule-name">工具选型与流程编排</span></td><td>在真实业务场景中能找到 AI 的切入点，设计合理的人机协同分工模式</td></tr>
-          <tr><td style="padding-left:0"><span class="rule-name">任务 Agent 化</span></td><td>交付能跑通的工作流 / 智能体以处理较复杂的工作任务，实现端到端自动化</td></tr>
-          <tr><td style="padding-left:0"><span class="rule-name">结果闭环</span></td><td>通过工作流 / 智能体带来可量化的业务指标提升或工时降低 / 合作方与用户的实际反馈</td></tr>
+          <tr>
+            <td style="width:220px;padding-left:0">
+              <span class="rule-name" style="display:flex;align-items:center;gap:8px"><span style="font-family:var(--mono);font-size:11px;color:var(--orange);font-weight:700;letter-spacing:.1em">D1</span>AI 基础素养</span>
+              <span style="font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.08em">基础门槛 · AI 加速</span>
+            </td>
+            <td>能与 AI 工具有效协作完成日常任务。能写出结构清晰、目的明确的 Prompt；能主动调用多元 AI 工具（不局限于一个平台）完成翻译、总结、起草、查询、分析等任务；对 AI 边界有清醒认知。</td>
+          </tr>
+          <tr>
+            <td style="width:220px;padding-left:0">
+              <span class="rule-name" style="display:flex;align-items:center;gap:8px"><span style="font-family:var(--mono);font-size:11px;color:var(--amber);font-weight:700;letter-spacing:.1em">D2</span>人机协同分工</span>
+              <span style="font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.08em">关键能力 · AI 协同</span>
+            </td>
+            <td>能在真实业务场景中识别 AI 的切入点，设计合理的人机分工模式（什么交给 AI、什么留给人）。能根据任务复杂度选择合适的协同模式，并为 AI 出错或边界外情况设计人工介入路径。</td>
+          </tr>
+          <tr>
+            <td style="width:220px;padding-left:0">
+              <span class="rule-name" style="display:flex;align-items:center;gap:8px"><span style="font-family:var(--mono);font-size:11px;color:var(--moss);font-weight:700;letter-spacing:.1em">D3</span>Agent 接管能力</span>
+              <span style="font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.08em">进阶能力 · AI 接管</span>
+            </td>
+            <td>能将一个完整业务环节交给 AI 独立完成。交付的工作流 / 智能体实现端到端闭环（输入→处理→输出→反馈），无需逐步推进；具备异常处理机制（错误捕获、降级、人工接管），月运行次数与成功率经得起检验。</td>
+          </tr>
+          <tr>
+            <td style="width:220px;padding-left:0">
+              <span class="rule-name" style="display:flex;align-items:center;gap:8px"><span style="font-family:var(--mono);font-size:11px;color:var(--orange);font-weight:700;letter-spacing:.1em">D4</span>范式创造能力</span>
+              <span style="font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.08em">顶级能力 · AI 重塑</span>
+            </td>
+            <td>通过 AI 让原本不可能或不存在的工作方式成为现实。带来结构性的工作方式变化（不只是更快/更便宜，而是创造了新的工作形态），对所在岗位/团队/业务线产生可被推广的范式价值。<br><strong style="color:var(--orange)">D4 评定硬标准（任意 1 条）：</strong>① 核心产出指标提升 10 倍及以上；② 实现了原本组织无法完成的工作；③ 所在岗位/业务线的考核标准因此变化。</td>
+          </tr>
         </tbody>
       </table>
     </div>
 
     <div style="margin-top:28px">
       <div style="font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px;font-weight:600">— 怎么打分</div>
-      <p class="lead" style="margin-bottom:16px">案例的<strong style="color:var(--paper)">深度</strong>（做到了什么程度）× <strong style="color:var(--paper)">质量</strong>（有多少人在用，是否真实有效）双维度查表评估。<strong style="color:var(--paper)">取你最高分案例为最终得分。</strong></p>
+      <p class="lead" style="margin-bottom:16px">案例的<strong style="color:var(--paper)">深度</strong>（AI 在工作中扮演什么角色）× <strong style="color:var(--paper)">质量</strong>（有多少人在用，是否真实有效）双维度查表评估。<strong style="color:var(--paper)">取你最高分案例为最终得分。</strong></p>
 
       <div class="matrix-large">
         <table>
@@ -2031,19 +2174,19 @@ body[data-view="hr"] .watermark-tag{display:block}
           </thead>
           <tbody>
             <tr>
-              <td class="row-head">D1 · Prompt 模板<small>可复用的高质量提示词</small></td>
+              <td class="row-head">D1 · AI 基础素养<small>能与 AI 工具有效协作</small></td>
               <td class="score">10</td><td class="score">12</td><td class="score">15</td>
             </tr>
             <tr>
-              <td class="row-head">D2 · 人机协同分工<small>重构 AI 与人的分工模式</small></td>
+              <td class="row-head">D2 · 人机协同分工<small>设计合理的人机分工模式</small></td>
               <td class="score">18</td><td class="score">22</td><td class="score">25</td>
             </tr>
             <tr>
-              <td class="row-head">D3 · Agent 工作流<small>端到端自动化，无需持续介入</small></td>
+              <td class="row-head">D3 · Agent 接管能力<small>AI 独立完成完整工作环节</small></td>
               <td class="score">25</td><td class="score">32</td><td class="score">35</td>
             </tr>
             <tr>
-              <td class="row-head">D4 · 复杂 Agent<small>多 Agent 协同 / 动态决策</small></td>
+              <td class="row-head">D4 · 范式创造能力<small>AI 让不可能成为可能</small></td>
               <td class="score">30</td><td class="score">35</td><td class="score peak">40</td>
             </tr>
           </tbody>
@@ -2054,6 +2197,152 @@ body[data-view="hr"] .watermark-tag{display:block}
         <strong style="color:var(--paper)">代表作思维 · </strong>取最高分案例为最终得分，其他案例可入库沉淀但不累加。鼓励做精不做多 — 一个真正的超级个体，会让自己的 AI 资产持续创造价值。
       </div>
     </div>
+
+    <!-- 分层审核机制 -->
+    <div style="margin-top:32px">
+      <div style="font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px;font-weight:600">— 分层审核机制</div>
+      <p class="lead" style="margin-bottom:20px">不是所有提报都需要审核。<strong style="color:var(--paper)">档位越高、影响越大，审核越严格</strong>——这是为了既保护员工自主提报的效率，又确保高分案例的真实性。</p>
+
+      <div class="tier-flow">
+
+        <!-- D1×Q1 · 自助即时 -->
+        <div class="tier-flow-item tier-d1">
+          <div class="tier-flow-tag">D1 × Q1</div>
+          <div class="tier-flow-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+          </div>
+          <div class="tier-flow-text">
+            <div class="tier-flow-title">自助申报 · 即时生效</div>
+            <div class="tier-flow-desc">提交运行截图即可，无需任何审核。鼓励员工大胆尝试基础 AI 应用。</div>
+          </div>
+          <div class="tier-flow-actor">
+            <span class="actor-pill actor-self">员工自己</span>
+          </div>
+        </div>
+
+        <!-- D2 / D3 · 上级审核 -->
+        <div class="tier-flow-item tier-d23">
+          <div class="tier-flow-tag">D2 · D3</div>
+          <div class="tier-flow-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="tier-flow-text">
+            <div class="tier-flow-title">直属上级审核 · 3 个工作日内反馈</div>
+            <div class="tier-flow-desc">D2 的"人机协同设计"和 D3 的"AI 接管能力"涉及业务判断，由你的直属上级核定档位与质量。上级会收到系统通知，在管理端"员工评分"页面处理。</div>
+          </div>
+          <div class="tier-flow-actor">
+            <span class="actor-pill actor-mgr">直属上级</span>
+          </div>
+        </div>
+
+        <!-- D4 · 委员会评议 -->
+        <div class="tier-flow-item tier-d4">
+          <div class="tier-flow-tag">D4</div>
+          <div class="tier-flow-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div class="tier-flow-text">
+            <div class="tier-flow-title">评审委员会评议 · 月度集中评审</div>
+            <div class="tier-flow-desc">D4 是顶级档位，需要委员会基于"3 条硬标准"集中评议。员工需提交完整证据材料（量化数据、前后对比、业务影响）。委员会由 HR、AI 工程团队、业务负责人组成。</div>
+          </div>
+          <div class="tier-flow-actor">
+            <span class="actor-pill actor-cmt">评审委员会</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Q 升级流程 -->
+      <div style="margin-top:24px;padding:18px 22px;background:#FAF3E3;border:1px solid var(--rule-soft);border-radius:12px">
+        <div style="font-family:var(--display);font-weight:600;font-size:14px;color:var(--paper);margin-bottom:10px">质量等级（Q1 → Q3）的升级路径</div>
+        <div class="q-flow">
+          <div class="q-flow-step">
+            <span class="q-flow-num">Q1</span>
+            <span class="q-flow-label">个人能跑</span>
+          </div>
+          <span class="q-flow-arrow">→</span>
+          <div class="q-flow-step">
+            <span class="q-flow-num">Q2</span>
+            <span class="q-flow-label">业务方点击"使用过且有价值"</span>
+          </div>
+          <span class="q-flow-arrow">→</span>
+          <div class="q-flow-step">
+            <span class="q-flow-num">Q3</span>
+            <span class="q-flow-label">业务方填说明 + 上级与委员会复核</span>
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-top:12px">
+          <strong style="color:var(--paper-2)">注：</strong>Q 等级会随时间动态调整。如果案例的实际使用情况发生变化（如从"高度认可"变为"已不再使用"），评审委员会和 HR 在年度回顾时会下调或归零，员工分数同步调整。
+        </div>
+      </div>
+
+      <!-- 上级 / 委员会 通知机制 -->
+      <div style="margin-top:18px;padding:16px 20px;background:rgba(92,107,58,.08);border:1px solid rgba(92,107,58,.25);border-radius:12px;font-size:12.5px;line-height:1.7;color:var(--paper-2)">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--moss);letter-spacing:.16em;font-weight:700;margin-bottom:8px;text-transform:uppercase">— 通知机制</div>
+        当下属提报需要审核的案例时，<strong style="color:var(--paper)">系统会自动推送通知</strong>到上级的管理端首页与企业 IM。上级可在"员工评分"页面统一处理待审清单（D2/D3 档位核定 + Q 升级请求 + 业务方点赞确认）。每位上级可查看自己权限范围内所有下属的历史评分记录与档位变化轨迹。
+      </div>
+    </div>
+
+    <!-- 跨岗位案例 -->
+    <div style="margin-top:32px">
+      <div style="font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px;font-weight:600">— 真实案例 · 每档一个供你参考</div>
+
+      <div class="d-examples">
+
+        <div class="d-example d-example-d1">
+          <div class="d-example-head">
+            <span class="d-example-tag" style="background:rgba(194,65,12,.12);color:var(--orange);border-color:rgba(194,65,12,.4)">D1 · AI 基础素养</span>
+            <span class="d-example-pts" style="color:var(--orange)">10–15 分</span>
+          </div>
+          <div class="d-example-name">市场推文多语言翻译与本地化 Prompt 包 <span style="font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.06em;margin-left:8px">— 市场营销岗</span></div>
+          <div class="d-example-body">
+            <strong>场景：</strong>一名市场专员针对小红书、Instagram、LinkedIn 三个不同平台，整理出 3 套结构化翻译 Prompt 模板，能保留中文原意的同时贴合每个平台的语言风格，单篇推文翻译时间从 40 分钟降至 10 分钟。<br>
+            <strong>为什么是 D1：</strong>AI 是工具，员工仍是工作主体。Prompt 输出后仍需员工根据当下营销节点、品牌口吻做最后润色才能发布。
+          </div>
+        </div>
+
+        <div class="d-example d-example-d2">
+          <div class="d-example-head">
+            <span class="d-example-tag" style="background:rgba(166,116,30,.12);color:var(--amber);border-color:rgba(166,116,30,.4)">D2 · 人机协同分工</span>
+            <span class="d-example-pts" style="color:var(--amber)">18–25 分</span>
+          </div>
+          <div class="d-example-name">绩效面谈话术生成器 <span style="font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.06em;margin-left:8px">— HRBP 岗</span></div>
+          <div class="d-example-body">
+            <strong>场景：</strong>一名 HRBP 设计了一套人机协同流程：输入员工绩效结果与画像 → AI 自动生成差异化的开场白、关键问题、改进建议初稿 → HRBP 在面谈前 10 分钟做最后定稿与个性化调整。15 位 HRBP 在使用，月覆盖 200+ 次绩效面谈。<br>
+            <strong>为什么是 D2：</strong>AI 承担了"内容起草"这一独立环节，HRBP 只做最终决策。但每一次面谈仍需 HRBP 主动触发并定稿，不是端到端闭环。
+          </div>
+        </div>
+
+        <div class="d-example d-example-d3">
+          <div class="d-example-head">
+            <span class="d-example-tag" style="background:rgba(92,107,58,.12);color:var(--moss);border-color:rgba(92,107,58,.4)">D3 · Agent 接管能力</span>
+            <span class="d-example-pts" style="color:var(--moss)">25–35 分</span>
+          </div>
+          <div class="d-example-name">标准合同自动审查 Agent <span style="font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.06em;margin-left:8px">— 法务岗</span></div>
+          <div class="d-example-body">
+            <strong>场景：</strong>一名公司法务搭建了端到端合同审查 Agent:合同上传 → AI 自动识别合同类型、抽取关键条款(付款、违约、知识产权)、对比公司模板、标注风险点位置与等级 → 输出审查报告。律师只看异常合同的异常段落。系统月稳定处理 800+ 份标准合同,准确率 95%,疑难合同自动转人工。<br>
+            <strong>为什么是 D3：</strong>AI 独立完成了"合同初审"这一完整业务环节,从输入到输出端到端闭环。律师不主动介入,工作流也能完成;律师只做监督与异常处理。
+          </div>
+        </div>
+
+        <div class="d-example d-example-d4">
+          <div class="d-example-head">
+            <span class="d-example-tag" style="background:rgba(194,65,12,.15);color:var(--orange);border-color:var(--orange)">D4 · 范式创造能力</span>
+            <span class="d-example-pts" style="color:var(--orange);font-weight:700">30–40 分</span>
+          </div>
+          <div class="d-example-name">全球行业雷达系统 <span style="font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.06em;margin-left:8px">— 战略岗</span></div>
+          <div class="d-example-body">
+            <strong>场景：</strong>原本战略团队每季度只能深度研究 3 个赛道(人力天花板)。员工搭建了"行业雷达系统"——12 个 Agent 协同持续追踪全球 500+ 公司的公开信息、专利、招聘动态、产品发布,自动生成赛道动态周报。战略分析师从"信息收集"转为"信号判读"。<br>
+            <strong>为什么是 D4(满足 3 条硬标准):</strong><br>
+            ① <strong>数量级跃迁</strong>:单季度可深度覆盖赛道数从 3 个 → 50+ 个(>10×)<br>
+            ② <strong>能力扩展</strong>:原本无法做到的"实时全球追踪"成为可能<br>
+            ③ <strong>KPI 重写</strong>:战略团队 KPI 从"产出研报数量" → "战略预警准确率 + 决策影响力"
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 
   <!-- 学习进化力 -->
@@ -2201,23 +2490,23 @@ body[data-view="hr"] .watermark-tag{display:block}
           <div class="depth-grid">
             <div class="depth-card" data-depth="D1">
               <span class="depth-id">D1</span>
-              <div class="depth-title">Prompt 模板</div>
-              <div class="depth-desc">可复用的高质量提示词</div>
+              <div class="depth-title">AI 基础素养</div>
+              <div class="depth-desc">能与 AI 工具有效协作</div>
             </div>
             <div class="depth-card" data-depth="D2">
               <span class="depth-id">D2</span>
               <div class="depth-title">人机协同分工</div>
-              <div class="depth-desc">重构 AI 与人的分工模式</div>
+              <div class="depth-desc">设计合理的人机分工模式</div>
             </div>
             <div class="depth-card" data-depth="D3">
               <span class="depth-id">D3</span>
-              <div class="depth-title">Agent 工作流</div>
-              <div class="depth-desc">端到端自动化，无需持续介入</div>
+              <div class="depth-title">Agent 接管能力</div>
+              <div class="depth-desc">AI 独立完成完整工作环节</div>
             </div>
             <div class="depth-card selected" data-depth="D4">
               <span class="depth-id">D4</span>
-              <div class="depth-title">复杂 Agent</div>
-              <div class="depth-desc">多 Agent 协同 / 动态决策</div>
+              <div class="depth-title">范式创造能力</div>
+              <div class="depth-desc">AI 让不可能成为可能</div>
             </div>
           </div>
         </div>
@@ -2331,7 +2620,7 @@ body[data-view="hr"] .watermark-tag{display:block}
         <div style="font-family:var(--mono);font-size:11px;color:var(--moss);letter-spacing:.08em">D4 × Q3 = 满分代表作</div>
 
         <div class="preview-formula-box">
-          <div class="preview-formula-row"><span>深度评级</span><span>D4 · 复杂 Agent</span></div>
+          <div class="preview-formula-row"><span>深度评级</span><span>D4 · 范式创造</span></div>
           <div class="preview-formula-row"><span>质量评级</span><span>Q3 · 高度认可</span></div>
           <div class="preview-formula-row"><span>计分逻辑</span><span>查表 → 40 pt</span></div>
         </div>
@@ -2381,7 +2670,7 @@ body[data-view="hr"] .watermark-tag{display:block}
         </div>
         <div class="lib-stat">
           <div class="lib-stat-num">9<em>1</em></div>
-          <div class="lib-stat-label">D4 复杂 Agent</div>
+          <div class="lib-stat-label">D4 范式创造</div>
         </div>
         <div class="lib-stat">
           <div class="lib-stat-num">6<em>8</em>%</div>
@@ -2398,10 +2687,10 @@ body[data-view="hr"] .watermark-tag{display:block}
       <input placeholder="搜索案例名称、提报人、技术栈、业务场景…">
     </div>
     <button class="filter-pill active">全部</button>
-    <button class="filter-pill">D4 复杂 Agent</button>
-    <button class="filter-pill">D3 工作流</button>
+    <button class="filter-pill">D4 范式创造</button>
+    <button class="filter-pill">D3 Agent接管</button>
     <button class="filter-pill">D2 人机协同</button>
-    <button class="filter-pill">D1 Prompt</button>
+    <button class="filter-pill">D1 基础素养</button>
     <button class="filter-pill">Q3 认证</button>
   </div>
 
@@ -2538,7 +2827,7 @@ body[data-view="hr"] .watermark-tag{display:block}
     <div class="rating-hero-text">
       <span class="label">— 员工评分 / Manager Rating</span>
       <h1 class="h1" style="margin-top:6px">为你的团队 <em>打分</em>。</h1>
-      <p class="lead">基于日常观察与员工的季度工作总结，对学习进化力 (30%) 与价值创造力 (30%) 进行评估。</p>
+      <p class="lead">本季度对学习进化力 (30%) 与价值创造力 (30%) 进行人评，并审核下属的 AI 案例档位（D2/D3）与 Q 升级请求。</p>
     </div>
     <div class="rating-hero-stats">
       <div class="rh-stat">
@@ -2554,8 +2843,8 @@ body[data-view="hr"] .watermark-tag{display:block}
         <div class="rh-stat-label">待评分</div>
       </div>
       <div class="rh-stat">
-        <div class="rh-stat-num"><em>06.30</em></div>
-        <div class="rh-stat-label">截止日期</div>
+        <div class="rh-stat-num" style="color:var(--orange)"><em>4</em></div>
+        <div class="rh-stat-label">待审核 AI 案例</div>
       </div>
     </div>
   </div>
@@ -2702,7 +2991,7 @@ body[data-view="hr"] .watermark-tag{display:block}
               <span class="rate-cap-tag">— 01</span>
               <span class="rate-cap-name">AI 指挥力</span>
               <span class="rate-cap-weight" style="color:var(--orange)">·40%</span>
-              <span class="rate-readonly-badge">系统自动评分 · 无需打分</span>
+              <span class="rate-readonly-badge">系统按 D × Q 自动算分</span>
             </div>
             <div class="rate-cap-total" id="aiTotal" style="color:var(--orange)">35 <em>/ 40</em></div>
           </div>
@@ -2723,7 +3012,7 @@ body[data-view="hr"] .watermark-tag{display:block}
               <div class="ai-showcase-meta">
                 <div class="ai-meta-item">
                   <span class="ai-meta-label">深度</span>
-                  <span class="ai-meta-val ai-meta-d">D3 · Agent 工作流</span>
+                  <span class="ai-meta-val ai-meta-d">D3 · Agent 接管</span>
                 </div>
                 <div class="ai-meta-item">
                   <span class="ai-meta-label">质量</span>
@@ -2764,22 +3053,84 @@ body[data-view="hr"] .watermark-tag{display:block}
             </div>
           </div>
 
-          <!-- 上级 Q 等级核定区 -->
+          <!-- 上级审核区（D档位 + Q升级 统一处理） -->
           <div class="q-review">
             <div class="q-review-head">
               <div>
                 <div class="q-review-title">
-                  <span class="rate-readonly-badge" style="margin-left:0;background:rgba(166,116,30,.12);color:var(--amber);border-color:rgba(166,116,30,.4)">⚐ 待你处理 · 2 项</span>
+                  <span class="rate-readonly-badge" style="margin-left:0;background:rgba(166,116,30,.12);color:var(--amber);border-color:rgba(166,116,30,.4)">⚐ 待你处理 · 4 项</span>
                 </div>
-                <div class="q-review-sub">作为上级，你需要核定下属案例的 Q 等级。Q3 升级需要你与评审委员会共同确认。</div>
+                <div class="q-review-sub">作为上级，你需要审核下属的 D2 / D3 档位首次核定，以及 Q 升级请求。D4 档位由评审委员会评议，不在此处理。</div>
               </div>
-              <a class="ai-showcase-link" href="#" onclick="event.preventDefault();alert('查看完整Q核定流程说明\n\n[模拟] Q1自助申报即时生效 · Q2业务方点赞认可 · Q3需上级+评审委员会复核')">
-                了解 Q 核定规则
+              <a class="ai-showcase-link" href="#" onclick="event.preventDefault();alert('完整审核机制\n\n· D1×Q1 → 员工自助即时生效\n· D2/D3 → 上级核定档位\n· D4 → 评审委员会评议\n· Q1→Q2 → 业务方点赞确认\n· Q2→Q3 → 业务方说明 + 上级与委员会复核')">
+                了解审核规则
                 <span style="font-family:var(--mono);font-size:11px;opacity:.7">↗</span>
               </a>
             </div>
 
             <div class="q-list">
+
+              <!-- 待 D3 档位核定 (新增) -->
+              <div class="q-item q-pending">
+                <div class="q-item-left">
+                  <div class="q-item-tag">
+                    <span class="q-arrow" style="background:rgba(92,107,58,.12);color:var(--moss);border-color:rgba(92,107,58,.4)">D 档位核定</span>
+                    <span class="q-tag-label" style="color:var(--moss);background:rgba(92,107,58,.1);border-color:rgba(92,107,58,.35)">员工首次提报 D3</span>
+                  </div>
+                  <div class="q-item-name">入职 Onboarding 全流程 Agent <span style="font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.06em;margin-left:8px">— 张轶贤</span></div>
+                  <div class="q-item-meta">
+                    <span>员工自评 D3 · Q1</span>
+                    <span class="q-meta-dot">·</span>
+                    <span>需你核定档位</span>
+                    <span class="q-meta-dot">·</span>
+                    <span>核定后 → <strong style="color:var(--moss)">25 分</strong></span>
+                  </div>
+                  <div class="q-item-evidence">
+                    <span class="q-evidence-eyebrow">员工自陈 ·</span>
+                    "新员工从入职申请、合同签署、IT 设备申请、培训分配、文化欢迎到首周 1V1 排期，全部由 Agent 自动完成。月运行 30+ 次，成功率 96%。"
+                  </div>
+                </div>
+                <div class="q-item-right">
+                  <a class="q-link" href="#" onclick="event.preventDefault();alert('跳转至「入职 Onboarding 全流程 Agent」案例详情\n\n[模拟] 查看运行截图、月运行记录、异常处理日志')">
+                    查看证据 ↗
+                  </a>
+                  <div class="q-actions">
+                    <button class="q-btn q-btn-approve" onclick="this.closest('.q-item').style.opacity='.5';this.textContent='✓ 已核定为 D3';this.disabled=true">✓ 核定为 D3</button>
+                    <button class="q-btn q-btn-reject">下调为 D2</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 待 D2 档位核定 (新增) -->
+              <div class="q-item q-pending">
+                <div class="q-item-left">
+                  <div class="q-item-tag">
+                    <span class="q-arrow" style="background:rgba(166,116,30,.12);color:var(--amber);border-color:rgba(166,116,30,.4)">D 档位核定</span>
+                    <span class="q-tag-label" style="color:var(--amber);background:rgba(166,116,30,.1);border-color:rgba(166,116,30,.35)">员工首次提报 D2</span>
+                  </div>
+                  <div class="q-item-name">岗位胜任力模型 AI 共建工具 <span style="font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.06em;margin-left:8px">— 王思怡</span></div>
+                  <div class="q-item-meta">
+                    <span>员工自评 D2 · Q1</span>
+                    <span class="q-meta-dot">·</span>
+                    <span>需你核定档位</span>
+                    <span class="q-meta-dot">·</span>
+                    <span>核定后 → <strong style="color:var(--amber)">18 分</strong></span>
+                  </div>
+                  <div class="q-item-evidence">
+                    <span class="q-evidence-eyebrow">员工自陈 ·</span>
+                    "AI 基于岗位 JD + 历史候选人数据 + 业务方访谈记录，自动生成胜任力模型草稿，HR 与业务方共同审定后定稿。HR 决定最终模型与权重。"
+                  </div>
+                </div>
+                <div class="q-item-right">
+                  <a class="q-link" href="#" onclick="event.preventDefault();alert('跳转至「岗位胜任力模型 AI 共建工具」案例详情')">
+                    查看证据 ↗
+                  </a>
+                  <div class="q-actions">
+                    <button class="q-btn q-btn-approve" onclick="this.closest('.q-item').style.opacity='.5';this.textContent='✓ 已核定为 D2';this.disabled=true">✓ 核定为 D2</button>
+                    <button class="q-btn q-btn-reject">下调为 D1</button>
+                  </div>
+                </div>
+              </div>
 
               <!-- 待 Q3 复核 -->
               <div class="q-item q-pending">
@@ -2790,7 +3141,7 @@ body[data-view="hr"] .watermark-tag{display:block}
                   </div>
                   <div class="q-item-name">面试评估报告自动生成 Agent</div>
                   <div class="q-item-meta">
-                    <span>D3 · Agent 工作流</span>
+                    <span>D3 · Agent 接管</span>
                     <span class="q-meta-dot">·</span>
                     <span>当前 Q2 → 32 分</span>
                     <span class="q-meta-dot">·</span>
@@ -3595,7 +3946,7 @@ function updatePreview(){
     const sub=document.querySelector('.preview-eyebrow').nextElementSibling.nextElementSibling;
     if(sub) sub.textContent = d+' × '+q+' = '+(score===40?'满分代表作':score>=30?'高分代表作':score>=20?'优质案例':'入门案例');
     document.querySelectorAll('.preview-formula-row span:last-child').forEach((s,i)=>{
-      if(i===0) s.textContent = d+' · '+({D1:'Prompt 模板',D2:'人机协同',D3:'Agent 工作流',D4:'复杂 Agent'})[d];
+      if(i===0) s.textContent = d+' · '+({D1:'AI 基础素养',D2:'人机协同',D3:'Agent 接管',D4:'范式创造'})[d];
       if(i===1) s.textContent = q+' · '+({Q1:'个人能跑',Q2:'业务方认可',Q3:'高度认可'})[q];
       if(i===2) s.textContent = '查表 → '+score+' pt';
     });
