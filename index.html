@@ -289,6 +289,56 @@ a{color:inherit;text-decoration:none}
 }
 .form-hint{font-size:12.5px;color:var(--muted);margin-bottom:16px;padding-left:32px}
 
+/* 用户列表填报区 */
+.user-list{display:flex;flex-direction:column;gap:8px;margin-bottom:10px}
+.user-row{
+  display:grid;grid-template-columns:140px 140px 1fr 32px;gap:10px;align-items:center;
+  padding:10px 12px;background:#FAF3E3;border:1px solid var(--rule-soft);border-radius:8px;
+  transition:border-color .2s;
+}
+.user-row:hover{border-color:var(--rule)}
+.input-sm{
+  padding:6px 10px;font-size:12.5px;height:32px;
+}
+.user-row select.input-sm{
+  background-image:none;cursor:pointer;
+}
+.user-row-del{
+  width:28px;height:28px;border-radius:50%;
+  background:transparent;border:1px solid var(--rule-soft);color:var(--muted);
+  cursor:pointer;font-size:16px;line-height:1;
+  display:grid;place-items:center;
+  transition:all .2s;
+}
+.user-row-del:hover{background:rgba(181,61,42,.1);border-color:var(--red);color:var(--red)}
+
+.user-add-btn{
+  width:100%;padding:10px;
+  background:transparent;border:1px dashed var(--rule);border-radius:8px;
+  font-family:var(--serif);font-size:12.5px;color:var(--muted);
+  cursor:pointer;transition:all .2s;
+}
+.user-add-btn:hover{
+  background:rgba(43,29,14,.04);border-color:var(--paper-2);color:var(--paper-2);border-style:solid;
+}
+
+.user-summary{
+  margin-top:14px;padding:10px 14px;
+  background:rgba(92,107,58,.08);border:1px solid rgba(92,107,58,.3);border-radius:8px;
+  font-size:12.5px;color:var(--paper-2);
+  display:flex;align-items:center;gap:8px;
+}
+.user-summary-icon{
+  width:20px;height:20px;border-radius:50%;
+  background:var(--moss);color:#FAF3E3;
+  display:grid;place-items:center;font-size:11px;font-weight:700;flex-shrink:0;
+}
+
+@media (max-width:768px){
+  .user-row{grid-template-columns:1fr;gap:6px}
+  .user-row-del{justify-self:end;margin-top:-4px}
+}
+
 .field{margin-bottom:18px}
 .field-label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
 .field-label .req{color:var(--orange);margin-left:3px}
@@ -339,7 +389,6 @@ a{color:inherit;text-decoration:none}
 .quality-text{display:flex;flex-direction:column;gap:3px}
 .quality-id{font-family:var(--mono);font-size:11px;color:var(--paper);letter-spacing:.12em;font-weight:600}
 .quality-name{font-size:13px;color:var(--bone);line-height:1.45}
-.quality-hint{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.06em}
 
 /* Score preview right rail */
 .preview-card{
@@ -1928,7 +1977,7 @@ body[data-view="hr"] .watermark-tag{display:block}
             <div class="case-meta">输入岗位关键词 + JD 模板 → 多 Agent 协同生成完整 JD、人才画像、Boolean 搜索串、面试题库</div>
             <div class="case-tags">
               <span class="case-tag">D4 · 范式创造</span>
-              <span class="case-tag">Q3 · 高度认可</span>
+              <span class="case-tag">Q3 · 用户高度认可</span>
               <span class="case-tag">已纳入流程</span>
             </div>
           </div>
@@ -1942,7 +1991,7 @@ body[data-view="hr"] .watermark-tag{display:block}
             <div class="case-meta">问卷数据 → 分群聚类 → 主题抽取 → 自动生成可视化报告，HR 仅做最终判断</div>
             <div class="case-tags">
               <span class="case-tag">D3 · Agent接管</span>
-              <span class="case-tag">Q3 · 高度认可</span>
+              <span class="case-tag">Q3 · 用户高度认可</span>
             </div>
           </div>
           <div class="case-score q3">35<em>分</em></div>
@@ -1955,7 +2004,7 @@ body[data-view="hr"] .watermark-tag{display:block}
             <div class="case-meta">基于绩效结果与员工画像，输出差异化的面谈开场白、关键问题与改进建议</div>
             <div class="case-tags">
               <span class="case-tag">D2 · 人机协同</span>
-              <span class="case-tag">Q2 · 业务方认可</span>
+              <span class="case-tag">Q2 · 用户认可</span>
             </div>
           </div>
           <div class="case-score q2">22<em>分</em></div>
@@ -1968,7 +2017,7 @@ body[data-view="hr"] .watermark-tag{display:block}
             <div class="case-meta">基于公司战略与团队目标，自动检测 OKR 颗粒度、可衡量性与对齐度，给出修订建议</div>
             <div class="case-tags">
               <span class="case-tag">D2 · 人机协同</span>
-              <span class="case-tag">Q2 · 业务方认可</span>
+              <span class="case-tag">Q2 · 用户认可</span>
             </div>
           </div>
           <div class="case-score q2">22<em>分</em></div>
@@ -1981,7 +2030,7 @@ body[data-view="hr"] .watermark-tag{display:block}
             <div class="case-meta">基于岗位、级别、薪酬包、特殊条款，结构化生成中英双语 offer letter</div>
             <div class="case-tags">
               <span class="case-tag">D1 · Prompt</span>
-              <span class="case-tag">Q2 · 业务方认可</span>
+              <span class="case-tag">Q2 · 用户认可</span>
             </div>
           </div>
           <div class="case-score">12<em>分</em></div>
@@ -2168,8 +2217,8 @@ body[data-view="hr"] .watermark-tag{display:block}
             <tr>
               <th style="text-align:left;padding-left:18px">深度 \ 质量</th>
               <th>Q1 · 个人能跑</th>
-              <th>Q2 · 业务方认可</th>
-              <th>Q3 · 高度认可</th>
+              <th>Q2 · 用户认可</th>
+              <th>Q3 · 用户高度认可</th>
             </tr>
           </thead>
           <tbody>
@@ -2242,8 +2291,8 @@ body[data-view="hr"] .watermark-tag{display:block}
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           </div>
           <div class="tier-flow-text">
-            <div class="tier-flow-title">评审委员会评议 · 月度集中评审</div>
-            <div class="tier-flow-desc">D4 是顶级档位，需要委员会基于"3 条硬标准"集中评议。员工需提交完整证据材料（量化数据、前后对比、业务影响）。委员会由 HR、AI 工程团队、业务负责人组成。</div>
+            <div class="tier-flow-title">评审委员会评议 · 集中评审</div>
+            <div class="tier-flow-desc">D4 是顶级档位，需要委员会基于"3 条硬标准"集中评议。员工需提交完整证据材料（量化数据、前后对比、业务影响）。</div>
           </div>
           <div class="tier-flow-actor">
             <span class="actor-pill actor-cmt">评审委员会</span>
@@ -2252,34 +2301,41 @@ body[data-view="hr"] .watermark-tag{display:block}
 
       </div>
 
+      <!-- 使用者定义 -->
+      <div style="margin-top:24px;padding:16px 20px;background:rgba(92,107,58,.06);border:1px solid rgba(92,107,58,.22);border-radius:12px;font-size:12.5px;line-height:1.7;color:var(--paper-2)">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--moss);letter-spacing:.16em;font-weight:700;margin-bottom:8px;text-transform:uppercase">— 谁是"用户"</div>
+        在你的日常工作中真实使用过这个 AI 工具的人，<strong style="color:var(--paper)">跟岗位无关</strong>。可能是 <strong style="color:var(--paper)">同组同事 / 跨部门合作者 / 上下游业务伙伴 / 你的上级 / 你的下属</strong>。提报案例时需标注每位用户的工作关系，<strong style="color:var(--paper)">至少包含 1 位跨团队用户</strong>，以避免小圈子互捧。
+      </div>
+
       <!-- Q 升级流程 -->
-      <div style="margin-top:24px;padding:18px 22px;background:#FAF3E3;border:1px solid var(--rule-soft);border-radius:12px">
+      <div style="margin-top:18px;padding:18px 22px;background:#FAF3E3;border:1px solid var(--rule-soft);border-radius:12px">
         <div style="font-family:var(--display);font-weight:600;font-size:14px;color:var(--paper);margin-bottom:10px">质量等级（Q1 → Q3）的升级路径</div>
         <div class="q-flow">
           <div class="q-flow-step">
             <span class="q-flow-num">Q1</span>
-            <span class="q-flow-label">个人能跑</span>
+            <span class="q-flow-label">个人能跑 · 即时生效</span>
           </div>
           <span class="q-flow-arrow">→</span>
           <div class="q-flow-step">
             <span class="q-flow-num">Q2</span>
-            <span class="q-flow-label">业务方点击"使用过且有价值"</span>
+            <span class="q-flow-label">有用户实际在使用且认可其价值</span>
           </div>
           <span class="q-flow-arrow">→</span>
           <div class="q-flow-step">
             <span class="q-flow-num">Q3</span>
-            <span class="q-flow-label">业务方填说明 + 上级与委员会复核</span>
+            <span class="q-flow-label">用户高度认可并已纳入日常标准工作流程中</span>
           </div>
         </div>
         <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-top:12px">
-          <strong style="color:var(--paper-2)">注：</strong>Q 等级会随时间动态调整。如果案例的实际使用情况发生变化（如从"高度认可"变为"已不再使用"），评审委员会和 HR 在年度回顾时会下调或归零，员工分数同步调整。
+          <strong style="color:var(--paper-2)">注：</strong>Q 等级会随时间动态调整。如果案例的实际使用情况发生变化（如从"用户高度认可"变为"已不再使用"），评审委员会和 HR 在年度回顾时会下调或归零，员工分数同步调整。
         </div>
       </div>
 
-      <!-- 上级 / 委员会 通知机制 -->
-      <div style="margin-top:18px;padding:16px 20px;background:rgba(92,107,58,.08);border:1px solid rgba(92,107,58,.25);border-radius:12px;font-size:12.5px;line-height:1.7;color:var(--paper-2)">
-        <div style="font-family:var(--mono);font-size:10px;color:var(--moss);letter-spacing:.16em;font-weight:700;margin-bottom:8px;text-transform:uppercase">— 通知机制</div>
-        当下属提报需要审核的案例时，<strong style="color:var(--paper)">系统会自动推送通知</strong>到上级的管理端首页与企业 IM。上级可在"员工评分"页面统一处理待审清单（D2/D3 档位核定 + Q 升级请求 + 业务方点赞确认）。每位上级可查看自己权限范围内所有下属的历史评分记录与档位变化轨迹。
+      <!-- 通知与沟通机制 -->
+      <div style="margin-top:18px;padding:16px 20px;background:rgba(166,116,30,.06);border:1px solid rgba(166,116,30,.25);border-radius:12px;font-size:12.5px;line-height:1.7;color:var(--paper-2)">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--amber);letter-spacing:.16em;font-weight:700;margin-bottom:8px;text-transform:uppercase">— 通知与沟通机制</div>
+        当下属提报需要审核的案例时，<strong style="color:var(--paper)">系统自动推送通知</strong>到上级的管理端与企业 IM。上级在"员工评分"页面用 <strong style="color:var(--paper)">"✓ 情况属实"</strong> 一键确认通过，无需逐项打钩。<br>
+        如果上级觉得档位虚高或事实有疑问，<strong style="color:var(--paper)">线下与员工沟通</strong>，达成共识后在系统执行 <strong style="color:var(--paper)">"↓ 沟通后下调档位"</strong>。系统不记录沟通内容、不展示驳回理由，避免对员工的人际关系造成压力。
       </div>
     </div>
 
@@ -2521,25 +2577,22 @@ body[data-view="hr"] .watermark-tag{display:block}
               <div class="quality-radio"></div>
               <div class="quality-text">
                 <span class="quality-id">Q1 · 个人能跑</span>
-                <span class="quality-name">自己使用，提交运行截图即时生效</span>
+                <span class="quality-name">自己能用起来，提交运行截图即时生效</span>
               </div>
-              <span class="quality-hint">自助申报</span>
             </div>
             <div class="quality-card" data-quality="Q2">
               <div class="quality-radio"></div>
               <div class="quality-text">
-                <span class="quality-id">Q2 · 业务方认可</span>
-                <span class="quality-name">上级 / 用户 / 合作方点击"使用过且有价值"</span>
+                <span class="quality-id">Q2 · 用户认可</span>
+                <span class="quality-name">有用户实际在使用且认可其价值</span>
               </div>
-              <span class="quality-hint">业务方确认</span>
             </div>
             <div class="quality-card selected" data-quality="Q3">
               <div class="quality-radio"></div>
               <div class="quality-text">
-                <span class="quality-id">Q3 · 已纳入日常工作</span>
-                <span class="quality-name">完全成型，业务方填写说明，评审委员会复核</span>
+                <span class="quality-id">Q3 · 用户高度认可</span>
+                <span class="quality-name">用户高度认可并已纳入日常标准工作流程中</span>
               </div>
-              <span class="quality-hint">委员会复核</span>
             </div>
           </div>
         </div>
@@ -2547,7 +2600,7 @@ body[data-view="hr"] .watermark-tag{display:block}
         <!-- Section 4 -->
         <div class="form-section">
           <div class="form-title"><span class="form-title-num">4</span>结果与证据</div>
-          <div class="form-hint">交付物截图、运行视频、业务方反馈、效率提升量化数据。</div>
+          <div class="form-hint">交付物截图、运行视频、使用者反馈、效率提升量化数据。</div>
 
           <div class="field">
             <label class="field-label">效能提升 (可量化)</label>
@@ -2563,9 +2616,81 @@ body[data-view="hr"] .watermark-tag{display:block}
           </div>
         </div>
 
-        <!-- Section 5 · 可见性设置 -->
+        <!-- Section 5 · 用户列表 -->
         <div class="form-section">
-          <div class="form-title"><span class="form-title-num">5</span>可见性设置</div>
+          <div class="form-title"><span class="form-title-num">5</span>用户列表 <span style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:8px;font-weight:500;letter-spacing:.06em">— Q 升级的依据</span></div>
+          <div class="form-hint">填写已在使用此工具的真实用户。<strong style="color:var(--paper-2)">含至少 1 位跨团队用户</strong>，作为 Q2 升级的事实依据。提报后系统会向他们推送"我用过且有用"的确认通知。</div>
+
+          <div class="user-list">
+            <div class="user-row">
+              <div class="user-col user-col-name">
+                <input class="input input-sm" placeholder="姓名 / 工号" value="王思怡">
+              </div>
+              <div class="user-col user-col-rel">
+                <select class="input input-sm">
+                  <option>同组协作</option>
+                  <option selected>跨部门合作</option>
+                  <option>上下游业务伙伴</option>
+                  <option>我的上级</option>
+                  <option>我的下属</option>
+                </select>
+              </div>
+              <div class="user-col user-col-scene">
+                <input class="input input-sm" placeholder="一句话使用场景" value="日常起草各部门 JD,每周用 3-5 次">
+              </div>
+              <button class="user-row-del" title="移除">×</button>
+            </div>
+
+            <div class="user-row">
+              <div class="user-col user-col-name">
+                <input class="input input-sm" placeholder="姓名 / 工号" value="李浩泽">
+              </div>
+              <div class="user-col user-col-rel">
+                <select class="input input-sm">
+                  <option selected>同组协作</option>
+                  <option>跨部门合作</option>
+                  <option>上下游业务伙伴</option>
+                  <option>我的上级</option>
+                  <option>我的下属</option>
+                </select>
+              </div>
+              <div class="user-col user-col-scene">
+                <input class="input input-sm" placeholder="一句话使用场景" value="给团队成员当模板用,本月用了 8 次">
+              </div>
+              <button class="user-row-del" title="移除">×</button>
+            </div>
+
+            <div class="user-row">
+              <div class="user-col user-col-name">
+                <input class="input input-sm" placeholder="姓名 / 工号" value="刘嘉琪">
+              </div>
+              <div class="user-col user-col-rel">
+                <select class="input input-sm">
+                  <option>同组协作</option>
+                  <option>跨部门合作</option>
+                  <option selected>上下游业务伙伴</option>
+                  <option>我的上级</option>
+                  <option>我的下属</option>
+                </select>
+              </div>
+              <div class="user-col user-col-scene">
+                <input class="input input-sm" placeholder="一句话使用场景" value="招聘部门按这个模板对外发布岗位">
+              </div>
+              <button class="user-row-del" title="移除">×</button>
+            </div>
+          </div>
+
+          <button class="user-add-btn">+ 添加用户</button>
+
+          <div class="user-summary">
+            <span class="user-summary-icon">✓</span>
+            已填写 <strong>3 位</strong>用户 · 含 <strong>2 位跨团队</strong>(跨部门 + 上下游) · <strong style="color:var(--moss)">符合 Q 升级前提</strong>
+          </div>
+        </div>
+
+        <!-- Section 6 · 可见性设置 -->
+        <div class="form-section">
+          <div class="form-title"><span class="form-title-num">6</span>可见性设置</div>
           <div class="form-hint">本案例提交后是否对全员公开？涉及业务敏感信息的请选择"仅管理员可见"。</div>
 
           <div class="visibility-toggle">
@@ -2599,7 +2724,7 @@ body[data-view="hr"] .watermark-tag{display:block}
         </div>
 
         <div class="submit-row">
-          <div class="submit-meta">提报后将进入 <strong>评审委员会</strong> 队列 · 平均 3 个工作日反馈</div>
+          <div class="submit-meta">提报后将根据档位进入相应审核流程 · D1 即时生效 / D2-D3 上级核对 / D4 评审委员会</div>
           <div style="display:flex;gap:10px">
             <button class="btn btn-ghost">保存草稿</button>
             <button class="btn btn-primary">提交评审 →</button>
@@ -2621,7 +2746,7 @@ body[data-view="hr"] .watermark-tag{display:block}
 
         <div class="preview-formula-box">
           <div class="preview-formula-row"><span>深度评级</span><span>D4 · 范式创造</span></div>
-          <div class="preview-formula-row"><span>质量评级</span><span>Q3 · 高度认可</span></div>
+          <div class="preview-formula-row"><span>质量评级</span><span>Q3 · 用户高度认可</span></div>
           <div class="preview-formula-row"><span>计分逻辑</span><span>查表 → 40 pt</span></div>
         </div>
 
@@ -2666,7 +2791,7 @@ body[data-view="hr"] .watermark-tag{display:block}
         </div>
         <div class="lib-stat">
           <div class="lib-stat-num">2<em>34</em></div>
-          <div class="lib-stat-label">Q3 高度认可</div>
+          <div class="lib-stat-label">Q3 用户高度认可</div>
         </div>
         <div class="lib-stat">
           <div class="lib-stat-num">9<em>1</em></div>
@@ -2999,7 +3124,7 @@ body[data-view="hr"] .watermark-tag{display:block}
           <div class="ai-showcase">
             <div class="ai-showcase-head">
               <div class="ai-showcase-eyebrow">— 员工最高分代表作</div>
-              <a class="ai-showcase-link" href="#" onclick="event.preventDefault();alert('跳转至李浩泽的「招聘面试官 AI 助手」案例详情\n\n[模拟] 此处会展示完整的案例描述、运行截图、业务方反馈、效能提升数据等')">
+              <a class="ai-showcase-link" href="#" onclick="event.preventDefault();alert('跳转至李浩泽的「招聘面试官 AI 助手」案例详情\n\n[模拟] 此处会展示完整的案例描述、运行截图、使用者反馈、效能提升数据等')">
                 查看案例详情
                 <span style="font-family:var(--mono);font-size:11px;opacity:.7">↗</span>
               </a>
@@ -3016,7 +3141,7 @@ body[data-view="hr"] .watermark-tag{display:block}
                 </div>
                 <div class="ai-meta-item">
                   <span class="ai-meta-label">质量</span>
-                  <span class="ai-meta-val ai-meta-q">Q3 · 高度认可</span>
+                  <span class="ai-meta-val ai-meta-q">Q3 · 用户高度认可</span>
                 </div>
                 <div class="ai-meta-item">
                   <span class="ai-meta-label">提报时间</span>
@@ -3038,12 +3163,12 @@ body[data-view="hr"] .watermark-tag{display:block}
                 <span class="ai-stat-divider">·</span>
                 <span class="ai-stat-block">
                   <span class="ai-stat-num">2</span>
-                  <span class="ai-stat-label">Q3 高度认可</span>
+                  <span class="ai-stat-label">Q3 用户高度认可</span>
                 </span>
                 <span class="ai-stat-divider">·</span>
                 <span class="ai-stat-block">
                   <span class="ai-stat-num">3</span>
-                  <span class="ai-stat-label">Q2 业务方认可</span>
+                  <span class="ai-stat-label">Q2 用户认可</span>
                 </span>
               </div>
               <div class="ai-showcase-note">
@@ -3062,7 +3187,7 @@ body[data-view="hr"] .watermark-tag{display:block}
                 </div>
                 <div class="q-review-sub">作为上级，你需要审核下属的 D2 / D3 档位首次核定，以及 Q 升级请求。D4 档位由评审委员会评议，不在此处理。</div>
               </div>
-              <a class="ai-showcase-link" href="#" onclick="event.preventDefault();alert('完整审核机制\n\n· D1×Q1 → 员工自助即时生效\n· D2/D3 → 上级核定档位\n· D4 → 评审委员会评议\n· Q1→Q2 → 业务方点赞确认\n· Q2→Q3 → 业务方说明 + 上级与委员会复核')">
+              <a class="ai-showcase-link" href="#" onclick="event.preventDefault();alert('完整审核机制\n\n· D1×Q1 → 员工自助即时生效\n· D2/D3 → 上级核定档位\n· D4 → 评审委员会评议\n· Q1→Q2 → 有用户实际在使用且认可其价值\n· Q2→Q3 → 用户高度认可并已纳入日常标准工作流程中')">
                 了解审核规则
                 <span style="font-family:var(--mono);font-size:11px;opacity:.7">↗</span>
               </a>
@@ -3095,8 +3220,8 @@ body[data-view="hr"] .watermark-tag{display:block}
                     查看证据 ↗
                   </a>
                   <div class="q-actions">
-                    <button class="q-btn q-btn-approve" onclick="this.closest('.q-item').style.opacity='.5';this.textContent='✓ 已核定为 D3';this.disabled=true">✓ 核定为 D3</button>
-                    <button class="q-btn q-btn-reject">下调为 D2</button>
+                    <button class="q-btn q-btn-approve" onclick="this.closest('.q-item').style.opacity='.5';this.textContent='✓ 情况属实 · 已通过';this.disabled=true">✓ 情况属实 · 确认通过</button>
+                    <button class="q-btn q-btn-reject">↓ 沟通后下调档位</button>
                   </div>
                 </div>
               </div>
@@ -3118,7 +3243,7 @@ body[data-view="hr"] .watermark-tag{display:block}
                   </div>
                   <div class="q-item-evidence">
                     <span class="q-evidence-eyebrow">员工自陈 ·</span>
-                    "AI 基于岗位 JD + 历史候选人数据 + 业务方访谈记录，自动生成胜任力模型草稿，HR 与业务方共同审定后定稿。HR 决定最终模型与权重。"
+                    "AI 基于岗位 JD + 历史候选人数据 + 业务访谈记录，自动生成胜任力模型草稿，HR 与业务负责人共同审定后定稿。HR 决定最终模型与权重。"
                   </div>
                 </div>
                 <div class="q-item-right">
@@ -3126,8 +3251,8 @@ body[data-view="hr"] .watermark-tag{display:block}
                     查看证据 ↗
                   </a>
                   <div class="q-actions">
-                    <button class="q-btn q-btn-approve" onclick="this.closest('.q-item').style.opacity='.5';this.textContent='✓ 已核定为 D2';this.disabled=true">✓ 核定为 D2</button>
-                    <button class="q-btn q-btn-reject">下调为 D1</button>
+                    <button class="q-btn q-btn-approve" onclick="this.closest('.q-item').style.opacity='.5';this.textContent='✓ 情况属实 · 已通过';this.disabled=true">✓ 情况属实 · 确认通过</button>
+                    <button class="q-btn q-btn-reject">↓ 沟通后下调档位</button>
                   </div>
                 </div>
               </div>
@@ -3148,27 +3273,27 @@ body[data-view="hr"] .watermark-tag{display:block}
                     <span>升级后 → <strong style="color:var(--orange)">35 分</strong></span>
                   </div>
                   <div class="q-item-evidence">
-                    <span class="q-evidence-eyebrow">业务方反馈 ·</span>
+                    <span class="q-evidence-eyebrow">使用者反馈 ·</span>
                     "已纳入招聘部门日常工作流程，每月稳定处理 80+ 场面试评估，节省一线招聘官约 12 小时/周。" — 刘嘉琪 (招聘经理)
                   </div>
                 </div>
                 <div class="q-item-right">
-                  <a class="q-link" href="#" onclick="event.preventDefault();alert('跳转至「面试评估报告自动生成 Agent」案例详情页\n\n[模拟] 完整查看运行截图、用户反馈、效能数据')">
+                  <a class="q-link" href="#" onclick="event.preventDefault();alert('跳转至「面试评估报告自动生成 Agent」案例详情页\n\n[模拟] 完整查看运行截图、使用者反馈、效能数据')">
                     查看详情 ↗
                   </a>
                   <div class="q-actions">
-                    <button class="q-btn q-btn-approve" onclick="this.closest('.q-item').style.opacity='.5';this.textContent='✓ 已批准';this.disabled=true">✓ 批准升级 Q3</button>
-                    <button class="q-btn q-btn-reject">维持 Q2</button>
+                    <button class="q-btn q-btn-approve" onclick="this.closest('.q-item').style.opacity='.5';this.textContent='✓ 情况属实 · 已通过';this.disabled=true">✓ 情况属实 · 确认通过</button>
+                    <button class="q-btn q-btn-reject">↓ 维持当前等级</button>
                   </div>
                 </div>
               </div>
 
-              <!-- 待 Q2 确认 (上级可代业务方点赞) -->
+              <!-- 待 Q2 确认 (使用者尚未达标) -->
               <div class="q-item q-pending">
                 <div class="q-item-left">
                   <div class="q-item-tag">
                     <span class="q-arrow">Q1 → Q2</span>
-                    <span class="q-tag-label" style="color:var(--amber);background:rgba(166,116,30,.12);border-color:rgba(166,116,30,.4)">业务方未点赞</span>
+                    <span class="q-tag-label" style="color:var(--amber);background:rgba(166,116,30,.12);border-color:rgba(166,116,30,.4)">使用者人数未达标</span>
                   </div>
                   <div class="q-item-name">候选人背景调查信息聚合工具</div>
                   <div class="q-item-meta">
@@ -3180,7 +3305,7 @@ body[data-view="hr"] .watermark-tag{display:block}
                   </div>
                   <div class="q-item-evidence">
                     <span class="q-evidence-eyebrow">提报人备注 ·</span>
-                    "已被同组同事使用 6 周，但业务方未在系统点赞确认。我希望上级核定其实际价值。"
+                    "已被同组同事使用 6 周，但只有 1 位用户点赞且都是同组的，差跨团队用户。我希望上级核定其实际价值，并代为确认 Q2。"
                   </div>
                 </div>
                 <div class="q-item-right">
@@ -3188,8 +3313,8 @@ body[data-view="hr"] .watermark-tag{display:block}
                     查看详情 ↗
                   </a>
                   <div class="q-actions">
-                    <button class="q-btn q-btn-approve" onclick="this.closest('.q-item').style.opacity='.5';this.textContent='✓ 已确认';this.disabled=true">✓ 确认升级 Q2</button>
-                    <button class="q-btn q-btn-reject">维持 Q1</button>
+                    <button class="q-btn q-btn-approve" onclick="this.closest('.q-item').style.opacity='.5';this.textContent='✓ 情况属实 · 已通过';this.disabled=true">✓ 情况属实 · 确认通过</button>
+                    <button class="q-btn q-btn-reject">↓ 维持当前等级</button>
                   </div>
                 </div>
               </div>
@@ -3947,7 +4072,7 @@ function updatePreview(){
     if(sub) sub.textContent = d+' × '+q+' = '+(score===40?'满分代表作':score>=30?'高分代表作':score>=20?'优质案例':'入门案例');
     document.querySelectorAll('.preview-formula-row span:last-child').forEach((s,i)=>{
       if(i===0) s.textContent = d+' · '+({D1:'AI 基础素养',D2:'人机协同',D3:'Agent 接管',D4:'范式创造'})[d];
-      if(i===1) s.textContent = q+' · '+({Q1:'个人能跑',Q2:'业务方认可',Q3:'高度认可'})[q];
+      if(i===1) s.textContent = q+' · '+({Q1:'个人能跑',Q2:'用户认可',Q3:'用户高度认可'})[q];
       if(i===2) s.textContent = '查表 → '+score+' pt';
     });
   }
