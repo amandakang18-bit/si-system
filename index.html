@@ -413,6 +413,93 @@ a{color:inherit;text-decoration:none}
 .preview-tip{font-size:12px;line-height:1.6;color:var(--muted)}
 .preview-tip strong{color:var(--bone)}
 
+/* 二元选择按钮 (Section 2 的判别问题) */
+.binary-choice{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.binary-btn{
+  padding:10px 16px;background:#FAF3E3;border:1px solid var(--rule-soft);border-radius:8px;
+  font-family:var(--serif);font-size:12.5px;color:var(--paper-2);cursor:pointer;
+  transition:all .2s;
+}
+.binary-btn:hover{border-color:var(--rule);background:var(--paper);color:#FAF3E3}
+.binary-btn.selected{
+  background:rgba(92,107,58,.12);border-color:var(--moss);color:var(--moss);font-weight:600;
+}
+.binary-hint{
+  margin-top:8px;font-size:11.5px;color:var(--muted);line-height:1.6;
+  padding-left:4px;
+}
+
+/* 提报清单卡片 */
+.checklist-card{
+  background:linear-gradient(180deg,#F8EFD8 0%,#F4E8C8 100%);
+  border:1px solid var(--rule-soft);border-radius:14px;
+  padding:24px;position:sticky;top:90px;
+}
+.checklist-eyebrow{
+  font-family:var(--mono);font-size:10.5px;color:var(--orange);
+  letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+  margin-bottom:6px;
+}
+.checklist-title{
+  font-family:var(--display);font-weight:600;font-size:24px;color:var(--paper);
+  letter-spacing:-.01em;margin-bottom:4px;
+}
+.checklist-sub{
+  font-size:12.5px;color:var(--paper-2);line-height:1.55;margin-bottom:20px;
+}
+
+.checklist-list{display:flex;flex-direction:column;gap:6px}
+.checklist-item{
+  display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:flex-start;
+  padding:9px 12px;background:#FAF3E3;border:1px solid var(--rule-soft);border-radius:8px;
+  transition:all .2s;
+}
+.checklist-item.done{border-color:rgba(92,107,58,.4);background:rgba(92,107,58,.06)}
+.checklist-icon{
+  width:22px;height:22px;border-radius:50%;
+  display:grid;place-items:center;
+  font-family:var(--display);font-size:12px;font-weight:700;
+  background:#fff;border:1px solid var(--rule-soft);color:var(--muted);
+  margin-top:1px;
+}
+.checklist-item.done .checklist-icon{background:var(--moss);color:#FAF3E3;border-color:var(--moss)}
+.checklist-text{display:flex;flex-direction:column;gap:2px}
+.checklist-name{
+  font-size:13px;font-weight:600;color:var(--paper);line-height:1.3;
+}
+.checklist-meta{
+  font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.04em;
+}
+
+.checklist-divider{
+  height:1px;background:var(--rule-soft);margin:20px 0;
+}
+
+.checklist-status{
+  display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:flex-start;
+  padding:14px;background:#FAF3E3;border:1px solid var(--rule);border-radius:10px;
+}
+.checklist-status-icon{
+  width:36px;height:36px;border-radius:50%;
+  display:grid;place-items:center;
+  background:var(--orange);color:#FAF3E3;
+}
+.checklist-status-title{
+  font-family:var(--display);font-weight:600;font-size:15px;color:var(--paper);
+  margin-bottom:3px;
+}
+.checklist-status-desc{
+  font-size:11.5px;color:var(--paper-2);line-height:1.55;
+}
+
+.checklist-philosophy{
+  margin-top:14px;padding:12px 14px;
+  background:rgba(43,29,14,.04);border-left:2px solid var(--orange);
+  border-radius:4px;
+  font-size:11.5px;line-height:1.6;color:var(--muted);
+}
+.checklist-philosophy strong{color:var(--paper-2);font-weight:600}
+
 .score-matrix{margin-top:14px;border:1px solid var(--rule-soft);border-radius:8px;overflow:hidden}
 .score-matrix table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:11px}
 .score-matrix th,.score-matrix td{padding:6px 4px;text-align:center;border:1px solid var(--rule-soft);color:var(--paper-2)}
@@ -1105,8 +1192,120 @@ body[data-view="employee"] .emp-notice{display:inline-flex;align-items:center;ga
 .matrix-large td.score.peak{color:var(--orange);background:rgba(194,65,12,.08)}
 
 /* ============================================================ */
-/* PAGE · RATING (管理员员工评分)                                 */
+/* 管理员看板 · 热力图                                            */
 /* ============================================================ */
+.heat-table{
+  display:grid;gap:4px;padding:6px 0;
+  font-family:var(--mono);font-size:12px;
+}
+.heat-row{
+  display:grid;grid-template-columns:120px repeat(6,1fr);gap:4px;
+  align-items:stretch;
+}
+.heat-table-moss .heat-row{grid-template-columns:120px repeat(4,1fr)}
+
+.heat-head .heat-cell{
+  background:transparent !important;color:var(--muted);
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
+  font-weight:600;padding:6px 0;height:auto;
+}
+.heat-head .heat-cell::after{display:none}
+.heat-cell{
+  position:relative;
+  height:38px;border-radius:6px;
+  display:grid;place-items:center;
+  background:rgba(194,65,12,.04);
+  color:var(--paper);font-weight:700;font-size:13px;
+  letter-spacing:.04em;
+  transition:transform .2s;cursor:default;
+}
+.heat-cell:hover{transform:scale(1.04);z-index:2}
+.heat-cell span{position:relative;z-index:1}
+.heat-label{
+  background:transparent !important;color:var(--paper-2);
+  font-family:var(--serif);font-weight:500;font-size:12.5px;letter-spacing:0;
+  justify-content:flex-start !important;padding-left:4px;
+}
+
+/* 工具热力图 (橙色梯度,基于 data-v 数值) */
+.heat-cell[data-v]:not(.heat-label){background:rgba(194,65,12,.06)}
+/* < 10 */
+.heat-cell[data-v="0"],
+.heat-cell[data-v="1"],
+.heat-cell[data-v="2"],
+.heat-cell[data-v="3"],
+.heat-cell[data-v="4"],
+.heat-cell[data-v="6"],
+.heat-cell[data-v="8"]{background:rgba(194,65,12,.06);color:var(--muted-2)}
+/* 10-30 */
+.heat-cell[data-v="12"],
+.heat-cell[data-v="14"],
+.heat-cell[data-v="18"],
+.heat-cell[data-v="22"],
+.heat-cell[data-v="24"]{background:rgba(194,65,12,.18);color:var(--paper-2)}
+/* 30-60 */
+.heat-cell[data-v="32"],
+.heat-cell[data-v="34"],
+.heat-cell[data-v="38"],
+.heat-cell[data-v="42"],
+.heat-cell[data-v="45"],
+.heat-cell[data-v="46"],
+.heat-cell[data-v="52"],
+.heat-cell[data-v="56"]{background:rgba(194,65,12,.38);color:#FAF3E3}
+/* 60-100 */
+.heat-cell[data-v="64"],
+.heat-cell[data-v="68"],
+.heat-cell[data-v="78"],
+.heat-cell[data-v="89"],
+.heat-cell[data-v="92"],
+.heat-cell[data-v="98"]{background:rgba(194,65,12,.6);color:#FAF3E3}
+/* > 100 */
+.heat-cell[data-v="124"],
+.heat-cell[data-v="128"],
+.heat-cell[data-v="142"],
+.heat-cell[data-v="156"]{background:rgba(194,65,12,.88);color:#FAF3E3}
+
+/* 能力热力图 (绿色梯度,通过 data-color="moss" 区分) */
+.heat-cell[data-color="moss"]{background:rgba(92,107,58,.06)}
+.heat-cell[data-color="moss"][data-v="0"],
+.heat-cell[data-color="moss"][data-v="1"],
+.heat-cell[data-color="moss"][data-v="2"],
+.heat-cell[data-color="moss"][data-v="3"],
+.heat-cell[data-color="moss"][data-v="4"]{background:rgba(92,107,58,.08);color:var(--muted-2)}
+.heat-cell[data-color="moss"][data-v="14"],
+.heat-cell[data-color="moss"][data-v="18"],
+.heat-cell[data-color="moss"][data-v="22"],
+.heat-cell[data-color="moss"][data-v="24"]{background:rgba(92,107,58,.25);color:var(--paper-2)}
+.heat-cell[data-color="moss"][data-v="32"],
+.heat-cell[data-color="moss"][data-v="48"],
+.heat-cell[data-color="moss"][data-v="58"],
+.heat-cell[data-color="moss"][data-v="64"],
+.heat-cell[data-color="moss"][data-v="74"],
+.heat-cell[data-color="moss"][data-v="86"]{background:rgba(92,107,58,.5);color:#FAF3E3}
+.heat-cell[data-color="moss"][data-v="98"],
+.heat-cell[data-color="moss"][data-v="124"]{background:rgba(92,107,58,.75);color:#FAF3E3}
+.heat-cell[data-color="moss"][data-v="142"],
+.heat-cell[data-color="moss"][data-v="156"],
+.heat-cell[data-color="moss"][data-v="178"]{background:rgba(92,107,58,1);color:#FAF3E3}
+
+.heat-insight{
+  margin-top:18px;padding:12px 14px;
+  background:rgba(43,29,14,.04);border:1px solid var(--rule-soft);
+  border-radius:10px;
+  display:flex;gap:10px;align-items:flex-start;
+  font-size:12.5px;line-height:1.55;color:var(--paper-2);
+}
+.heat-insight-icon{
+  color:var(--orange);font-family:var(--display);font-size:14px;
+  font-weight:700;flex-shrink:0;
+}
+.heat-insight strong{color:var(--paper);font-weight:600}
+
+@media (max-width:1100px){
+  .heat-row{grid-template-columns:80px repeat(6,1fr);font-size:11px}
+  .heat-table-moss .heat-row{grid-template-columns:80px repeat(4,1fr)}
+  .heat-cell{height:32px;font-size:11.5px}
+}
 .rating-shell{
   display:grid;grid-template-columns:340px 1fr;gap:24px;
   margin-top:24px;
@@ -2538,69 +2737,44 @@ body[data-view="hr"] .watermark-tag{display:block}
           </div>
         </div>
 
-        <!-- Section 2 -->
+        <!-- Section 2 · AI 在你工作中的角色 -->
         <div class="form-section">
-          <div class="form-title"><span class="form-title-num">2</span>深度评级 (D 维度)</div>
-          <div class="form-hint">你这个案例做到了什么程度？参考下面四档定义。</div>
+          <div class="form-title"><span class="form-title-num">2</span>AI 在你工作中的角色</div>
+          <div class="form-hint">用最自然的话讲清楚 AI 做了什么、你做了什么。系统会基于此自动识别案例档位,你不需要自评。</div>
 
-          <div class="depth-grid">
-            <div class="depth-card" data-depth="D1">
-              <span class="depth-id">D1</span>
-              <div class="depth-title">AI 基础素养</div>
-              <div class="depth-desc">能与 AI 工具有效协作</div>
-            </div>
-            <div class="depth-card" data-depth="D2">
-              <span class="depth-id">D2</span>
-              <div class="depth-title">人机协同分工</div>
-              <div class="depth-desc">设计合理的人机分工模式</div>
-            </div>
-            <div class="depth-card" data-depth="D3">
-              <span class="depth-id">D3</span>
-              <div class="depth-title">Agent 接管能力</div>
-              <div class="depth-desc">AI 独立完成完整工作环节</div>
-            </div>
-            <div class="depth-card selected" data-depth="D4">
-              <span class="depth-id">D4</span>
-              <div class="depth-title">范式创造能力</div>
-              <div class="depth-desc">AI 让不可能成为可能</div>
+          <div class="field">
+            <label class="field-label">AI 承担的具体环节<span class="req">*</span></label>
+            <textarea class="textarea" placeholder="例:AI 自动起草初稿、AI 独立完成多轮筛选并产出结果...">AI 独立完成 JD 起草、候选人画像生成、布尔检索词构造、面试题库匹配 4 个环节。我只在最后一步审阅与发布。</textarea>
+          </div>
+
+          <div class="field">
+            <label class="field-label">你保留了哪些判断 / 介入</label>
+            <textarea class="textarea" placeholder="说明你在这个 AI 流程中扮演什么角色">最终发布前的审阅与异常情况处理(如岗位描述违反公司价值观、候选人意向不匹配等罕见情况)。</textarea>
+          </div>
+
+          <div class="field">
+            <label class="field-label">是否端到端闭环运行 (不需要持续介入)</label>
+            <div class="binary-choice">
+              <button class="binary-btn selected" data-v="yes">✓ 是 · AI 自主完成全流程</button>
+              <button class="binary-btn" data-v="partial">○ 部分自动 · 仍需逐步推进</button>
+              <button class="binary-btn" data-v="no">○ 否 · 主要靠人工驱动</button>
             </div>
           </div>
-        </div>
 
-        <!-- Section 3 -->
-        <div class="form-section">
-          <div class="form-title"><span class="form-title-num">3</span>质量评级 (Q 维度)</div>
-          <div class="form-hint">实际有多少人在用、被认可到什么程度。</div>
-
-          <div class="quality-list">
-            <div class="quality-card" data-quality="Q1">
-              <div class="quality-radio"></div>
-              <div class="quality-text">
-                <span class="quality-id">Q1 · 个人能跑</span>
-                <span class="quality-name">自己能用起来，提交运行截图即时生效</span>
-              </div>
+          <div class="field">
+            <label class="field-label">是否带来了原本不可能的工作方式</label>
+            <div class="binary-choice">
+              <button class="binary-btn selected" data-v="yes">✓ 是 · 撤掉 AI 无法完成同等产出</button>
+              <button class="binary-btn" data-v="no">○ 否 · AI 主要是加速,原方式也能完成</button>
             </div>
-            <div class="quality-card" data-quality="Q2">
-              <div class="quality-radio"></div>
-              <div class="quality-text">
-                <span class="quality-id">Q2 · 用户认可</span>
-                <span class="quality-name">有用户实际在使用且认可其价值</span>
-              </div>
-            </div>
-            <div class="quality-card selected" data-quality="Q3">
-              <div class="quality-radio"></div>
-              <div class="quality-text">
-                <span class="quality-id">Q3 · 用户高度认可</span>
-                <span class="quality-name">用户高度认可并已纳入日常标准工作流程中</span>
-              </div>
-            </div>
+            <div class="binary-hint">若选"是",需在下方"业务价值"中提供 10× 提升、能力扩展、或 KPI 重写的数据证明。</div>
           </div>
         </div>
 
         <!-- Section 4 -->
         <div class="form-section">
-          <div class="form-title"><span class="form-title-num">4</span>结果与证据</div>
-          <div class="form-hint">交付物截图、运行视频、使用者反馈、效率提升量化数据。</div>
+          <div class="form-title"><span class="form-title-num">3</span>业务价值与证据</div>
+          <div class="form-hint">用具体数字说明这个 AI 案例带来的变化。系统会基于这些客观数据识别案例的真实价值。</div>
 
           <div class="field">
             <label class="field-label">效能提升 (可量化)</label>
@@ -2618,7 +2792,7 @@ body[data-view="hr"] .watermark-tag{display:block}
 
         <!-- Section 5 · 用户列表 -->
         <div class="form-section">
-          <div class="form-title"><span class="form-title-num">5</span>用户列表 <span style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:8px;font-weight:500;letter-spacing:.06em">— Q 升级的依据</span></div>
+          <div class="form-title"><span class="form-title-num">4</span>用户列表 <span style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:8px;font-weight:500;letter-spacing:.06em">— Q 升级的依据</span></div>
           <div class="form-hint">填写已在使用此工具的真实用户。<strong style="color:var(--paper-2)">含至少 1 位跨团队用户</strong>，作为 Q2 升级的事实依据。提报后系统会向他们推送"我用过且有用"的确认通知。</div>
 
           <div class="user-list">
@@ -2690,7 +2864,7 @@ body[data-view="hr"] .watermark-tag{display:block}
 
         <!-- Section 6 · 可见性设置 -->
         <div class="form-section">
-          <div class="form-title"><span class="form-title-num">6</span>可见性设置</div>
+          <div class="form-title"><span class="form-title-num">5</span>可见性设置</div>
           <div class="form-hint">本案例提交后是否对全员公开？涉及业务敏感信息的请选择"仅管理员可见"。</div>
 
           <div class="visibility-toggle">
@@ -2724,7 +2898,7 @@ body[data-view="hr"] .watermark-tag{display:block}
         </div>
 
         <div class="submit-row">
-          <div class="submit-meta">提报后将根据档位进入相应审核流程 · D1 即时生效 / D2-D3 上级核对 / D4 评审委员会</div>
+          <div class="submit-meta">提报后系统会自动识别案例档位,无需员工自评 · 上级会在管理端对事实进行核对</div>
           <div style="display:flex;gap:10px">
             <button class="btn btn-ghost">保存草稿</button>
             <button class="btn btn-primary">提交评审 →</button>
@@ -2734,40 +2908,87 @@ body[data-view="hr"] .watermark-tag{display:block}
       </div>
     </div>
 
-    <!-- RIGHT: Live preview -->
+    <!-- RIGHT: 提报清单 · 引导员工补全事实 -->
     <div>
-      <div class="preview-card">
-        <div class="preview-eyebrow">实时预测分数</div>
-        <div style="display:flex;align-items:baseline">
-          <div class="preview-score">4<em>0</em></div>
-          <div class="preview-of">/ 40</div>
+      <div class="checklist-card">
+        <div class="checklist-eyebrow">— 提报清单</div>
+        <div class="checklist-title">越完整,越准确</div>
+        <div class="checklist-sub">系统会基于你填的客观事实自动识别档位。事实越完整,识别越准。</div>
+
+        <div class="checklist-list">
+
+          <div class="checklist-item done">
+            <span class="checklist-icon">✓</span>
+            <div class="checklist-text">
+              <div class="checklist-name">基础信息</div>
+              <div class="checklist-meta">标题 · 场景 · 技术栈</div>
+            </div>
+          </div>
+
+          <div class="checklist-item done">
+            <span class="checklist-icon">✓</span>
+            <div class="checklist-text">
+              <div class="checklist-name">AI 角色描述</div>
+              <div class="checklist-meta">AI 承担的环节 · 你保留的判断</div>
+            </div>
+          </div>
+
+          <div class="checklist-item done">
+            <span class="checklist-icon">✓</span>
+            <div class="checklist-text">
+              <div class="checklist-name">两个判别问题</div>
+              <div class="checklist-meta">闭环运行 · 原本可能性</div>
+            </div>
+          </div>
+
+          <div class="checklist-item done">
+            <span class="checklist-icon">✓</span>
+            <div class="checklist-text">
+              <div class="checklist-name">业务价值数据</div>
+              <div class="checklist-meta">已填写量化指标</div>
+            </div>
+          </div>
+
+          <div class="checklist-item done">
+            <span class="checklist-icon">✓</span>
+            <div class="checklist-text">
+              <div class="checklist-name">证据材料</div>
+              <div class="checklist-meta">3 个文件已上传</div>
+            </div>
+          </div>
+
+          <div class="checklist-item done">
+            <span class="checklist-icon">✓</span>
+            <div class="checklist-text">
+              <div class="checklist-name">用户列表</div>
+              <div class="checklist-meta">3 位用户(含 2 位跨团队)</div>
+            </div>
+          </div>
+
+          <div class="checklist-item pending">
+            <span class="checklist-icon">○</span>
+            <div class="checklist-text">
+              <div class="checklist-name">可见性设置</div>
+              <div class="checklist-meta">待确认公开/涉密</div>
+            </div>
+          </div>
+
         </div>
-        <div style="font-family:var(--mono);font-size:11px;color:var(--moss);letter-spacing:.08em">D4 × Q3 = 满分代表作</div>
 
-        <div class="preview-formula-box">
-          <div class="preview-formula-row"><span>深度评级</span><span>D4 · 范式创造</span></div>
-          <div class="preview-formula-row"><span>质量评级</span><span>Q3 · 用户高度认可</span></div>
-          <div class="preview-formula-row"><span>计分逻辑</span><span>查表 → 40 pt</span></div>
+        <div class="checklist-divider"></div>
+
+        <div class="checklist-status">
+          <div class="checklist-status-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div class="checklist-status-text">
+            <div class="checklist-status-title">已完成 6 / 7 项</div>
+            <div class="checklist-status-desc">完成所有提报后,系统会自动识别案例档位,你不需要自评。上级会在管理端对事实进行核对。</div>
+          </div>
         </div>
 
-        <div class="score-matrix">
-          <table>
-            <thead>
-              <tr><th></th><th>Q1</th><th>Q2</th><th>Q3</th></tr>
-            </thead>
-            <tbody>
-              <tr><td class="row-head">D1</td><td>10</td><td>12</td><td>15</td></tr>
-              <tr><td class="row-head">D2</td><td>18</td><td>22</td><td>25</td></tr>
-              <tr><td class="row-head">D3</td><td>25</td><td>32</td><td>35</td></tr>
-              <tr><td class="row-head">D4</td><td>30</td><td>35</td><td class="hot">40</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="preview-divider"></div>
-
-        <div class="preview-tip">
-          <strong>提示 · </strong>AI 指挥力得分 = 你提报的所有案例中分数最高的那一个，不累加。<br>本案例若获评 Q3，将成为你的代表作并替换当前最高分案例（35 → 40）。
+        <div class="checklist-philosophy">
+          <strong>设计哲学 · </strong>员工只提报客观事实,AI 自动识别档位。这避免了"为了拿高分"的提报扭曲,让你专注于把案例本身做扎实。
         </div>
       </div>
     </div>
@@ -3675,7 +3896,7 @@ body[data-view="hr"] .watermark-tag{display:block}
   <p class="lead" style="max-width:520px;margin:14px auto 0">人才看板包含全员的精确 SI 分数、Tier 评级、人评 6 维度拆解和待认证候选人信息。<br>员工视角下不显示。</p>
   <div style="margin-top:32px;padding:18px 24px;background:rgba(194,65,12,.06);border:1px solid rgba(194,65,12,.2);border-radius:12px;text-align:left;font-size:12.5px;line-height:1.7;color:var(--paper-2)">
     <div style="font-family:var(--mono);font-size:10px;color:var(--orange);letter-spacing:.16em;font-weight:700;margin-bottom:8px">— 切换至管理员端可查看：</div>
-    全员精确 SI 分数 · 部门达标率排行 · SI 分布直方图 · Tier S/A/B/C 候选人列表 · 人评 6 维度原始数据 · AI 治理力面试排期
+    全员精确 SI 分数 · 部门达标率 · AI 工具与能力分布热力图 · Tier S/A/B/C 候选人列表 · 人评 6 维度原始数据 · AI 治理力面试排期
   </div>
   <button class="btn btn-primary" style="margin-top:24px" onclick="document.querySelector('.vs-btn[data-view=hr]').click()">→ 切换到管理员端</button>
 </div>
@@ -3726,62 +3947,203 @@ body[data-view="hr"] .watermark-tag{display:block}
     <div class="viz-card">
       <div class="viz-head">
         <div>
-          <div class="viz-title">SI Score 分布直方图</div>
-          <div class="viz-sub">全公司 · 1,402 人 · 2026 Q2</div>
+          <div class="viz-title">AI 工具使用分布</div>
+          <div class="viz-sub">部门 × 主流工具 · 数字 = 案例数</div>
         </div>
-        <div style="display:flex;gap:14px;font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.1em">
-          <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:var(--orange);border-radius:2px"></span>已达标</span>
-          <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:var(--ink-4);border-radius:2px"></span>待达标</span>
+        <div style="display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.1em">
+          <span>低</span>
+          <div style="display:flex;gap:2px">
+            <span style="width:14px;height:14px;background:rgba(194,65,12,.08);border-radius:2px"></span>
+            <span style="width:14px;height:14px;background:rgba(194,65,12,.22);border-radius:2px"></span>
+            <span style="width:14px;height:14px;background:rgba(194,65,12,.45);border-radius:2px"></span>
+            <span style="width:14px;height:14px;background:rgba(194,65,12,.7);border-radius:2px"></span>
+            <span style="width:14px;height:14px;background:rgba(194,65,12,1);border-radius:2px"></span>
+          </div>
+          <span>高</span>
         </div>
       </div>
 
-      <div class="hist">
-        <div class="hist-target-line"></div>
-        <div class="hist-bar"><span class="bar-tip">0-10 · 4 人</span><div class="bar" style="height:5%"></div></div>
-        <div class="hist-bar"><span class="bar-tip">10-20 · 32 人</span><div class="bar" style="height:13%"></div></div>
-        <div class="hist-bar"><span class="bar-tip">20-30 · 124 人</span><div class="bar" style="height:32%"></div></div>
-        <div class="hist-bar"><span class="bar-tip">30-40 · 218 人</span><div class="bar" style="height:55%"></div></div>
-        <div class="hist-bar"><span class="bar-tip">40-50 · 295 人</span><div class="bar" style="height:75%"></div></div>
-        <div class="hist-bar target"><span class="bar-tip">50-60 · 342 人 · 已达标</span><div class="bar" style="height:88%"></div></div>
-        <div class="hist-bar peak target"><span class="bar-tip">60-70 · 261 人 · 已达标</span><div class="bar" style="height:68%"></div></div>
-        <div class="hist-bar target"><span class="bar-tip">70-80 · 84 人 · 优秀</span><div class="bar" style="height:23%"></div></div>
-        <div class="hist-bar target"><span class="bar-tip">80-90 · 19 人 · Tier A</span><div class="bar" style="height:8%"></div></div>
-        <div class="hist-bar target"><span class="bar-tip">90-100 · 23 人 · Tier S</span><div class="bar" style="height:9%"></div></div>
-      </div>
-      <div class="hist-x">
-        <span>0</span><span>10</span><span>20</span><span>30</span><span>40</span><span>50</span><span>60</span><span>70</span><span>80</span><span>90</span>
+      <div class="heat-table">
+        <div class="heat-row heat-head">
+          <div class="heat-cell heat-label"></div>
+          <div class="heat-cell">Claude</div>
+          <div class="heat-cell">GPT</div>
+          <div class="heat-cell">飞书机器人</div>
+          <div class="heat-cell">n8n</div>
+          <div class="heat-cell">Coze</div>
+          <div class="heat-cell">自研 Agent</div>
+        </div>
+        <div class="heat-row">
+          <div class="heat-cell heat-label">人力中心</div>
+          <div class="heat-cell" data-v="92"><span>92</span></div>
+          <div class="heat-cell" data-v="68"><span>68</span></div>
+          <div class="heat-cell" data-v="124"><span>124</span></div>
+          <div class="heat-cell" data-v="45"><span>45</span></div>
+          <div class="heat-cell" data-v="22"><span>22</span></div>
+          <div class="heat-cell" data-v="14"><span>14</span></div>
+        </div>
+        <div class="heat-row">
+          <div class="heat-cell heat-label">技术中心</div>
+          <div class="heat-cell" data-v="156"><span>156</span></div>
+          <div class="heat-cell" data-v="89"><span>89</span></div>
+          <div class="heat-cell" data-v="42"><span>42</span></div>
+          <div class="heat-cell" data-v="128"><span>128</span></div>
+          <div class="heat-cell" data-v="34"><span>34</span></div>
+          <div class="heat-cell" data-v="98"><span>98</span></div>
+        </div>
+        <div class="heat-row">
+          <div class="heat-cell heat-label">市场营销</div>
+          <div class="heat-cell" data-v="78"><span>78</span></div>
+          <div class="heat-cell" data-v="142"><span>142</span></div>
+          <div class="heat-cell" data-v="56"><span>56</span></div>
+          <div class="heat-cell" data-v="18"><span>18</span></div>
+          <div class="heat-cell" data-v="64"><span>64</span></div>
+          <div class="heat-cell" data-v="8"><span>8</span></div>
+        </div>
+        <div class="heat-row">
+          <div class="heat-cell heat-label">业务/运营</div>
+          <div class="heat-cell" data-v="46"><span>46</span></div>
+          <div class="heat-cell" data-v="52"><span>52</span></div>
+          <div class="heat-cell" data-v="98"><span>98</span></div>
+          <div class="heat-cell" data-v="34"><span>34</span></div>
+          <div class="heat-cell" data-v="12"><span>12</span></div>
+          <div class="heat-cell" data-v="6"><span>6</span></div>
+        </div>
+        <div class="heat-row">
+          <div class="heat-cell heat-label">财务/法务</div>
+          <div class="heat-cell" data-v="38"><span>38</span></div>
+          <div class="heat-cell" data-v="24"><span>24</span></div>
+          <div class="heat-cell" data-v="42"><span>42</span></div>
+          <div class="heat-cell" data-v="8"><span>8</span></div>
+          <div class="heat-cell" data-v="3"><span>3</span></div>
+          <div class="heat-cell" data-v="12"><span>12</span></div>
+        </div>
+        <div class="heat-row">
+          <div class="heat-cell heat-label">行政/职能</div>
+          <div class="heat-cell" data-v="22"><span>22</span></div>
+          <div class="heat-cell" data-v="34"><span>34</span></div>
+          <div class="heat-cell" data-v="68"><span>68</span></div>
+          <div class="heat-cell" data-v="4"><span>4</span></div>
+          <div class="heat-cell" data-v="2"><span>2</span></div>
+          <div class="heat-cell" data-v="1"><span>1</span></div>
+        </div>
       </div>
 
-      <div class="hist-summary">
-        <div class="hist-sum"><strong>72<em>9</em></strong><span>已达标</span></div>
-        <div class="hist-sum"><strong>67<em>3</em></strong><span>待达标</span></div>
-        <div class="hist-sum"><strong>49.<em>4</em></strong><span>平均分</span></div>
-        <div class="hist-sum"><strong>5<em>4</em></strong><span>中位数</span></div>
+      <div class="heat-insight">
+        <span class="heat-insight-icon">⚐</span>
+        <span><strong>洞察 · </strong>飞书机器人是全员化最强工具（人力中心 124 例最高）；n8n / 自研 Agent 主要集中在技术中心，跨部门推广空间大。</span>
       </div>
     </div>
 
     <div class="viz-card">
       <div class="viz-head">
         <div>
-          <div class="viz-title">部门达标率排行</div>
-          <div class="viz-sub">按 SI ≥ 50 占比降序</div>
+          <div class="viz-title">AI 能力深度分布</div>
+          <div class="viz-sub">部门 × D 等级 · 数字 = 案例数</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.1em">
+          <span>少</span>
+          <div style="display:flex;gap:2px">
+            <span style="width:14px;height:14px;background:rgba(92,107,58,.08);border-radius:2px"></span>
+            <span style="width:14px;height:14px;background:rgba(92,107,58,.25);border-radius:2px"></span>
+            <span style="width:14px;height:14px;background:rgba(92,107,58,.5);border-radius:2px"></span>
+            <span style="width:14px;height:14px;background:rgba(92,107,58,.75);border-radius:2px"></span>
+            <span style="width:14px;height:14px;background:rgba(92,107,58,1);border-radius:2px"></span>
+          </div>
+          <span>多</span>
         </div>
       </div>
 
-      <div class="dept-list">
-        <div class="dept-row"><span class="dept-rank">01</span><span class="dept-name">技术中台</span><div class="dept-bar"><div class="dept-bar-fill" style="width:78%"></div></div><span class="dept-pct">78%</span></div>
-        <div class="dept-row"><span class="dept-rank">02</span><span class="dept-name">产品研发</span><div class="dept-bar"><div class="dept-bar-fill" style="width:71%"></div></div><span class="dept-pct">71%</span></div>
-        <div class="dept-row"><span class="dept-rank">03</span><span class="dept-name">数据智能</span><div class="dept-bar"><div class="dept-bar-fill" style="width:68%"></div></div><span class="dept-pct">68%</span></div>
-        <div class="dept-row"><span class="dept-rank">04</span><span class="dept-name">商业化</span><div class="dept-bar"><div class="dept-bar-fill cool" style="width:58%"></div></div><span class="dept-pct">58%</span></div>
-        <div class="dept-row"><span class="dept-rank">05</span><span class="dept-name">用户增长</span><div class="dept-bar"><div class="dept-bar-fill cool" style="width:54%"></div></div><span class="dept-pct">54%</span></div>
-        <div class="dept-row"><span class="dept-rank">06</span><span class="dept-name">人力资源</span><div class="dept-bar"><div class="dept-bar-fill cool" style="width:48%"></div></div><span class="dept-pct">48%</span></div>
-        <div class="dept-row"><span class="dept-rank">07</span><span class="dept-name">财务</span><div class="dept-bar"><div class="dept-bar-fill cool" style="width:41%"></div></div><span class="dept-pct">41%</span></div>
-        <div class="dept-row"><span class="dept-rank">08</span><span class="dept-name">行政与法务</span><div class="dept-bar"><div class="dept-bar-fill cool" style="width:32%"></div></div><span class="dept-pct">32%</span></div>
+      <div class="heat-table heat-table-moss">
+        <div class="heat-row heat-head">
+          <div class="heat-cell heat-label"></div>
+          <div class="heat-cell">D1 基础素养</div>
+          <div class="heat-cell">D2 人机协同</div>
+          <div class="heat-cell">D3 Agent 接管</div>
+          <div class="heat-cell">D4 范式创造</div>
+        </div>
+        <div class="heat-row">
+          <div class="heat-cell heat-label">人力中心</div>
+          <div class="heat-cell" data-v="178" data-color="moss"><span>178</span></div>
+          <div class="heat-cell" data-v="86" data-color="moss"><span>86</span></div>
+          <div class="heat-cell" data-v="32" data-color="moss"><span>32</span></div>
+          <div class="heat-cell" data-v="4" data-color="moss"><span>4</span></div>
+        </div>
+        <div class="heat-row">
+          <div class="heat-cell heat-label">技术中心</div>
+          <div class="heat-cell" data-v="124" data-color="moss"><span>124</span></div>
+          <div class="heat-cell" data-v="142" data-color="moss"><span>142</span></div>
+          <div class="heat-cell" data-v="98" data-color="moss"><span>98</span></div>
+          <div class="heat-cell" data-v="18" data-color="moss"><span>18</span></div>
+        </div>
+        <div class="heat-row">
+          <div class="heat-cell heat-label">市场营销</div>
+          <div class="heat-cell" data-v="156" data-color="moss"><span>156</span></div>
+          <div class="heat-cell" data-v="74" data-color="moss"><span>74</span></div>
+          <div class="heat-cell" data-v="22" data-color="moss"><span>22</span></div>
+          <div class="heat-cell" data-v="2" data-color="moss"><span>2</span></div>
+        </div>
+        <div class="heat-row">
+          <div class="heat-cell heat-label">业务/运营</div>
+          <div class="heat-cell" data-v="98" data-color="moss"><span>98</span></div>
+          <div class="heat-cell" data-v="58" data-color="moss"><span>58</span></div>
+          <div class="heat-cell" data-v="24" data-color="moss"><span>24</span></div>
+          <div class="heat-cell" data-v="3" data-color="moss"><span>3</span></div>
+        </div>
+        <div class="heat-row">
+          <div class="heat-cell heat-label">财务/法务</div>
+          <div class="heat-cell" data-v="64" data-color="moss"><span>64</span></div>
+          <div class="heat-cell" data-v="32" data-color="moss"><span>32</span></div>
+          <div class="heat-cell" data-v="14" data-color="moss"><span>14</span></div>
+          <div class="heat-cell" data-v="1" data-color="moss"><span>1</span></div>
+        </div>
+        <div class="heat-row">
+          <div class="heat-cell heat-label">行政/职能</div>
+          <div class="heat-cell" data-v="48" data-color="moss"><span>48</span></div>
+          <div class="heat-cell" data-v="18" data-color="moss"><span>18</span></div>
+          <div class="heat-cell" data-v="4" data-color="moss"><span>4</span></div>
+          <div class="heat-cell" data-v="0" data-color="moss"><span>0</span></div>
+        </div>
       </div>
 
-      <div style="margin-top:24px;padding:16px;background:rgba(194,65,12,.06);border:1px solid rgba(194,65,12,.22);border-radius:10px;font-size:12.5px;line-height:1.6;color:var(--paper-2)">
-        <strong style="color:var(--paper)">岗位差异调节 · </strong>对行政、财务执行、前台等 AI 化空间受限岗位，由 HRBP / 上级 / 评审委员会三方联合审议，可上调一档或达标保护。
+      <div class="heat-insight">
+        <span class="heat-insight-icon">⚐</span>
+        <span><strong>洞察 · </strong>D1 基础素养已全公司普及；D3/D4 高阶能力集中在技术中心，行政/职能岗 D4 为 0，是下一阶段重点突破方向。</span>
       </div>
+
+      <div style="margin-top:18px;padding:14px;background:rgba(194,65,12,.06);border:1px solid rgba(194,65,12,.22);border-radius:10px;font-size:12px;line-height:1.6;color:var(--paper-2)">
+        <strong style="color:var(--paper)">岗位差异调节 · </strong>对行政、财务执行、前台等 AI 化空间受限岗位，由 HRBP / 上级 / 评审委员会三方联合审议,可上调一档或达标保护。
+      </div>
+    </div>
+  </div>
+
+  <!-- 项目目标追踪 · 部门达标率排行 -->
+  <div class="viz-card" style="margin-bottom:28px">
+    <div class="viz-head">
+      <div>
+        <div class="viz-title">部门达标率排行 <span style="font-family:var(--mono);font-size:10.5px;color:var(--orange);font-weight:700;letter-spacing:.12em;margin-left:10px;padding:3px 9px;background:rgba(194,65,12,.1);border:1px solid rgba(194,65,12,.3);border-radius:5px">项目目标追踪</span></div>
+        <div class="viz-sub">SI ≥ 50 占比 · 目标：8.30 前实现 60% 员工达标</div>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:8px">
+        <span style="font-family:var(--display);font-weight:600;font-style:italic;font-size:28px;color:var(--orange);letter-spacing:-.02em">52<em style="font-style:normal;font-size:18px">%</em></span>
+        <span style="font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.1em">全公司当前</span>
+      </div>
+    </div>
+
+    <div class="dept-list">
+      <div class="dept-row"><span class="dept-rank">01</span><span class="dept-name">技术中台</span><div class="dept-bar"><div class="dept-bar-fill" style="width:78%"></div></div><span class="dept-pct">78%</span></div>
+      <div class="dept-row"><span class="dept-rank">02</span><span class="dept-name">产品研发</span><div class="dept-bar"><div class="dept-bar-fill" style="width:71%"></div></div><span class="dept-pct">71%</span></div>
+      <div class="dept-row"><span class="dept-rank">03</span><span class="dept-name">数据智能</span><div class="dept-bar"><div class="dept-bar-fill" style="width:68%"></div></div><span class="dept-pct">68%</span></div>
+      <div class="dept-row"><span class="dept-rank">04</span><span class="dept-name">商业化</span><div class="dept-bar"><div class="dept-bar-fill cool" style="width:58%"></div></div><span class="dept-pct">58%</span></div>
+      <div class="dept-row"><span class="dept-rank">05</span><span class="dept-name">用户增长</span><div class="dept-bar"><div class="dept-bar-fill cool" style="width:54%"></div></div><span class="dept-pct">54%</span></div>
+      <div class="dept-row"><span class="dept-rank">06</span><span class="dept-name">人力资源</span><div class="dept-bar"><div class="dept-bar-fill cool" style="width:48%"></div></div><span class="dept-pct">48%</span></div>
+      <div class="dept-row"><span class="dept-rank">07</span><span class="dept-name">财务</span><div class="dept-bar"><div class="dept-bar-fill cool" style="width:41%"></div></div><span class="dept-pct">41%</span></div>
+      <div class="dept-row"><span class="dept-rank">08</span><span class="dept-name">行政与法务</span><div class="dept-bar"><div class="dept-bar-fill cool" style="width:32%"></div></div><span class="dept-pct">32%</span></div>
+    </div>
+
+    <div class="heat-insight" style="margin-top:20px">
+      <span class="heat-insight-icon">⚐</span>
+      <span><strong>项目目标 · </strong>当前全公司 52% 达标，距 60% 目标差 8 个百分点。重点关注后 3 名部门（人力资源 / 财务 / 行政与法务），推动其向中位线靠拢。</span>
     </div>
   </div>
 
@@ -3953,20 +4315,15 @@ function goPage(p){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// depth selector
-document.querySelectorAll('.depth-card').forEach(c=>{
-  c.addEventListener('click',()=>{
-    document.querySelectorAll('.depth-card').forEach(x=>x.classList.remove('selected'));
-    c.classList.add('selected');
-    updatePreview();
-  });
-});
-// quality radio
-document.querySelectorAll('.quality-card').forEach(c=>{
-  c.addEventListener('click',()=>{
-    document.querySelectorAll('.quality-card').forEach(x=>x.classList.remove('selected'));
-    c.classList.add('selected');
-    updatePreview();
+// depth/quality selectors removed - 员工不再自评 D/Q
+
+// binary choice (Section 2 判别问题)
+document.querySelectorAll('.binary-choice').forEach(group=>{
+  group.querySelectorAll('.binary-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      group.querySelectorAll('.binary-btn').forEach(x=>x.classList.remove('selected'));
+      btn.classList.add('selected');
+    });
   });
 });
 
@@ -4040,44 +4397,6 @@ document.querySelectorAll('.rating-emp').forEach(emp=>{
     if(histTitle && name) histTitle.textContent = `— ${name} · 历史评分记录`;
   });
 });
-function updatePreview(){
-  const d=document.querySelector('.depth-card.selected')?.dataset.depth;
-  const q=document.querySelector('.quality-card.selected')?.dataset.quality;
-  const tbl={
-    D1:{Q1:10,Q2:12,Q3:15},
-    D2:{Q1:18,Q2:22,Q3:25},
-    D3:{Q1:25,Q2:32,Q3:35},
-    D4:{Q1:30,Q2:35,Q3:40}
-  };
-  if(d&&q){
-    const score=tbl[d][q];
-    const el=document.querySelector('.preview-score');
-    const tens=Math.floor(score/10), ones=score%10;
-    if(score===100||score>=10){
-      el.innerHTML = (Math.floor(score/10)) + '<em>'+(score%10)+'</em>';
-    }else{
-      el.innerHTML='<em>'+score+'</em>';
-    }
-    // also highlight matrix cell
-    document.querySelectorAll('.score-matrix td').forEach(c=>c.classList.remove('hot'));
-    const map={D1:0,D2:1,D3:2,D4:3};
-    const qmap={Q1:1,Q2:2,Q3:3};
-    const rows=document.querySelectorAll('.score-matrix tbody tr');
-    if(rows[map[d]]){
-      const cells=rows[map[d]].querySelectorAll('td');
-      if(cells[qmap[q]]) cells[qmap[q]].classList.add('hot');
-    }
-    // update sub
-    const sub=document.querySelector('.preview-eyebrow').nextElementSibling.nextElementSibling;
-    if(sub) sub.textContent = d+' × '+q+' = '+(score===40?'满分代表作':score>=30?'高分代表作':score>=20?'优质案例':'入门案例');
-    document.querySelectorAll('.preview-formula-row span:last-child').forEach((s,i)=>{
-      if(i===0) s.textContent = d+' · '+({D1:'AI 基础素养',D2:'人机协同',D3:'Agent 接管',D4:'范式创造'})[d];
-      if(i===1) s.textContent = q+' · '+({Q1:'个人能跑',Q2:'用户认可',Q3:'用户高度认可'})[q];
-      if(i===2) s.textContent = '查表 → '+score+' pt';
-    });
-  }
-}
-
 // filter pills active toggle
 document.querySelectorAll('.filter-pill').forEach(p=>{
   p.addEventListener('click',()=>{
