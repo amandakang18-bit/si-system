@@ -833,6 +833,34 @@ a{color:inherit;text-decoration:none}
 .t-action a{color:var(--orange);transition:color .2s}
 .t-action a:hover{color:var(--orange-2)}
 
+/* 人才类型 pill */
+.talent-type{
+  display:inline-block;padding:4px 10px;border-radius:6px;
+  font-family:var(--serif);font-size:12px;font-weight:500;letter-spacing:.01em;
+  border:1px solid;white-space:nowrap;
+}
+.talent-A{
+  background:rgba(194,65,12,.08);color:var(--orange);border-color:rgba(194,65,12,.3);
+}
+.talent-B{
+  background:rgba(166,116,30,.08);color:var(--amber);border-color:rgba(166,116,30,.3);
+}
+.talent-C{
+  background:rgba(92,107,58,.08);color:var(--moss);border-color:rgba(92,107,58,.3);
+}
+.talent-D{
+  background:rgba(90,67,38,.08);color:var(--muted);border-color:var(--rule);
+}
+
+/* 是否过线 标记 */
+.line-check{
+  display:inline-flex;align-items:center;gap:4px;
+  font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.06em;
+}
+.line-check.pass{color:var(--moss)}
+.line-check.fail{color:var(--red);}
+.line-check.near{color:var(--amber)}
+
 /* Footer */
 .footer{
   margin-top:80px;padding:32px 36px;border-top:1px solid var(--rule-soft);
@@ -2303,7 +2331,7 @@ body[data-view="hr"] .watermark-tag{display:block}
           <div class="label">Super Individual · Result</div>
         </div>
         <!-- HR view: exact tier shown -->
-        <div class="score-tier tier-A hr-only">● Tier A · 卓越</div>
+        <div class="score-tier tier-A hr-only">● A 级 · 超级个体核心</div>
       </div>
 
       <!-- HR view: exact score -->
@@ -4272,10 +4300,10 @@ body[data-view="hr"] .watermark-tag{display:block}
 <div class="employee-only" style="padding:80px 36px;max-width:680px;margin:0 auto;text-align:center">
   <div style="font-family:var(--display);font-size:120px;color:var(--orange);font-weight:300;line-height:1;font-style:italic">⊘</div>
   <h2 class="h2" style="margin-top:24px;font-size:32px">仅限管理员访问</h2>
-  <p class="lead" style="max-width:520px;margin:14px auto 0">人才看板包含全员的精确 SI 分数、Tier 评级、人评 6 维度拆解和待认证候选人信息。<br>员工视角下不显示。</p>
+  <p class="lead" style="max-width:520px;margin:14px auto 0">人才看板包含全员的精确 SI 分数、Tier 评级、人评 6 维度拆解和人员明细。<br>员工视角下不显示。</p>
   <div style="margin-top:32px;padding:18px 24px;background:rgba(194,65,12,.06);border:1px solid rgba(194,65,12,.2);border-radius:12px;text-align:left;font-size:12.5px;line-height:1.7;color:var(--paper-2)">
     <div style="font-family:var(--mono);font-size:10px;color:var(--orange);letter-spacing:.16em;font-weight:700;margin-bottom:8px">— 切换至管理员端可查看：</div>
-    全员精确 SI 分数 · 部门达标率 · AI 工具与能力分布热力图 · Tier S/A/B/C 候选人列表 · 人评 6 维度原始数据
+    全员精确 SI 分数 · 部门达标率 · AI 工具与能力分布热力图 · A / B / C / D 人才分类 · 人评 6 维度原始数据
   </div>
   <button class="btn btn-primary" style="margin-top:24px" onclick="document.querySelector('.vs-btn[data-view=hr]').click()">→ 切换到管理员端</button>
 </div>
@@ -4523,13 +4551,14 @@ body[data-view="hr"] .watermark-tag{display:block}
   <div class="table-card">
     <div class="table-head-row">
       <div>
-        <div class="viz-title">超级个体 · 待认证候选人</div>
-        <div class="viz-sub" style="margin-top:3px">SI ≥ A 级 · 超级个体核心人才池</div>
+        <div class="viz-title">人员明细</div>
+        <div class="viz-sub" style="margin-top:3px">全员 SI 分数 · Tier 评级 · 人才类型映射</div>
       </div>
       <div class="tabs">
-        <div class="tab active">Tier S · 顶尖</div>
-        <div class="tab">Tier A · 卓越</div>
-        <div class="tab">Tier B · 优秀</div>
+        <div class="tab active">A · 超级个体核心</div>
+        <div class="tab">B · 超级个体高潜</div>
+        <div class="tab">C · AI Ready</div>
+        <div class="tab">D · 未达标</div>
         <div class="tab">全部</div>
       </div>
     </div>
@@ -4540,10 +4569,9 @@ body[data-view="hr"] .watermark-tag{display:block}
           <th>员工</th>
           <th>SI</th>
           <th>分项 (40 / 30 / 30)</th>
-          <th>Tier</th>
-          <th>孵化候选</th>
-          <th>案例数</th>
-          <th>下一步</th>
+          <th>评级</th>
+          <th>人才类型</th>
+          <th>是否过线</th>
         </tr>
       </thead>
       <tbody>
@@ -4556,10 +4584,9 @@ body[data-view="hr"] .watermark-tag{display:block}
           </td>
           <td><span class="t-score">96<em>/ 100</em></span></td>
           <td><div class="t-mini-bar"><div class="b-orange" style="height:100%"></div><div class="b-amber" style="height:97%"></div><div class="b-moss" style="height:90%"></div></div></td>
-          <td><span class="tier-pill t-S">● Tier S</span></td>
-          <td><div class="t-gov"><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell on"></div></div></td>
-          <td><span style="font-family:var(--mono);font-size:12px;color:var(--bone)">23 / 8 Q3</span></td>
-          <td class="t-action"><a>已认证 · 孵化候选</a></td>
+          <td><span class="tier-pill t-S">● A 级</span></td>
+          <td><span class="talent-type talent-A">A 级 · 超级个体核心</span></td>
+          <td><span class="line-check pass">✓ 已过线</span></td>
         </tr>
         <tr>
           <td>
@@ -4570,10 +4597,9 @@ body[data-view="hr"] .watermark-tag{display:block}
           </td>
           <td><span class="t-score">93<em>/ 100</em></span></td>
           <td><div class="t-mini-bar"><div class="b-orange" style="height:100%"></div><div class="b-amber" style="height:90%"></div><div class="b-moss" style="height:90%"></div></div></td>
-          <td><span class="tier-pill t-S">● Tier S</span></td>
-          <td><div class="t-gov"><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell"></div></div></td>
-          <td><span style="font-family:var(--mono);font-size:12px;color:var(--bone)">17 / 6 Q3</span></td>
-          <td class="t-action"><a>已认证 · 孵化候选</a></td>
+          <td><span class="tier-pill t-S">● A 级</span></td>
+          <td><span class="talent-type talent-A">A 级 · 超级个体核心</span></td>
+          <td><span class="line-check pass">✓ 已过线</span></td>
         </tr>
         <tr>
           <td>
@@ -4584,10 +4610,9 @@ body[data-view="hr"] .watermark-tag{display:block}
           </td>
           <td><span class="t-score">88<em>/ 100</em></span></td>
           <td><div class="t-mini-bar"><div class="b-orange" style="height:95%"></div><div class="b-amber" style="height:87%"></div><div class="b-moss" style="height:87%"></div></div></td>
-          <td><span class="tier-pill t-A">● Tier A</span></td>
-          <td><div class="t-gov"><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell"></div><div class="gov-cell"></div></div></td>
-          <td><span style="font-family:var(--mono);font-size:12px;color:var(--bone)">14 / 5 Q3</span></td>
-          <td class="t-action"><a>→ 已排访谈 5/12</a></td>
+          <td><span class="tier-pill t-S">● A 级</span></td>
+          <td><span class="talent-type talent-A">A 级 · 超级个体核心</span></td>
+          <td><span class="line-check pass">✓ 已过线</span></td>
         </tr>
         <tr>
           <td>
@@ -4598,10 +4623,9 @@ body[data-view="hr"] .watermark-tag{display:block}
           </td>
           <td><span class="t-score">85<em>/ 100</em></span></td>
           <td><div class="t-mini-bar"><div class="b-orange" style="height:80%"></div><div class="b-amber" style="height:90%"></div><div class="b-moss" style="height:90%"></div></div></td>
-          <td><span class="tier-pill t-A">● Tier A</span></td>
-          <td><div class="t-gov"><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell"></div><div class="gov-cell"></div></div></td>
-          <td><span style="font-family:var(--mono);font-size:12px;color:var(--bone)">11 / 3 Q3</span></td>
-          <td class="t-action"><a>→ 已排访谈 5/14</a></td>
+          <td><span class="tier-pill t-S">● A 级</span></td>
+          <td><span class="talent-type talent-A">A 级 · 超级个体核心</span></td>
+          <td><span class="line-check pass">✓ 已过线</span></td>
         </tr>
         <tr>
           <td>
@@ -4612,10 +4636,9 @@ body[data-view="hr"] .watermark-tag{display:block}
           </td>
           <td><span class="t-score">82<em>/ 100</em></span></td>
           <td><div class="t-mini-bar"><div class="b-orange" style="height:75%"></div><div class="b-amber" style="height:90%"></div><div class="b-moss" style="height:90%"></div></div></td>
-          <td><span class="tier-pill t-A">● Tier A</span></td>
-          <td><div class="t-gov"><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell"></div><div class="gov-cell"></div><div class="gov-cell"></div></div></td>
-          <td><span style="font-family:var(--mono);font-size:12px;color:var(--bone)">9 / 2 Q3</span></td>
-          <td class="t-action"><a>→ 待排访谈</a></td>
+          <td><span class="tier-pill t-S">● A 级</span></td>
+          <td><span class="talent-type talent-A">A 级 · 超级个体核心</span></td>
+          <td><span class="line-check pass">✓ 已过线</span></td>
         </tr>
         <tr>
           <td>
@@ -4626,10 +4649,9 @@ body[data-view="hr"] .watermark-tag{display:block}
           </td>
           <td><span class="t-score">78<em>/ 100</em></span></td>
           <td><div class="t-mini-bar"><div class="b-orange" style="height:80%"></div><div class="b-amber" style="height:80%"></div><div class="b-moss" style="height:73%"></div></div></td>
-          <td><span class="tier-pill t-A">● Tier A</span></td>
-          <td><div class="t-gov"><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell"></div><div class="gov-cell"></div></div></td>
-          <td><span style="font-family:var(--mono);font-size:12px;color:var(--bone)">12 / 3 Q3</span></td>
-          <td class="t-action"><a>→ 待排访谈</a></td>
+          <td><span class="tier-pill t-S">● A 级</span></td>
+          <td><span class="talent-type talent-A">A 级 · 超级个体核心</span></td>
+          <td><span class="line-check pass">✓ 已过线</span></td>
         </tr>
       </tbody>
     </table>
