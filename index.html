@@ -1199,7 +1199,7 @@ body[data-view="employee"] .emp-notice{display:inline-flex;align-items:center;ga
   font-family:var(--mono);font-size:12px;
 }
 .heat-row{
-  display:grid;grid-template-columns:120px repeat(6,1fr);gap:4px;
+  display:grid;grid-template-columns:120px repeat(5,1fr);gap:4px;
   align-items:stretch;
 }
 .heat-table-moss .heat-row{grid-template-columns:120px repeat(4,1fr)}
@@ -1302,7 +1302,7 @@ body[data-view="employee"] .emp-notice{display:inline-flex;align-items:center;ga
 .heat-insight strong{color:var(--paper);font-weight:600}
 
 @media (max-width:1100px){
-  .heat-row{grid-template-columns:80px repeat(6,1fr);font-size:11px}
+  .heat-row{grid-template-columns:80px repeat(5,1fr);font-size:11px}
   .heat-table-moss .heat-row{grid-template-columns:80px repeat(4,1fr)}
   .heat-cell{height:32px;font-size:11.5px}
 }
@@ -2240,7 +2240,7 @@ body[data-view="hr"] .watermark-tag{display:block}
         </div>
         <div class="hero-stat hr-only">
           <div class="hero-stat-num">A</div>
-          <div class="hero-stat-label">Tier · 待治理力面试</div>
+          <div class="hero-stat-label">Tier 评级</div>
         </div>
       </div>
     </div>
@@ -2611,7 +2611,7 @@ body[data-view="hr"] .watermark-tag{display:block}
               <span class="rule-name" style="display:flex;align-items:center;gap:8px"><span style="font-family:var(--mono);font-size:11px;color:var(--amber);font-weight:700;letter-spacing:.1em">D2</span>人机协同分工</span>
               <span style="font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.08em">关键能力 · AI 协同</span>
             </td>
-            <td>能在真实业务场景中识别 AI 的切入点，设计合理的人机分工模式（什么交给 AI、什么留给人）。能根据任务复杂度选择合适的协同模式，并为 AI 出错或边界外情况设计人工介入路径。</td>
+            <td>能在真实业务场景中识别 AI 的切入点，设计合理的人机分工模式（什么交给 AI、什么留给人）。能根据任务复杂度选择合适的协同模式，并为 AI 出错或边界外情况设计人工介入路径。<br><span style="font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em">· 全流程节点 ≥ 3 (即整个工作链路至少 3 个环节)</span></td>
           </tr>
           <tr>
             <td style="width:220px;padding-left:0">
@@ -2625,7 +2625,7 @@ body[data-view="hr"] .watermark-tag{display:block}
               <span class="rule-name" style="display:flex;align-items:center;gap:8px"><span style="font-family:var(--mono);font-size:11px;color:var(--orange);font-weight:700;letter-spacing:.1em">D4</span>范式创造能力</span>
               <span style="font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.08em">顶级能力 · AI 重塑</span>
             </td>
-            <td>通过 AI 让原本不可能或不存在的工作方式成为现实。带来结构性的工作方式变化（不只是更快/更便宜，而是创造了新的工作形态），对所在岗位/团队/业务线产生可被推广的范式价值。</td>
+            <td>带来了结构性的工作变化；对公司产生了可被推广和批量复制的价值；催化了新的组织能力 / 业务。<br><br><strong style="color:var(--paper)">判定标准（需同时满足）：</strong><br>① <strong style="color:var(--paper-2)">工作模式重塑</strong>：岗位的工作本质改变（如从"做执行"变为"做产品"、从"做服务"变为"做能力"），原岗位 KPI 需重写；<br>② <strong style="color:var(--paper-2)">批量复制资产</strong>：产出的能力被公司多个团队 / 业务线复用，或对外服务能力实现规模化（如产品化、平台化）；<br>③ <strong style="color:var(--paper-2)">新业务催生</strong>：直接催生了公司新业务或新的服务交付模式。</td>
           </tr>
         </tbody>
       </table>
@@ -2658,19 +2658,21 @@ body[data-view="hr"] .watermark-tag{display:block}
             <tbody>
               <tr>
                 <td class="row-head">D1 · AI 基础素养<small>能与 AI 工具有效协作</small></td>
-                <td class="score">8–11</td><td class="score">11–14</td><td class="score">14–17</td>
+                <td class="score">8–11</td><td class="score">12–15</td><td class="score">15–18</td>
               </tr>
               <tr>
-                <td class="row-head">D2 · 人机协同分工<small>设计合理的人机分工模式</small></td>
-                <td class="score">17–20</td><td class="score">20–23</td><td class="score">23–26</td>
+                <td class="row-head">D2 · 人机协同分工<small>设计合理的人机分工模式 (全流程节点 ≥ 3)</small></td>
+                <td class="score">18–21</td><td class="score">22–25</td><td class="score">26–29</td>
               </tr>
               <tr>
-                <td class="row-head">D3 · Agent 接管能力<small>AI 独立完成完整工作环节</small></td>
-                <td class="score">26–29</td><td class="score">29–32</td><td class="score">32–35</td>
+                <td class="row-head">D3 · Agent 接管能力<small>AI 端到端接管,人基本无需介入</small></td>
+                <td class="score">29–32</td><td class="score">33–36</td><td class="score">37–40</td>
               </tr>
               <tr>
-                <td class="row-head">D4 · 范式创造能力<small>AI 让不可能成为可能</small></td>
-                <td class="score">32–35</td><td class="score">35–38</td><td class="score peak">37–40</td>
+                <td class="row-head">D4 · 范式创造能力<small>改变服务模式 · 催生新业务线</small></td>
+                <td class="score" style="color:var(--muted);font-size:14px">—</td>
+                <td class="score" style="color:var(--muted);font-size:14px">—</td>
+                <td class="score peak">40</td>
               </tr>
             </tbody>
           </table>
@@ -2723,12 +2725,12 @@ body[data-view="hr"] .watermark-tag{display:block}
           <div class="q-quality-row q-quality-full">
             <div class="q-quality-tag">完整</div>
             <div class="q-quality-add">+3</div>
-            <div class="q-quality-std">有<strong>系统化</strong>的错误处理机制（出错前预设自动检验机制、出错后沉淀错误案例库反哺 AI 等）</div>
+            <div class="q-quality-std">有<strong>系统化</strong>错误处理机制（① 决策层控制：针对不同类型 AI 偏差设置处理策略与优先级；② 持续优化与学习：出错后沉淀错误案例库持续驯化 AI 等）</div>
           </div>
           <div class="q-quality-row q-quality-partial">
             <div class="q-quality-tag">部分</div>
             <div class="q-quality-add">+1.5</div>
-            <div class="q-quality-std">有<strong>基础</strong>错误处理机制（提供边界约束、配备人工兜底方案等）</div>
+            <div class="q-quality-std">有<strong>基础</strong>错误处理机制（纠正与干预：事前为 AI 输出建立业务边界或校验规则、配备人工兜底方案等）</div>
           </div>
           <div class="q-quality-row q-quality-none">
             <div class="q-quality-tag">缺失</div>
@@ -2812,7 +2814,7 @@ body[data-view="hr"] .watermark-tag{display:block}
       <!-- D4 委员会兜底 -->
       <div style="margin-top:24px;padding:16px 20px;background:rgba(194,65,12,.06);border:1px solid rgba(194,65,12,.3);border-radius:12px;font-size:12.5px;line-height:1.7;color:var(--paper-2)">
         <div style="font-family:var(--mono);font-size:10px;color:var(--orange);letter-spacing:.16em;font-weight:700;margin-bottom:8px;text-transform:uppercase">— D4 评审委员会兜底</div>
-        D4 是顶级档位，<strong style="color:var(--paper)">需评审委员会基于"3 条硬标准"集中评议</strong>（① 10× 跃迁 / ② 能力扩展 / ③ KPI 重写）。员工需提交完整证据材料，由 HR、业务负责人组成的评审委员会做资格审定。
+        D4 是顶级档位，<strong style="color:var(--paper)">需评审委员会基于 3 条判定标准集中评议</strong>（① 工作模式重塑 / ② 批量复制资产 / ③ 新业务催生，需同时满足）。员工需提交完整证据材料，由 HR、业务负责人组成的评审委员会做资格审定。
       </div>
     </div>
 
@@ -2859,13 +2861,14 @@ body[data-view="hr"] .watermark-tag{display:block}
           <div class="d-example-head">
             <span class="d-example-tag" style="background:rgba(194,65,12,.15);color:var(--orange);border-color:var(--orange)">D4 · 范式创造能力</span>
                       </div>
-          <div class="d-example-name">全球行业雷达系统 <span style="font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.06em;margin-left:8px">— 战略岗</span></div>
+          <div class="d-example-name">创业者赋能数字分身 · 大佬 Skill 集群 <span style="font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.06em;margin-left:8px">— 创业者运营岗</span></div>
           <div class="d-example-body">
-            <strong>场景：</strong>原本战略团队每季度只能深度研究 3 个赛道(人力天花板)。员工搭建了"行业雷达系统"——12 个 Agent 协同持续追踪全球 500+ 公司的公开信息、专利、招聘动态、产品发布,自动生成赛道动态周报。战略分析师从"信息收集"转为"信号判读"。<br>
-            <strong>为什么是 D4(满足 3 条硬标准):</strong><br>
-            ① <strong>数量级跃迁</strong>:单季度可深度覆盖赛道数从 3 个 → 50+ 个(>10×)<br>
-            ② <strong>能力扩展</strong>:原本无法做到的"实时全球追踪"成为可能<br>
-            ③ <strong>KPI 重写</strong>:战略团队 KPI 从"产出研报数量" → "战略预警准确率 + 决策影响力"
+            <strong>场景：</strong>孵化器旗下入孵创业者超过 200 个，创业者支持团队仅 2 人，以往每位创业者每月最多获得 1 次 1V1 咨询，且深度严重依赖支持人员个人经验，创始人级别的战略洞察难以规模化触达。<br>
+            员工搭建"创业者赋能数字分身"——把 12 位连续创业者、独角兽 CEO、知名投资人的专业能力抽象为 N 个 Skill（融资策略 / 产品定位 / 团队组建 / 增长黑客 / BP 打磨 / 估值博弈 / 媒体策略 / 法务架构 等），部署在公司 Skill 市场。每位创业者可根据创业阶段、行业、当前困境自动调用对应 Skill 组合，提供 7×24 战略级咨询。同时，分身自动整理高频共性问题，自动生成每周线上训练营选题，将 1V1 咨询沉淀为 1VN 课程。<br>
+            <strong>为什么是 D4（同时满足 3 条判定标准）：</strong><br>
+            ① <strong>工作模式重塑</strong>：创业者支持岗位从"做服务（1V1 咨询）"变为"做能力产品（Skill 集群 + 训练营）"，原岗位 KPI 重写；<br>
+            ② <strong>批量复制资产</strong>：Skill 集群部署在公司 Skill 市场，可被多个孵化期项目、多个行业线复用；<br>
+            ③ <strong>新业务催生</strong>：直接催生了"AI 驱动的创业者赋能"这一新服务交付模式，服务效率提升数十倍。
           </div>
         </div>
 
@@ -2994,7 +2997,7 @@ body[data-view="hr"] .watermark-tag{display:block}
 
           <div class="field">
             <label class="field-label">使用工具 / 技术栈</label>
-            <input class="input" value="Claude Sonnet 4.5 · n8n · 飞书多维表格 · 内部 ATS API">
+            <input class="input" value="Claude Sonnet 4.5 · 飞书多维表格 · 内部 ATS API">
           </div>
         </div>
 
@@ -3125,14 +3128,6 @@ body[data-view="hr"] .watermark-tag{display:block}
           </div>
 
           <div class="field">
-            <label class="field-label">是否有人工兜底路径</label>
-            <div class="binary-choice">
-              <button class="binary-btn selected" data-v="yes">✓ 是 · 设计了清晰的人工接管路径</button>
-              <button class="binary-btn" data-v="no">○ 否 · 出错只能重跑或手动处理</button>
-            </div>
-          </div>
-
-          <div class="field">
             <label class="field-label">月运行次数与成功率 (用于稳定性验证)</label>
             <input class="input" placeholder="例:月运行 80 次,成功率 92%,异常转人工 8 次" value="月运行 80 次 · 成功率 92% · 异常转人工 8 次,均按预设路径处理">
           </div>
@@ -3245,7 +3240,7 @@ body[data-view="hr"] .watermark-tag{display:block}
             <span class="checklist-icon">✓</span>
             <div class="checklist-text">
               <div class="checklist-name">错误处理机制</div>
-              <div class="checklist-meta">3 层处理 · 人工兜底路径完整</div>
+              <div class="checklist-meta">3 层处理 · 月运行成功率 92%</div>
             </div>
           </div>
 
@@ -3692,7 +3687,7 @@ body[data-view="hr"] .watermark-tag{display:block}
                 </div>
                 <div class="q-review-sub">作为上级，你的工作是<strong style="color:var(--paper)">确认 V 价值等级</strong>（Agent 推荐档位 → 你核实业务上下文）。<strong style="color:var(--paper)">D 深度和 Q 工程质量由 Agent 100% 自动评判</strong>，无需上级操作；D4 资格由评审委员会评议。</div>
               </div>
-              <a class="ai-showcase-link" href="#" onclick="event.preventDefault();alert('评判分工 (v5)\n\n· D 深度 → 100% Agent 评判\n· V 价值 → Agent 推荐 + 上级人工确认\n· Q 工程质量 → 100% Agent 评判\n· D4 → 评审委员会基于 3 条硬标准评议')">
+              <a class="ai-showcase-link" href="#" onclick="event.preventDefault();alert('评判分工 (v5)\n\n· D 深度 → 100% Agent 评判\n· V 价值 → Agent 推荐 + 上级人工确认\n· Q 工程质量 → 100% Agent 评判\n· D4 → 评审委员会基于 3 条判定标准评议 (需同时满足)')">
                 了解审核规则
                 <span style="font-family:var(--mono);font-size:11px;opacity:.7">↗</span>
               </a>
@@ -4259,7 +4254,6 @@ body[data-view="hr"] .watermark-tag{display:block}
           <div class="heat-cell">Claude</div>
           <div class="heat-cell">GPT</div>
           <div class="heat-cell">飞书机器人</div>
-          <div class="heat-cell">n8n</div>
           <div class="heat-cell">Coze</div>
           <div class="heat-cell">自研 Agent</div>
         </div>
@@ -4268,7 +4262,6 @@ body[data-view="hr"] .watermark-tag{display:block}
           <div class="heat-cell" data-v="92"><span>92</span></div>
           <div class="heat-cell" data-v="68"><span>68</span></div>
           <div class="heat-cell" data-v="124"><span>124</span></div>
-          <div class="heat-cell" data-v="45"><span>45</span></div>
           <div class="heat-cell" data-v="22"><span>22</span></div>
           <div class="heat-cell" data-v="14"><span>14</span></div>
         </div>
@@ -4277,7 +4270,6 @@ body[data-view="hr"] .watermark-tag{display:block}
           <div class="heat-cell" data-v="156"><span>156</span></div>
           <div class="heat-cell" data-v="89"><span>89</span></div>
           <div class="heat-cell" data-v="42"><span>42</span></div>
-          <div class="heat-cell" data-v="128"><span>128</span></div>
           <div class="heat-cell" data-v="34"><span>34</span></div>
           <div class="heat-cell" data-v="98"><span>98</span></div>
         </div>
@@ -4286,7 +4278,6 @@ body[data-view="hr"] .watermark-tag{display:block}
           <div class="heat-cell" data-v="78"><span>78</span></div>
           <div class="heat-cell" data-v="142"><span>142</span></div>
           <div class="heat-cell" data-v="56"><span>56</span></div>
-          <div class="heat-cell" data-v="18"><span>18</span></div>
           <div class="heat-cell" data-v="64"><span>64</span></div>
           <div class="heat-cell" data-v="8"><span>8</span></div>
         </div>
@@ -4295,7 +4286,6 @@ body[data-view="hr"] .watermark-tag{display:block}
           <div class="heat-cell" data-v="46"><span>46</span></div>
           <div class="heat-cell" data-v="52"><span>52</span></div>
           <div class="heat-cell" data-v="98"><span>98</span></div>
-          <div class="heat-cell" data-v="34"><span>34</span></div>
           <div class="heat-cell" data-v="12"><span>12</span></div>
           <div class="heat-cell" data-v="6"><span>6</span></div>
         </div>
@@ -4304,7 +4294,6 @@ body[data-view="hr"] .watermark-tag{display:block}
           <div class="heat-cell" data-v="38"><span>38</span></div>
           <div class="heat-cell" data-v="24"><span>24</span></div>
           <div class="heat-cell" data-v="42"><span>42</span></div>
-          <div class="heat-cell" data-v="8"><span>8</span></div>
           <div class="heat-cell" data-v="3"><span>3</span></div>
           <div class="heat-cell" data-v="12"><span>12</span></div>
         </div>
@@ -4313,7 +4302,6 @@ body[data-view="hr"] .watermark-tag{display:block}
           <div class="heat-cell" data-v="22"><span>22</span></div>
           <div class="heat-cell" data-v="34"><span>34</span></div>
           <div class="heat-cell" data-v="68"><span>68</span></div>
-          <div class="heat-cell" data-v="4"><span>4</span></div>
           <div class="heat-cell" data-v="2"><span>2</span></div>
           <div class="heat-cell" data-v="1"><span>1</span></div>
         </div>
@@ -4321,7 +4309,7 @@ body[data-view="hr"] .watermark-tag{display:block}
 
       <div class="heat-insight">
         <span class="heat-insight-icon">⚐</span>
-        <span><strong>洞察 · </strong>飞书机器人是全员化最强工具（人力中心 124 例最高）；n8n / 自研 Agent 主要集中在技术中心，跨部门推广空间大。</span>
+        <span><strong>洞察 · </strong>飞书机器人是全员化最强工具（人力中心 124 例最高）；自研 Agent 主要集中在技术中心，跨部门推广空间大。</span>
       </div>
     </div>
 
@@ -4459,7 +4447,7 @@ body[data-view="hr"] .watermark-tag{display:block}
           <th>SI</th>
           <th>分项 (40 / 30 / 30)</th>
           <th>Tier</th>
-          <th>S 创客资格</th>
+          <th>孵化候选</th>
           <th>案例数</th>
           <th>下一步</th>
         </tr>
@@ -4477,7 +4465,7 @@ body[data-view="hr"] .watermark-tag{display:block}
           <td><span class="tier-pill t-S">● Tier S</span></td>
           <td><div class="t-gov"><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell on"></div></div></td>
           <td><span style="font-family:var(--mono);font-size:12px;color:var(--bone)">23 / 8 Q3</span></td>
-          <td class="t-action"><a>已认证 · 治理力 强</a></td>
+          <td class="t-action"><a>已认证 · 孵化候选</a></td>
         </tr>
         <tr>
           <td>
@@ -4491,7 +4479,7 @@ body[data-view="hr"] .watermark-tag{display:block}
           <td><span class="tier-pill t-S">● Tier S</span></td>
           <td><div class="t-gov"><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell on"></div><div class="gov-cell"></div></div></td>
           <td><span style="font-family:var(--mono);font-size:12px;color:var(--bone)">17 / 6 Q3</span></td>
-          <td class="t-action"><a>已认证 · 治理力 强</a></td>
+          <td class="t-action"><a>已认证 · 孵化候选</a></td>
         </tr>
         <tr>
           <td>
