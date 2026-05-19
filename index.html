@@ -622,6 +622,57 @@ a{color:inherit;text-decoration:none}
 }
 .filter-search input::placeholder{color:var(--muted-2)}
 .filter-icon{color:var(--muted);font-family:var(--mono);font-size:14px}
+
+/* === 业务场景筛选 (参考扣子资产广场) === */
+.scene-filter{
+  margin-bottom:28px;
+  padding:18px 20px;
+  background:var(--ink-2);border:1px solid var(--rule-soft);
+  border-radius:12px;
+}
+.scene-filter-head{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:14px;
+}
+.scene-filter-eyebrow{
+  font-family:var(--mono);font-size:10.5px;color:var(--muted);
+  letter-spacing:.16em;font-weight:600;text-transform:uppercase;
+}
+
+.scene-tags{
+  display:flex;gap:8px;flex-wrap:wrap;
+}
+.scene-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 14px;
+  background:#FAF3E3;border:1px solid var(--rule-soft);
+  border-radius:99px;
+  font-family:var(--serif);font-size:13px;color:var(--paper-2);
+  cursor:pointer;transition:all .2s;
+}
+.scene-tag:hover{
+  border-color:var(--orange);color:var(--paper);
+  background:linear-gradient(135deg,#FAF3E3 0%,#F2E5C5 100%);
+}
+.scene-tag.active{
+  background:var(--paper);color:#FAF3E3;border-color:var(--paper);
+  font-weight:600;
+}
+.scene-tag.active .scene-tag-count{
+  color:rgba(250,243,227,.65);
+}
+.scene-tag-icon{
+  font-family:var(--mono);font-size:12px;
+  color:var(--orange);
+}
+.scene-tag.active .scene-tag-icon{color:var(--orange-2)}
+.scene-tag-name{
+  letter-spacing:.02em;
+}
+.scene-tag-count{
+  font-family:var(--mono);font-size:10.5px;color:var(--muted);
+  letter-spacing:.04em;
+}
 .filter-pill{
   padding:8px 14px;border-radius:8px;background:var(--ink-3);
   border:1px solid var(--rule-soft);font-size:12.5px;color:var(--bone);
@@ -3289,11 +3340,11 @@ body[data-view="hr"] .watermark-tag{display:block}
           <div class="lib-stat-num">1,8<em>47</em></div>
           <div class="lib-stat-label">入库案例</div>
         </div>
-        <div class="lib-stat">
+        <div class="lib-stat hr-only">
           <div class="lib-stat-num">2<em>34</em></div>
           <div class="lib-stat-label">V3 完全成型</div>
         </div>
-        <div class="lib-stat">
+        <div class="lib-stat hr-only">
           <div class="lib-stat-num">9<em>1</em></div>
           <div class="lib-stat-label">D4 范式创造</div>
         </div>
@@ -3309,6 +3360,65 @@ body[data-view="hr"] .watermark-tag{display:block}
     <div class="filter-search">
       <span class="filter-icon">⌕</span>
       <input placeholder="搜索案例名称、提报人、技术栈、业务场景…">
+    </div>
+  </div>
+
+  <!-- 业务场景分类 (参考扣子资产广场) -->
+  <div class="scene-filter">
+    <div class="scene-filter-head">
+      <span class="scene-filter-eyebrow">— 按业务场景浏览</span>
+    </div>
+    <div class="scene-tags">
+      <button class="scene-tag active">
+        <span class="scene-tag-icon">⌘</span>
+        <span class="scene-tag-name">全部</span>
+        <span class="scene-tag-count">1,847</span>
+      </button>
+      <button class="scene-tag">
+        <span class="scene-tag-icon">⚐</span>
+        <span class="scene-tag-name">营销广告</span>
+        <span class="scene-tag-count">287</span>
+      </button>
+      <button class="scene-tag">
+        <span class="scene-tag-icon">⚙</span>
+        <span class="scene-tag-name">HR 招聘</span>
+        <span class="scene-tag-count">203</span>
+      </button>
+      <button class="scene-tag">
+        <span class="scene-tag-icon">⚛</span>
+        <span class="scene-tag-name">财务法务</span>
+        <span class="scene-tag-count">186</span>
+      </button>
+      <button class="scene-tag">
+        <span class="scene-tag-icon">◈</span>
+        <span class="scene-tag-name">产品研发</span>
+        <span class="scene-tag-count">412</span>
+      </button>
+      <button class="scene-tag">
+        <span class="scene-tag-icon">⌬</span>
+        <span class="scene-tag-name">数据分析</span>
+        <span class="scene-tag-count">231</span>
+      </button>
+      <button class="scene-tag">
+        <span class="scene-tag-icon">✦</span>
+        <span class="scene-tag-name">客户服务</span>
+        <span class="scene-tag-count">142</span>
+      </button>
+      <button class="scene-tag">
+        <span class="scene-tag-icon">⚭</span>
+        <span class="scene-tag-name">销售运营</span>
+        <span class="scene-tag-count">168</span>
+      </button>
+      <button class="scene-tag">
+        <span class="scene-tag-icon">⌖</span>
+        <span class="scene-tag-name">战略洞察</span>
+        <span class="scene-tag-count">98</span>
+      </button>
+      <button class="scene-tag">
+        <span class="scene-tag-icon">⊛</span>
+        <span class="scene-tag-name">内容创作</span>
+        <span class="scene-tag-count">120</span>
+      </button>
     </div>
   </div>
 
@@ -4664,6 +4774,13 @@ document.querySelectorAll('.filter-pill').forEach(p=>{
   p.addEventListener('click',()=>{
     document.querySelectorAll('.filter-pill').forEach(x=>x.classList.remove('active'));
     p.classList.add('active');
+  });
+});
+// scene tag active toggle
+document.querySelectorAll('.scene-tag').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.scene-tag').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
   });
 });
 // admin tabs
