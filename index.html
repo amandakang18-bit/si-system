@@ -2431,7 +2431,7 @@ body[data-view="hr"] .watermark-tag{display:block}
               <span class="case-tag">已纳入流程</span>
             </div>
           </div>
-          <div class="case-score q3">35<em>分</em></div>
+          <div class="case-score q3 hr-only">35<em>分</em></div>
         </div>
 
         <div class="case-item">
@@ -2444,7 +2444,7 @@ body[data-view="hr"] .watermark-tag{display:block}
               <span class="case-tag">V3 · 完全成型</span>
             </div>
           </div>
-          <div class="case-score q3">35<em>分</em></div>
+          <div class="case-score q3 hr-only">35<em>分</em></div>
         </div>
 
         <div class="case-item">
@@ -2457,7 +2457,7 @@ body[data-view="hr"] .watermark-tag{display:block}
               <span class="case-tag">V2 · 质量改善</span>
             </div>
           </div>
-          <div class="case-score q2">22<em>分</em></div>
+          <div class="case-score q2 hr-only">22<em>分</em></div>
         </div>
 
         <div class="case-item">
@@ -2470,7 +2470,7 @@ body[data-view="hr"] .watermark-tag{display:block}
               <span class="case-tag">V2 · 质量改善</span>
             </div>
           </div>
-          <div class="case-score q2">22<em>分</em></div>
+          <div class="case-score q2 hr-only">22<em>分</em></div>
         </div>
 
         <div class="case-item">
@@ -2483,7 +2483,7 @@ body[data-view="hr"] .watermark-tag{display:block}
               <span class="case-tag">V2 · 质量改善</span>
             </div>
           </div>
-          <div class="case-score">12<em>分</em></div>
+          <div class="case-score hr-only">12<em>分</em></div>
         </div>
       </div>
     </div>
@@ -3303,7 +3303,6 @@ body[data-view="hr"] .watermark-tag{display:block}
         </div>
       </div>
     </div>
-    <button class="btn btn-primary" onclick="goPage('submit')">+ 提报新案例</button>
   </div>
 
   <div class="filter-bar">
@@ -3311,12 +3310,6 @@ body[data-view="hr"] .watermark-tag{display:block}
       <span class="filter-icon">⌕</span>
       <input placeholder="搜索案例名称、提报人、技术栈、业务场景…">
     </div>
-    <button class="filter-pill active">全部</button>
-    <button class="filter-pill">D4 范式创造</button>
-    <button class="filter-pill">D3 Agent接管</button>
-    <button class="filter-pill">D2 人机协同</button>
-    <button class="filter-pill">D1 基础素养</button>
-    <button class="filter-pill">V3 完全成型</button>
   </div>
 
   <div class="lib-grid">
@@ -3324,117 +3317,108 @@ body[data-view="hr"] .watermark-tag{display:block}
     <div class="lib-card">
       <div class="lib-card-top">
         <span class="lib-badge badge-d4">D4 · Q3</span>
-        <div class="lib-pts">40<em>pt</em></div>
+        <div class="lib-pts hr-only">40<em>pt</em></div>
       </div>
       <h3 class="lib-title">销售线索清洗与分级智能体集群</h3>
       <p class="lib-desc">5 个 Agent 协同完成线索去重、企业画像补全、意向度评分、自动分配，月处理 1.2 万条</p>
       <div class="lib-foot">
         <div class="lib-author"><div class="av">王</div>王俊豪 · Sales Ops</div>
-        <div class="lib-uses"><em>已被 47 团队使用</em></div>
       </div>
     </div>
 
     <div class="lib-card">
       <div class="lib-card-top">
         <span class="lib-badge badge-d4">D4 · Q3</span>
-        <div class="lib-pts">40<em>pt</em></div>
+        <div class="lib-pts hr-only">40<em>pt</em></div>
       </div>
       <h3 class="lib-title">财务月结全流程自动化 Agent</h3>
       <p class="lib-desc">凭证采集 → 异常检测 → 自动入账 → 报表生成，月结周期从 5 天缩短至 1.5 天</p>
       <div class="lib-foot">
         <div class="lib-author"><div class="av">李</div>李佳茵 · Finance</div>
-        <div class="lib-uses"><em>已被 12 团队使用</em></div>
       </div>
     </div>
 
     <div class="lib-card">
       <div class="lib-card-top">
         <span class="lib-badge badge-d3">D3 · Q3</span>
-        <div class="lib-pts">35<em>pt</em></div>
+        <div class="lib-pts hr-only">35<em>pt</em></div>
       </div>
       <h3 class="lib-title">招聘JD智能生成与候选人匹配</h3>
       <p class="lib-desc">输入岗位关键词 + JD 模板 → 自动生成完整 JD、人才画像、Boolean 串、面试题库</p>
       <div class="lib-foot">
         <div class="lib-author"><div class="av">AK</div>Amanda Kang · HR</div>
-        <div class="lib-uses"><em>已被 23 团队使用</em></div>
       </div>
     </div>
 
     <div class="lib-card">
       <div class="lib-card-top">
         <span class="lib-badge badge-d3">D3 · Q3</span>
-        <div class="lib-pts">35<em>pt</em></div>
+        <div class="lib-pts hr-only">35<em>pt</em></div>
       </div>
       <h3 class="lib-title">用户反馈情感分析与归因工作流</h3>
       <p class="lib-desc">从应用商店、客服工单、社媒抓取反馈，自动分类归因到产品功能模块</p>
       <div class="lib-foot">
         <div class="lib-author"><div class="av">陈</div>陈默 · Product</div>
-        <div class="lib-uses"><em>已被 31 团队使用</em></div>
       </div>
     </div>
 
     <div class="lib-card">
       <div class="lib-card-top">
         <span class="lib-badge badge-d3">D3 · Q2</span>
-        <div class="lib-pts">32<em>pt</em></div>
+        <div class="lib-pts hr-only">32<em>pt</em></div>
       </div>
       <h3 class="lib-title">合同关键条款抽取与风险审查</h3>
       <p class="lib-desc">PDF 合同 → 抽取付款条款、违约责任、知识产权 → 标注风险点并对比公司模板</p>
       <div class="lib-foot">
         <div class="lib-author"><div class="av">林</div>林书雅 · Legal</div>
-        <div class="lib-uses"><em>已被 9 团队使用</em></div>
       </div>
     </div>
 
     <div class="lib-card">
       <div class="lib-card-top">
         <span class="lib-badge badge-d2">D2 · Q3</span>
-        <div class="lib-pts">25<em>pt</em></div>
+        <div class="lib-pts hr-only">25<em>pt</em></div>
       </div>
       <h3 class="lib-title">竞品周报半自动化生成</h3>
       <p class="lib-desc">每周一固定抓取 12 个竞品的官方更新与公开数据，AI 起草初稿，分析师 30min 完稿</p>
       <div class="lib-foot">
         <div class="lib-author"><div class="av">周</div>周岚 · Strategy</div>
-        <div class="lib-uses"><em>已被 6 团队使用</em></div>
       </div>
     </div>
 
     <div class="lib-card">
       <div class="lib-card-top">
         <span class="lib-badge badge-d2">D2 · Q2</span>
-        <div class="lib-pts">22<em>pt</em></div>
+        <div class="lib-pts hr-only">22<em>pt</em></div>
       </div>
       <h3 class="lib-title">绩效面谈话术生成器</h3>
       <p class="lib-desc">基于绩效结果与员工画像，输出差异化的面谈开场白与改进建议</p>
       <div class="lib-foot">
         <div class="lib-author"><div class="av">AK</div>Amanda Kang · HR</div>
-        <div class="lib-uses"><em>已被 14 团队使用</em></div>
       </div>
     </div>
 
     <div class="lib-card">
       <div class="lib-card-top">
         <span class="lib-badge badge-d1">D1 · Q3</span>
-        <div class="lib-pts">15<em>pt</em></div>
+        <div class="lib-pts hr-only">15<em>pt</em></div>
       </div>
       <h3 class="lib-title">客诉响应话术 Prompt 模板包</h3>
       <p class="lib-desc">12 个高频客诉场景的标准化回应 Prompt，覆盖 90% 一线客服日常工单</p>
       <div class="lib-foot">
         <div class="lib-author"><div class="av">高</div>高雅婷 · Customer</div>
-        <div class="lib-uses"><em>已被 84 团队使用</em></div>
       </div>
     </div>
 
     <div class="lib-card">
       <div class="lib-card-top">
         <span class="lib-badge badge-d1">D1 · Q2</span>
-        <div class="lib-pts">12<em>pt</em></div>
+        <div class="lib-pts hr-only">12<em>pt</em></div>
       </div>
       <h3 class="lib-title">产品 PRD 评审 Checklist Prompt</h3>
       <p class="lib-desc">输入 PRD 文档 → 输出完整性、可行性、依赖项 30 项检查清单</p>
       <div class="lib-foot">
         <div class="lib-author"><div class="av">吴</div>吴志明 · Product</div>
-        <div class="lib-uses"><em>已被 18 团队使用</em></div>
       </div>
     </div>
 
