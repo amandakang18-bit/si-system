@@ -2399,8 +2399,8 @@ body[data-view="hr"] .watermark-tag{display:block}
       </div>
       <div class="cap-bar orange"><div style="width:80%"></div></div>
       <div class="cap-detail">
-        <div class="cap-detail-row hi"><span>最高分代表作</span><span>D3 × Q3 → 35pt</span></div>
-        <div class="cap-detail-row"><span>评分方式</span><span>系统查表 · 深度 × 质量</span></div>
+        <div class="cap-detail-row hi"><span>最高分代表作</span><span>D3 · Agent接管 → 35pt</span></div>
+        <div class="cap-detail-row"><span>评分方式</span><span>Agent 按 D 深度评分</span></div>
         <div class="cap-detail-row"><span>数据源</span><span>AI 案例库 · 12 cases</span></div>
       </div>
     </div>
@@ -2505,8 +2505,7 @@ body[data-view="hr"] .watermark-tag{display:block}
             <div class="case-title">招聘JD智能生成与候选人匹配 Agent</div>
             <div class="case-meta">输入岗位关键词 + JD 模板 → 多 Agent 协同生成完整 JD、人才画像、Boolean 搜索串、面试题库</div>
             <div class="case-tags">
-              <span class="case-tag">D4 · 范式创造</span>
-              <span class="case-tag">V3 · 完全成型</span>
+              <span class="case-tag">D3 · Agent接管</span>
               <span class="case-tag">已纳入流程</span>
             </div>
           </div>
@@ -2520,7 +2519,6 @@ body[data-view="hr"] .watermark-tag{display:block}
             <div class="case-meta">问卷数据 → 分群聚类 → 主题抽取 → 自动生成可视化报告，HR 仅做最终判断</div>
             <div class="case-tags">
               <span class="case-tag">D3 · Agent接管</span>
-              <span class="case-tag">V3 · 完全成型</span>
             </div>
           </div>
           <div class="case-score q3 hr-only">35<em>分</em></div>
@@ -2533,7 +2531,6 @@ body[data-view="hr"] .watermark-tag{display:block}
             <div class="case-meta">基于绩效结果与员工画像，输出差异化的面谈开场白、关键问题与改进建议</div>
             <div class="case-tags">
               <span class="case-tag">D2 · 人机协同</span>
-              <span class="case-tag">V2 · 质量改善</span>
             </div>
           </div>
           <div class="case-score q2 hr-only">22<em>分</em></div>
@@ -2546,7 +2543,6 @@ body[data-view="hr"] .watermark-tag{display:block}
             <div class="case-meta">基于公司战略与团队目标，自动检测 OKR 颗粒度、可衡量性与对齐度，给出修订建议</div>
             <div class="case-tags">
               <span class="case-tag">D2 · 人机协同</span>
-              <span class="case-tag">V2 · 质量改善</span>
             </div>
           </div>
           <div class="case-score q2 hr-only">22<em>分</em></div>
@@ -2559,7 +2555,6 @@ body[data-view="hr"] .watermark-tag{display:block}
             <div class="case-meta">基于岗位、级别、薪酬包、特殊条款，结构化生成中英双语 offer letter</div>
             <div class="case-tags">
               <span class="case-tag">D1 · Prompt</span>
-              <span class="case-tag">V2 · 质量改善</span>
             </div>
           </div>
           <div class="case-score hr-only">12<em>分</em></div>
@@ -2712,120 +2707,50 @@ body[data-view="hr"] .watermark-tag{display:block}
 
     <div class="hr-only" style="margin-top:28px">
       <div style="font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px;font-weight:600">— 怎么打分</div>
-      <p class="lead" style="margin-bottom:16px"><strong style="color:var(--paper)">两段式评级</strong>：先定档位决定落在哪个区间，再根据精算确定具体得分。<strong style="color:var(--paper)">取你最高分案例为最终得分。</strong></p>
+      <p class="lead" style="margin-bottom:16px"><strong style="color:var(--paper)">Agent 按 D 深度直接评分</strong>：根据你提报的事实，判定案例落在哪一档（D1–D4），并在该档区间内精算具体得分，满分 40。<strong style="color:var(--paper)">取你最高分案例为最终得分。</strong></p>
 
-      <!-- 阶段一：档位定位 -->
+      <!-- D 档位 → 分数（单段，Agent 档内精算） -->
       <div class="stage-card">
         <div class="stage-header">
-          <span class="stage-num">阶段一</span>
-          <span class="stage-name">档位定位 · 决定区间</span>
+          <span class="stage-num">D 档</span>
+          <span class="stage-name">深度定档 · 直接出分</span>
         </div>
 
-        <p style="font-size:12.5px;color:var(--paper-2);line-height:1.6;margin:14px 0 16px">案例的 <strong style="color:var(--paper)">深度 D</strong>（AI 扮演什么角色）× <strong style="color:var(--paper)">价值 V</strong>（业务交付实际反馈）双维度查表评估区间。</p>
+        <p style="font-size:12.5px;color:var(--paper-2);line-height:1.6;margin:14px 0 16px">案例的 <strong style="color:var(--paper)">深度 D</strong>（AI 在这件事里扮演什么角色）决定档位与分数区间，Agent 在区间内按案例完成度自行精算。<strong style="color:var(--paper)">不再叠加 V 价值与 Q 工程质量</strong>，一次定分。</p>
 
-        <!-- D × V 区间表 -->
+        <!-- D → 分数表 -->
         <div class="matrix-large">
           <table>
             <thead>
               <tr>
-                <th style="text-align:left;padding-left:18px">深度 D \ 价值 V</th>
-                <th>V1 · 有价值有优化空间</th>
-                <th>V2 · 质量效率明显改善</th>
-                <th>V3 · 完全成型 · 团队日常</th>
+                <th style="text-align:left;padding-left:18px">深度 D</th>
+                <th>分数区间</th>
+                <th style="text-align:left;padding-left:18px">这一档意味着</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td class="row-head">D1 · AI 基础素养<small>能与 AI 工具有效协作</small></td>
-                <td class="score">8–11</td><td class="score">12–15</td><td class="score">15–18</td>
+                <td class="score">8–18</td>
+                <td style="text-align:left;padding:0 18px;font-size:12px;color:var(--paper-2);line-height:1.55">用 AI 加速单点任务，AI 是工具、人是主体。</td>
               </tr>
               <tr>
                 <td class="row-head">D2 · 人机协同分工<small>设计合理的人机分工模式 (全流程节点 ≥ 3)</small></td>
-                <td class="score">18–21</td><td class="score">22–25</td><td class="score">26–29</td>
+                <td class="score">19–28</td>
+                <td style="text-align:left;padding:0 18px;font-size:12px;color:var(--paper-2);line-height:1.55">AI 承担独立环节，人保留关键决策，未端到端闭环。</td>
               </tr>
               <tr>
                 <td class="row-head">D3 · Agent 接管能力<small>AI 端到端接管,人基本无需介入</small></td>
-                <td class="score">29–32</td><td class="score">33–36</td><td class="score">37–40</td>
+                <td class="score">29–39</td>
+                <td style="text-align:left;padding:0 18px;font-size:12px;color:var(--paper-2);line-height:1.55">一个完整业务环节交给 AI 闭环运行，含异常兜底。</td>
               </tr>
               <tr>
                 <td class="row-head">D4 · 范式创造能力<small>改变服务模式 · 催生新业务线</small></td>
-                <td class="score" style="color:var(--muted);font-size:14px">—</td>
-                <td class="score" style="color:var(--muted);font-size:14px">—</td>
                 <td class="score peak">40</td>
+                <td style="text-align:left;padding:0 18px;font-size:12px;color:var(--paper-2);line-height:1.55">结构性重塑工作模式，资产可批量复制、催生新业务。</td>
               </tr>
             </tbody>
           </table>
-        </div>
-
-        <!-- V 维度详细定义 -->
-        <div style="margin-top:18px;padding:18px 22px;background:#FAF3E3;border:1px solid var(--rule-soft);border-radius:12px">
-          <div style="font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px;font-weight:600">— V 维度 · 价值评级三档</div>
-          <div class="v-grid">
-            <div class="v-card v-card-1">
-              <div class="v-card-head">
-                <span class="v-id">V1</span>
-                <span class="v-name">有价值 · 有优化空间</span>
-              </div>
-              <div class="v-card-desc">个人能跑，有业务价值，但仍有较大优化空间。</div>
-            </div>
-            <div class="v-card v-card-2">
-              <div class="v-card-head">
-                <span class="v-id">V2</span>
-                <span class="v-name">质量效率明显改善</span>
-              </div>
-              <div class="v-card-desc">个人能跑，有业务价值，且因 AI 产出的工作质量和效率均有较明显改善。</div>
-            </div>
-            <div class="v-card v-card-3">
-              <div class="v-card-head">
-                <span class="v-id">V3</span>
-                <span class="v-name">完全成型 · 团队日常</span>
-              </div>
-              <div class="v-card-desc">有业务价值，完全成型，已纳入团队其他成员的日常工作流程或内容，带来较显著的团队效率提升。</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 阶段二：区间精算 -->
-      <div class="stage-card" style="margin-top:18px">
-        <div class="stage-header">
-          <span class="stage-num">阶段二</span>
-          <span class="stage-name">区间精算 · 工程质量加分</span>
-        </div>
-
-        <p style="font-size:12.5px;color:var(--paper-2);line-height:1.6;margin:14px 0 16px">在档位区间内，根据 AI 资产的 <strong style="color:var(--paper)">工程质量 Q</strong>（错误处理机制是否完善）做最终精算。</p>
-
-        <div class="q-quality-table">
-          <div class="q-quality-row q-quality-head">
-            <div>评级</div>
-            <div>加分</div>
-            <div>标准</div>
-          </div>
-          <div class="q-quality-row q-quality-full">
-            <div class="q-quality-tag">完整</div>
-            <div class="q-quality-add">+3</div>
-            <div class="q-quality-std">有<strong>系统化</strong>错误处理机制（① 决策层控制：针对不同类型 AI 偏差设置处理策略与优先级；② 持续优化与学习：出错后沉淀错误案例库持续驯化 AI 等）</div>
-          </div>
-          <div class="q-quality-row q-quality-partial">
-            <div class="q-quality-tag">部分</div>
-            <div class="q-quality-add">+1.5</div>
-            <div class="q-quality-std">有<strong>基础</strong>错误处理机制（纠正与干预：事前为 AI 输出建立业务边界或校验规则、配备人工兜底方案等）</div>
-          </div>
-          <div class="q-quality-row q-quality-none">
-            <div class="q-quality-tag">缺失</div>
-            <div class="q-quality-add">+0</div>
-            <div class="q-quality-std">无错误处理机制，出错就崩，每次都需要人工核验</div>
-          </div>
-        </div>
-
-        <!-- 计分公式 -->
-        <div class="formula-box">
-          <div class="formula-label">最终得分</div>
-          <div class="formula-content">
-            <span class="formula-piece">D × V 区间下限分</span>
-            <span class="formula-op">+</span>
-            <span class="formula-piece">Q 工程质量加分</span>
-          </div>
         </div>
       </div>
 
@@ -2834,66 +2759,25 @@ body[data-view="hr"] .watermark-tag{display:block}
       </div>
     </div>
 
-    <!-- 三方协作评判机制 -->
+    <!-- 评判机制 · Agent 全自动 -->
     <div class="hr-only" style="margin-top:32px">
-      <div style="font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px;font-weight:600">— 评判机制 · AI 主导 · 人在关键节点把关</div>
-      <p class="lead" style="margin-bottom:20px"><strong style="color:var(--paper)">每个维度由谁评判</strong>是这套体系的核心设计 — Agent 处理标准化判别（D、Q），上级处理需要业务上下文的价值判断（V），各司其职。</p>
+      <div style="font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px;font-weight:600">— 评判机制 · Agent 全自动评分</div>
+      <p class="lead" style="margin-bottom:20px"><strong style="color:var(--paper)">AI 指挥力 100% 由 Agent 评判</strong> — 基于员工提报的事实描述（AI 承担的环节、是否端到端闭环、范式判别、运行次数与成功率），Agent 按标准化规则判定 D 档并在区间内精算得分。员工无需自评，上级无需介入。</p>
 
       <div class="judge-flow">
-
-        <!-- D · 100% Agent -->
         <div class="judge-item judge-d">
           <div class="judge-badge">D 深度</div>
           <div class="judge-arrow">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </div>
           <div class="judge-text">
-            <div class="judge-title">100% Agent 评判</div>
-            <div class="judge-desc">基于员工提报的事实描述（AI 承担的环节 + 闭环判别问题 + 范式判别问题），Agent 按标准化规则判定 D 等级。员工无需自评。</div>
+            <div class="judge-title">100% Agent 评判 · 一次定分</div>
+            <div class="judge-desc">Agent 读取提报事实，判定 D1–D4 档位并在档内区间精算得分。从 D1 到 D4 逐级递进，覆盖"用 AI"到"重塑业务"的全梯度；D4 范式创造同样由 Agent 依据 3 条判定标准（工作模式重塑 / 批量复制资产 / 新业务催生）综合判定，无需人工委员会。</div>
           </div>
           <div class="judge-actor">
             <span class="judge-pill judge-pill-ai">⚙ Agent</span>
           </div>
         </div>
-
-        <!-- V · Agent 推荐 + 上级确认 -->
-        <div class="judge-item judge-v">
-          <div class="judge-badge">V 价值</div>
-          <div class="judge-arrow">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-          </div>
-          <div class="judge-text">
-            <div class="judge-title">Agent 推荐档位 + 上级人工确认</div>
-            <div class="judge-desc">Agent 基于提报内容初步推荐 V 等级，<strong style="color:var(--paper)">上级在管理端核实业务上下文</strong>——案例是否真在解决实际问题、价值是否真实而非"伪价值"。这是整套机制最关键的人在环节。</div>
-          </div>
-          <div class="judge-actor">
-            <span class="judge-pill judge-pill-ai">⚙ Agent</span>
-            <span class="judge-plus">+</span>
-            <span class="judge-pill judge-pill-mgr">人 直属上级</span>
-          </div>
-        </div>
-
-        <!-- Q · 100% Agent -->
-        <div class="judge-item judge-q">
-          <div class="judge-badge">Q 工程质量</div>
-          <div class="judge-arrow">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-          </div>
-          <div class="judge-text">
-            <div class="judge-title">100% Agent 评判</div>
-            <div class="judge-desc">基于员工对错误处理机制的描述与证据，Agent 按"完整 / 部分 / 缺失"三档客观打分。这是技术属性，无需人工介入。</div>
-          </div>
-          <div class="judge-actor">
-            <span class="judge-pill judge-pill-ai">⚙ Agent</span>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- D4 委员会兜底 -->
-      <div style="margin-top:24px;padding:16px 20px;background:rgba(194,65,12,.06);border:1px solid rgba(194,65,12,.3);border-radius:12px;font-size:12.5px;line-height:1.7;color:var(--paper-2)">
-        <div style="font-family:var(--mono);font-size:10px;color:var(--orange);letter-spacing:.16em;font-weight:700;margin-bottom:8px;text-transform:uppercase">— D4 评审委员会兜底</div>
-        D4 是顶级档位，<strong style="color:var(--paper)">需评审委员会基于 3 条判定标准集中评议</strong>（① 工作模式重塑 / ② 批量复制资产 / ③ 新业务催生，需同时满足）。员工需提交完整证据材料，由 HR、业务负责人组成的评审委员会做资格审定。
       </div>
     </div>
 
@@ -3061,7 +2945,7 @@ body[data-view="hr"] .watermark-tag{display:block}
               <button class="binary-btn selected" data-v="self">✓ 本人 · 我是这个 AI 实践的搭建者与使用者</button>
               <button class="binary-btn" data-v="other">○ 他人 · 我搭建给其他人使用</button>
             </div>
-            <div class="binary-hint">选择"他人"时，需在下方"用户列表"中明确实际使用者及其工作关系。SI 评分归属于<strong style="color:var(--paper-2)">搭建者</strong>，使用者反馈作为 V 价值核实的事实依据。</div>
+            <div class="binary-hint">选择"他人"时，需在下方"用户列表"中明确实际使用者及其工作关系。SI 评分归属于<strong style="color:var(--paper-2)">搭建者</strong>，使用者反馈作为 Agent 评分的事实依据。</div>
           </div>
 
           <div class="field">
@@ -3243,7 +3127,7 @@ body[data-view="hr"] .watermark-tag{display:block}
 
           <div class="vis-note">
             <span class="vis-note-icon">i</span>
-            <span><strong>无论选择哪种可见性，都不影响你的 SI 评分。</strong>系统会统一基于案例的深度 × 质量评估。涉密案例同样进入评审流程，只是不会在公司级案例库展示。</span>
+            <span><strong>无论选择哪种可见性，都不影响你的 SI 评分。</strong>系统会统一基于案例的 D 深度评估。涉密案例同样进入评审流程，只是不会在公司级案例库展示。</span>
           </div>
         </div>
 
@@ -3454,7 +3338,7 @@ body[data-view="hr"] .watermark-tag{display:block}
 
     <div class="lib-card">
       <div class="lib-card-top">
-        <span class="lib-badge hr-only badge-d4">D4 · V3</span>
+        <span class="lib-badge hr-only badge-d4">D4 · 范式创造</span>
         <div class="lib-pts hr-only">40<em>pt</em></div>
       </div>
       <h3 class="lib-title">销售线索清洗与分级智能体集群</h3>
@@ -3466,7 +3350,7 @@ body[data-view="hr"] .watermark-tag{display:block}
 
     <div class="lib-card">
       <div class="lib-card-top">
-        <span class="lib-badge hr-only badge-d4">D4 · V3</span>
+        <span class="lib-badge hr-only badge-d4">D4 · 范式创造</span>
         <div class="lib-pts hr-only">40<em>pt</em></div>
       </div>
       <h3 class="lib-title">财务月结全流程自动化 Agent</h3>
@@ -3478,7 +3362,7 @@ body[data-view="hr"] .watermark-tag{display:block}
 
     <div class="lib-card">
       <div class="lib-card-top">
-        <span class="lib-badge hr-only badge-d3">D3 · V3</span>
+        <span class="lib-badge hr-only badge-d3">D3 · Agent接管</span>
         <div class="lib-pts hr-only">35<em>pt</em></div>
       </div>
       <h3 class="lib-title">招聘JD智能生成与候选人匹配</h3>
@@ -3490,7 +3374,7 @@ body[data-view="hr"] .watermark-tag{display:block}
 
     <div class="lib-card">
       <div class="lib-card-top">
-        <span class="lib-badge hr-only badge-d3">D3 · V3</span>
+        <span class="lib-badge hr-only badge-d3">D3 · Agent接管</span>
         <div class="lib-pts hr-only">35<em>pt</em></div>
       </div>
       <h3 class="lib-title">用户反馈情感分析与归因工作流</h3>
@@ -3502,7 +3386,7 @@ body[data-view="hr"] .watermark-tag{display:block}
 
     <div class="lib-card">
       <div class="lib-card-top">
-        <span class="lib-badge hr-only badge-d3">D3 · V2</span>
+        <span class="lib-badge hr-only badge-d3">D3 · Agent接管</span>
         <div class="lib-pts hr-only">32<em>pt</em></div>
       </div>
       <h3 class="lib-title">合同关键条款抽取与风险审查</h3>
@@ -3514,7 +3398,7 @@ body[data-view="hr"] .watermark-tag{display:block}
 
     <div class="lib-card">
       <div class="lib-card-top">
-        <span class="lib-badge hr-only badge-d2">D2 · V3</span>
+        <span class="lib-badge hr-only badge-d2">D2 · 人机协同</span>
         <div class="lib-pts hr-only">25<em>pt</em></div>
       </div>
       <h3 class="lib-title">竞品周报半自动化生成</h3>
@@ -3526,7 +3410,7 @@ body[data-view="hr"] .watermark-tag{display:block}
 
     <div class="lib-card">
       <div class="lib-card-top">
-        <span class="lib-badge hr-only badge-d2">D2 · V2</span>
+        <span class="lib-badge hr-only badge-d2">D2 · 人机协同</span>
         <div class="lib-pts hr-only">22<em>pt</em></div>
       </div>
       <h3 class="lib-title">绩效面谈话术生成器</h3>
@@ -3538,7 +3422,7 @@ body[data-view="hr"] .watermark-tag{display:block}
 
     <div class="lib-card">
       <div class="lib-card-top">
-        <span class="lib-badge hr-only badge-d1">D1 · V3</span>
+        <span class="lib-badge hr-only badge-d1">D1 · 基础素养</span>
         <div class="lib-pts hr-only">15<em>pt</em></div>
       </div>
       <h3 class="lib-title">客诉响应话术 Prompt 模板包</h3>
@@ -3550,7 +3434,7 @@ body[data-view="hr"] .watermark-tag{display:block}
 
     <div class="lib-card">
       <div class="lib-card-top">
-        <span class="lib-badge hr-only badge-d1">D1 · V2</span>
+        <span class="lib-badge hr-only badge-d1">D1 · 基础素养</span>
         <div class="lib-pts hr-only">12<em>pt</em></div>
       </div>
       <h3 class="lib-title">产品 PRD 评审 Checklist Prompt</h3>
@@ -3574,7 +3458,7 @@ body[data-view="hr"] .watermark-tag{display:block}
     <div class="rating-hero-text">
       <span class="label">— 员工评分 / Manager Rating</span>
       <h1 class="h1" style="margin-top:6px">为你的团队 <em>打分</em>。</h1>
-      <p class="lead">本季度对学习进化力 (30%) 与价值创造力 (30%) 进行人评，并审核下属的 AI 案例档位（D2/D3）与 Q 升级请求。</p>
+      <p class="lead">本季度对学习进化力 (30%) 与价值创造力 (30%) 进行人评。AI 指挥力由 Agent 依 D 深度自动评分，无需上级审核。</p>
     </div>
     <div class="rating-hero-stats">
       <div class="rh-stat">
@@ -3588,10 +3472,6 @@ body[data-view="hr"] .watermark-tag{display:block}
       <div class="rh-stat">
         <div class="rh-stat-num amber"><em>5</em></div>
         <div class="rh-stat-label">待评分</div>
-      </div>
-      <div class="rh-stat">
-        <div class="rh-stat-num" style="color:var(--orange)"><em>4</em></div>
-        <div class="rh-stat-label">待审核 AI 案例</div>
       </div>
     </div>
   </div>
@@ -3738,7 +3618,7 @@ body[data-view="hr"] .watermark-tag{display:block}
               <span class="rate-cap-tag">— 01</span>
               <span class="rate-cap-name">AI 指挥力</span>
               <span class="rate-cap-weight" style="color:var(--orange)">·40%</span>
-              <span class="rate-readonly-badge">系统按 D × V + Q 自动算分</span>
+              <span class="rate-readonly-badge">Agent 按 D 深度自动评分</span>
             </div>
             <div class="rate-cap-total" id="aiTotal" style="color:var(--orange)">35 <em>/ 40</em></div>
           </div>
@@ -3762,10 +3642,6 @@ body[data-view="hr"] .watermark-tag{display:block}
                   <span class="ai-meta-val ai-meta-d">D3 · Agent 接管</span>
                 </div>
                 <div class="ai-meta-item">
-                  <span class="ai-meta-label">质量</span>
-                  <span class="ai-meta-val ai-meta-q">V3 · 完全成型</span>
-                </div>
-                <div class="ai-meta-item">
                   <span class="ai-meta-label">提报时间</span>
                   <span class="ai-meta-val">2026.04.18</span>
                 </div>
@@ -3785,12 +3661,12 @@ body[data-view="hr"] .watermark-tag{display:block}
                 <span class="ai-stat-divider">·</span>
                 <span class="ai-stat-block">
                   <span class="ai-stat-num">2</span>
-                  <span class="ai-stat-label">V3 完全成型</span>
+                  <span class="ai-stat-label">D3 接管</span>
                 </span>
                 <span class="ai-stat-divider">·</span>
                 <span class="ai-stat-block">
                   <span class="ai-stat-num">3</span>
-                  <span class="ai-stat-label">V2 质量改善</span>
+                  <span class="ai-stat-label">D2 协同</span>
                 </span>
               </div>
               <div class="ai-showcase-note">
@@ -3800,215 +3676,9 @@ body[data-view="hr"] .watermark-tag{display:block}
             </div>
           </div>
 
-          <!-- 上级审核区（D档位 + Q升级 统一处理） -->
-          <div class="q-review">
-            <div class="q-review-head">
-              <div>
-                <div class="q-review-title">
-                  <span class="rate-readonly-badge" style="margin-left:0;background:rgba(166,116,30,.12);color:var(--amber);border-color:rgba(166,116,30,.4)">⚐ 待你核实 V 价值 · 2 项</span>
-                </div>
-                <div class="q-review-sub">作为上级，你的工作是<strong style="color:var(--paper)">确认 V 价值等级</strong>（Agent 推荐档位 → 你核实业务上下文）。<strong style="color:var(--paper)">D 深度和 Q 工程质量由 Agent 100% 自动评判</strong>，无需上级操作；D4 资格由评审委员会评议。</div>
-              </div>
-              <a class="ai-showcase-link" href="#" onclick="event.preventDefault();alert('评判分工 (v5)\n\n· D 深度 → 100% Agent 评判\n· V 价值 → Agent 推荐 + 上级人工确认\n· Q 工程质量 → 100% Agent 评判\n· D4 → 评审委员会基于 3 条判定标准评议 (需同时满足)')">
-                了解审核规则
-                <span style="font-family:var(--mono);font-size:11px;opacity:.7">↗</span>
-              </a>
-            </div>
-
-            <div class="case-review-list">
-
-              <!-- 案例 1 · 入职 Onboarding 全流程 Agent · 张轶贤 -->
-              <div class="case-review-card">
-                <div class="case-review-header">
-                  <div class="case-review-title">
-                    <div class="case-review-name">入职 Onboarding 全流程 Agent</div>
-                    <div class="case-review-meta">— 张轶贤 · 人力中心 · 2026.05.16 提报</div>
-                  </div>
-                  <div class="case-review-status">
-                    <span class="case-status-pill case-status-pending">⚐ 待你核实 V</span>
-                  </div>
-                </div>
-
-                <!-- D 维度 · Agent 已判 -->
-                <div class="case-dim case-dim-d">
-                  <div class="case-dim-header">
-                    <span class="case-dim-tag case-dim-tag-agent">⚙ Agent 评分</span>
-                    <span class="case-dim-label">D 深度 · Agent 判定为 <strong>D3 Agent 接管能力</strong></span>
-                    <span class="case-dim-readonly">D 维度上级无需操作</span>
-                  </div>
-                  <div class="case-dim-reason">
-                    <span class="case-dim-reason-eyebrow">Agent 判别理由</span>
-                    案例描述了端到端闭环（员工无需逐步推进），月运行 30+ 次、成功率 96% 满足稳定性门槛，配合人工兜底路径，符合 D3 "Agent 接管"核心特征。
-                  </div>
-                </div>
-
-                <!-- V 维度 · 待上级核实 -->
-                <div class="case-dim case-dim-v case-dim-v-pending">
-                  <div class="case-dim-header">
-                    <span class="case-dim-tag case-dim-tag-pending">人 待你核实</span>
-                    <span class="case-dim-label">V 价值 · Agent 推荐 <strong>V3 完全成型 · 团队日常</strong></span>
-                  </div>
-                  <div class="case-dim-reason">
-                    <span class="case-dim-reason-eyebrow">使用者反馈</span>
-                    "已纳入新员工入职日常 SOP，每月稳定处理 30+ 次。从前需 HR 跟 3-4 个系统对接，现在 Agent 自动跑完整流程。" — 林芳菲 (HR Onboarding 主管)
-                  </div>
-                  <div class="case-dim-actions">
-                    <a class="q-link" href="#" onclick="event.preventDefault();alert('跳转至案例详情')">查看完整证据 ↗</a>
-                    <div class="q-actions">
-                      <button class="q-btn q-btn-approve" onclick="this.closest('.case-dim').style.opacity='.5';this.textContent='✓ V3 已确认';this.disabled=true">✓ 情况属实 · 确认 V3</button>
-                      <button class="q-btn q-btn-reject">↓ 沟通后下调至 V2</button>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Q 维度 · Agent 已判 -->
-                <div class="case-dim case-dim-q">
-                  <div class="case-dim-header">
-                    <span class="case-dim-tag case-dim-tag-agent">⚙ Agent 评分</span>
-                    <span class="case-dim-label">Q 工程质量 · Agent 判定为 <strong>完整 +3</strong></span>
-                    <span class="case-dim-readonly">Q 维度上级无需操作</span>
-                  </div>
-                  <div class="case-dim-reason">
-                    <span class="case-dim-reason-eyebrow">Agent 判别理由</span>
-                    员工提交了系统化错误处理机制描述：① 输入预检验 ② LLM 自评打分 + 阈值兜底 ③ 错误案例库反哺 Prompt。三层完整，符合"完整 +3"标准。
-                  </div>
-                </div>
-
-                <!-- 综合分数预览 -->
-                <div class="case-summary">
-                  <span class="case-summary-label">综合得分（待你确认 V3 后生效）</span>
-                  <span class="case-summary-formula">D3 · V3 区间 32 分 <span class="case-summary-plus">+</span> Q 完整 +3</span>
-                  <span class="case-summary-score">= <strong>35</strong> 分</span>
-                </div>
-              </div>
-
-              <!-- 案例 2 · 岗位胜任力模型 AI 共建工具 · 王思怡 -->
-              <div class="case-review-card">
-                <div class="case-review-header">
-                  <div class="case-review-title">
-                    <div class="case-review-name">岗位胜任力模型 AI 共建工具</div>
-                    <div class="case-review-meta">— 王思怡 · 人力中心 · 2026.05.14 提报</div>
-                  </div>
-                  <div class="case-review-status">
-                    <span class="case-status-pill case-status-pending">⚐ 待你核实 V</span>
-                  </div>
-                </div>
-
-                <!-- D 维度 · Agent 已判 -->
-                <div class="case-dim case-dim-d">
-                  <div class="case-dim-header">
-                    <span class="case-dim-tag case-dim-tag-agent">⚙ Agent 评分</span>
-                    <span class="case-dim-label">D 深度 · Agent 判定为 <strong>D2 人机协同分工</strong></span>
-                    <span class="case-dim-readonly">D 维度上级无需操作</span>
-                  </div>
-                  <div class="case-dim-reason">
-                    <span class="case-dim-reason-eyebrow">Agent 判别理由</span>
-                    案例呈现 4 步骤的人机分工模式（AI 生成草稿 → HR 审定 → 业务负责人共审 → 定稿），人在关键节点保留判断权，未达到端到端闭环（D3）的标准，符合 D2 "人机协同分工"。
-                  </div>
-                </div>
-
-                <!-- V 维度 · 待上级核实 -->
-                <div class="case-dim case-dim-v case-dim-v-pending">
-                  <div class="case-dim-header">
-                    <span class="case-dim-tag case-dim-tag-pending">人 待你核实</span>
-                    <span class="case-dim-label">V 价值 · Agent 推荐 <strong>V2 质量效率明显改善</strong></span>
-                  </div>
-                  <div class="case-dim-reason">
-                    <span class="case-dim-reason-eyebrow">提报人备注</span>
-                    "已被同组同事使用 6 周，每周 3-5 个岗位胜任力模型生成。质量比手工版高，HR 与业务沟通效率明显改善。希望上级核定 V2。"
-                  </div>
-                  <div class="case-dim-actions">
-                    <a class="q-link" href="#" onclick="event.preventDefault();alert('跳转至案例详情')">查看完整证据 ↗</a>
-                    <div class="q-actions">
-                      <button class="q-btn q-btn-approve" onclick="this.closest('.case-dim').style.opacity='.5';this.textContent='✓ V2 已确认';this.disabled=true">✓ 情况属实 · 确认 V2</button>
-                      <button class="q-btn q-btn-reject">↓ 沟通后下调至 V1</button>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Q 维度 · Agent 已判 -->
-                <div class="case-dim case-dim-q">
-                  <div class="case-dim-header">
-                    <span class="case-dim-tag case-dim-tag-agent">⚙ Agent 评分</span>
-                    <span class="case-dim-label">Q 工程质量 · Agent 判定为 <strong>部分 +1.5</strong></span>
-                    <span class="case-dim-readonly">Q 维度上级无需操作</span>
-                  </div>
-                  <div class="case-dim-reason">
-                    <span class="case-dim-reason-eyebrow">Agent 判别理由</span>
-                    有基础边界约束 + 人工兜底路径，但缺少出错后的系统化反馈机制（错误案例库 / Prompt 反哺）。属于"部分 +1.5"。
-                  </div>
-                </div>
-
-                <!-- 综合分数预览 -->
-                <div class="case-summary">
-                  <span class="case-summary-label">综合得分（待你确认 V2 后生效）</span>
-                  <span class="case-summary-formula">D2 · V2 区间 20 分 <span class="case-summary-plus">+</span> Q 部分 +1.5</span>
-                  <span class="case-summary-score">= <strong>21.5</strong> 分</span>
-                </div>
-              </div>
-
-            </div>
-
-            <!-- 已核定记录 (折叠) -->
-            <details class="q-history">
-              <summary class="q-history-summary">
-                <span class="q-history-icon">▸</span>
-                <span class="q-history-text">已核定记录 · 6 项</span>
-                <span class="q-history-meta">最近核定 · 2026.04.21</span>
-              </summary>
-              <div class="q-history-list">
-
-                <div class="q-history-row">
-                  <div class="q-history-left">
-                    <span class="q-history-action approved">✓ 确认 V3</span>
-                    <span class="q-history-case">招聘面试官 AI 助手 · 多 Agent 协同版</span>
-                  </div>
-                  <span class="q-history-date">2026.04.21</span>
-                </div>
-
-                <div class="q-history-row">
-                  <div class="q-history-left">
-                    <span class="q-history-action approved">✓ 确认 V2</span>
-                    <span class="q-history-case">JD 智能改写器</span>
-                  </div>
-                  <span class="q-history-date">2026.04.10</span>
-                </div>
-
-                <div class="q-history-row">
-                  <div class="q-history-left">
-                    <span class="q-history-action approved">✓ 确认 V3</span>
-                    <span class="q-history-case">入职 Welcome Pack 自动生成器</span>
-                  </div>
-                  <span class="q-history-date">2026.03.28</span>
-                </div>
-
-                <div class="q-history-row">
-                  <div class="q-history-left">
-                    <span class="q-history-action rejected">✗ 下调至 V1</span>
-                    <span class="q-history-case">员工敬业度问卷分析助手 (v0)</span>
-                  </div>
-                  <span class="q-history-date">2026.03.15</span>
-                </div>
-
-                <div class="q-history-row">
-                  <div class="q-history-left">
-                    <span class="q-history-action approved">✓ 确认 V2</span>
-                    <span class="q-history-case">绩效面谈 Prompt 模板包</span>
-                  </div>
-                  <span class="q-history-date">2026.02.18</span>
-                </div>
-
-                <div class="q-history-row">
-                  <div class="q-history-left">
-                    <span class="q-history-action approved">✓ 确认 V2</span>
-                    <span class="q-history-case">offer letter 自动起草工作流</span>
-                  </div>
-                  <span class="q-history-date">2026.01.30</span>
-                </div>
-
-              </div>
-            </details>
-
+          <!-- AI 指挥力：Agent 全自动，上级无需审核 -->
+          <div style="margin-top:18px;padding:14px 16px;background:rgba(166,116,30,.08);border:1px solid rgba(166,116,30,.28);border-radius:10px;font-size:12.5px;line-height:1.65;color:var(--paper-2)">
+            <strong style="color:var(--paper)">AI 指挥力由 Agent 依 D 深度自动评分</strong> — 取最高分代表作为最终得分，上级无需核实或确认。如对评分有异议，可在案例详情页发起复核。
           </div>
         </div>
 
